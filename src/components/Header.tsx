@@ -19,12 +19,12 @@ const Header = ({ onTabChange }: Props) => {
 };
 
 const Wrapper = styled.div`
-  height: 100px;
   background-color: #050505;
-  padding: 0 20px;
+  padding: 30px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 `;
 const TitleButton = styled.button`
   margin: 0;
@@ -56,8 +56,6 @@ const Button = styled.button`
     border: 1px solid #888;
   }
 `;
-const Right = styled.div`
-  margin-left: 80px;
-`;
+const Right = styled.div``;
 
 export default Header;
