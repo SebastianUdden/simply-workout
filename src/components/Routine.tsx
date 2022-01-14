@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Exercise, { ExerciseProps } from "./Exercise";
-import { Label, Select } from "./Common";
+import { Select } from "./Common";
 import { Format } from "./AddFormat";
 import { useEffect, useState } from "react";
 import {
