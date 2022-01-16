@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { FORMAT, HOME, ROUTINE, EXERCISE } from "../App";
+import workoutLogo from "../images/workout-logo.png";
 
 interface Props {
   onTabChange: Function;
@@ -8,7 +9,10 @@ interface Props {
 const Header = ({ onTabChange }: Props) => {
   return (
     <Wrapper>
-      <TitleButton onClick={() => onTabChange(HOME)}>Workout</TitleButton>
+      <TitleButton onClick={() => onTabChange(HOME)}>
+        <Logo src={workoutLogo} />
+        Workout
+      </TitleButton>
       <Right>
         <Button onClick={() => onTabChange(EXERCISE)}>+ Exercise</Button>
         <Button onClick={() => onTabChange(FORMAT)}>+ Format</Button>
@@ -34,6 +38,7 @@ const TitleButton = styled.button`
   border: none;
   border: 1px solid black;
   cursor: pointer;
+  padding: 5px;
   :hover {
     border: 1px solid white;
   }
@@ -56,6 +61,12 @@ const Button = styled.button`
     border: 1px solid #888;
   }
 `;
-const Right = styled.div``;
+const Right = styled.div`
+  margin-top: 15px;
+`;
+const Logo = styled.img`
+  width: 40px;
+  margin-right: -6px;
+`;
 
 export default Header;
