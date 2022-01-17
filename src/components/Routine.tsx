@@ -185,6 +185,11 @@ const Title = styled.h2`
   margin-bottom: 5px;
   color: orange;
   font-size: 22px;
+  cursor: pointer;
+  user-select: none;
+  :hover {
+    color: #fff;
+  }
   :active {
     opacity: 0.5;
   }
