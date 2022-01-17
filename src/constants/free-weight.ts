@@ -8,7 +8,7 @@ export const freeWeight = [
   {
     id: "105",
     category: FREE_WEIGHT,
-    name: "standing overhead dumbbell press",
+    name: "dumbbell standing overhead press",
   },
   { id: "106", category: FREE_WEIGHT, name: "dumbbell row" },
   { id: "107", category: FREE_WEIGHT, name: "single-leg deadlift" },
@@ -56,7 +56,7 @@ export const freeWeight = [
   {
     id: "131",
     category: FREE_WEIGHT,
-    name: "tricep extension",
+    name: "dumbbell tricep extension",
   },
   {
     id: "132",
@@ -69,4 +69,5 @@ export const freeWeight = [
   { id: "136", category: FREE_WEIGHT, name: "rack pull" },
   { id: "137", category: FREE_WEIGHT, name: "lateral raise" },
   { id: "138", category: FREE_WEIGHT, name: "reverse flye" },
+  { id: "139", category: FREE_WEIGHT, name: "dumbbell one-arm row" },
 ];
