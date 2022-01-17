@@ -127,17 +127,19 @@ const AddFormat = () => {
           <List>
             {formats.map((f) => (
               <Item onClick={() => setNewFormat(f)}>
-                <Column>
-                  <Row>
-                    {f.sets} sets * {f.reps} reps = {f.sets * f.reps} reps
-                  </Row>
-                  <Row>
-                    {f.rest} sec rest, {f.percentage}% per workout
-                  </Row>
-                </Column>
-                <Column>
-                  <Button onClick={() => handleDelete(f.id)}>&times;</Button>
-                </Column>
+                <Row>
+                  <Column>
+                    <Row>
+                      {f.sets} sets * {f.reps} reps = {f.sets * f.reps} reps
+                    </Row>
+                    <Row>
+                      {f.rest} sec rest, {f.percentage}% per workout
+                    </Row>
+                  </Column>
+                  <Column>
+                    <Button onClick={() => handleDelete(f.id)}>&times;</Button>
+                  </Column>
+                </Row>
               </Item>
             ))}
           </List>

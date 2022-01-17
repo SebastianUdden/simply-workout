@@ -14,6 +14,7 @@ import {
 } from "../utils";
 import { AddButton, DisplayName, Input, Label } from "./Common";
 import { ExerciseProps } from "./Exercise";
+import SimpleExercise from "./SimpleExercise";
 
 interface Props {
   onTabChange: Function;
@@ -37,7 +38,7 @@ const AddRoutine = ({ onTabChange }: Props) => {
     setExercises([
       ...exercises,
       {
-        id: uuidv4(),
+        id: type.id || uuidv4(),
         name: type.name,
         category: type.category,
         unit: "kg",
@@ -46,10 +47,8 @@ const AddRoutine = ({ onTabChange }: Props) => {
     ]);
   };
 
-  const handleRemoveEntry = (index: number) => {
-    setExercises(
-      exercises.filter((e: ExerciseProps, i: number) => index !== i)
-    );
+  const handleRemoveEntry = (id: string) => {
+    setExercises(exercises.filter((e: ExerciseProps) => e.id !== id));
   };
 
   const timeToComplete = estimateTime(format, exercises);
@@ -124,10 +123,12 @@ const AddRoutine = ({ onTabChange }: Props) => {
                   <Label>{routineName}</Label>
                   <Exercises>
                     {exercises.map((e: ExerciseProps, i: number) => (
-                      <Entry onClick={() => handleRemoveEntry(i)}>
-                        <span>{e.name}</span>
-                        <span>&times;</span>
-                      </Entry>
+                      <SimpleExercise
+                        exercise={e}
+                        onDelete={(deleteId: string) =>
+                          handleRemoveEntry(deleteId)
+                        }
+                      />
                     ))}
                   </Exercises>
                   <DisplayName>{getFormatString(format)}</DisplayName>

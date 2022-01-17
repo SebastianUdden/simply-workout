@@ -52,14 +52,11 @@ export const List = styled.ul<{ capitalize?: boolean }>`
 `;
 
 export const Item = styled.li`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   list-style-type: none;
   opacity: 0.4;
   font-size: 14px;
   border: 1px solid #666;
-  padding: 5px;
+  padding: 10px 10px 15px;
   border-radius: 6px;
   margin-bottom: 5px;
   cursor: pointer;
@@ -72,11 +69,17 @@ export const Item = styled.li`
   }
 `;
 
-export const Row = styled.p`
-  margin: 0;
+export const Row = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 4px 0;
 `;
 
-export const Column = styled.div``;
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 export const Input = styled.input`
   font-size: 15px;
@@ -112,4 +115,15 @@ export const Button = styled.button`
 export const Label = styled.label`
   font-weight: 800;
   margin: 20px 0 10px;
+`;
+
+export const Link = styled.a`
+  color: orange;
+  margin-right: 8px;
+  :hover {
+    color: magenta;
+  }
+  :active {
+    color: white;
+  }
 `;

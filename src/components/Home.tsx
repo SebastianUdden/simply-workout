@@ -2,17 +2,18 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { workoutFormats } from "../constants/formats";
+import { defaultRoutines } from "../constants/routines";
 import { getOldWorkout } from "../utils";
-import Routine from "./Routine";
+import Routine, { RoutineProps } from "./Routine";
 
 const Home = () => {
   const [expandIndex, setExpandIndex] = useState(-1);
   const [formats, setFormats] = useState([]);
-  const [routines, setRoutines] = useState<any[]>([]);
+  const [routines, setRoutines] = useState<RoutineProps[]>([]);
 
   useEffect(() => {
     const oldWorkout = getOldWorkout();
-    setRoutines(oldWorkout?.routines || []);
+    setRoutines(oldWorkout?.routines || defaultRoutines);
     setFormats(oldWorkout?.formats || workoutFormats);
   }, []);
 

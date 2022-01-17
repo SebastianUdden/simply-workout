@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import { searchFor } from "../utils";
+import { Link } from "./Common";
 
 export interface ExerciseProps {
   id?: string;
@@ -53,30 +55,6 @@ const Exercise = ({
     <Wrapper>
       <Flex>
         <Label>{name}</Label>
-        <Tag>{category}</Tag>
-      </Flex>
-      <Flex>
-        <Box>
-          <Box>
-            <Arrow onClick={() => changeByPercentage(1)}>+</Arrow>
-            <Arrow onClick={() => changeByPercentage(-1)}>-</Arrow>
-            {showInput ? (
-              <Input
-                id={`${name}-input`}
-                onBlur={() => setShowInput(false)}
-                value={value}
-                onChange={(e: any) =>
-                  onChangeValue && onChangeValue(i, checkValue(e.target.value))
-                }
-              />
-            ) : (
-              <FakeInput onClick={() => setShowInput(true)}>
-                {Math.round(value)}
-              </FakeInput>
-            )}
-            <Span>{unit}</Span>
-          </Box>
-        </Box>
         {onChangePosition && (
           <Box>
             <Arrow onClick={() => onChangePosition(i, -1)} disabled={i === 0}>
@@ -96,6 +74,43 @@ const Exercise = ({
             </Arrow>
           </Box>
         )}
+      </Flex>
+      <Flex>
+        <Tag>{category}</Tag>
+        <Box>
+          <Link href={searchFor(name, "how to")} target="_blank">
+            How to
+          </Link>{" "}
+          <Link href={searchFor(name, "muscles")} target="_blank">
+            Muscles
+          </Link>
+        </Box>
+      </Flex>
+      <Flex>
+        <Box>
+          <Box>
+            <Arrow onClick={() => changeByPercentage(1)}>+</Arrow>
+            <Arrow onClick={() => changeByPercentage(-1)}>-</Arrow>
+            <div>
+              {showInput ? (
+                <Input
+                  id={`${name}-input`}
+                  onBlur={() => setShowInput(false)}
+                  value={value}
+                  onChange={(e: any) =>
+                    onChangeValue &&
+                    onChangeValue(i, checkValue(e.target.value))
+                  }
+                />
+              ) : (
+                <FakeInput onClick={() => setShowInput(true)}>
+                  {Math.round(value)}
+                </FakeInput>
+              )}
+              <Span>{unit}</Span>
+            </div>
+          </Box>
+        </Box>
       </Flex>
     </Wrapper>
   );
@@ -135,6 +150,7 @@ const Label = styled.label`
   opacity: 0.7;
   font-weight: 800;
   text-transform: capitalize;
+  font-size: 18px;
 `;
 const Flex = styled.div`
   display: flex;
@@ -142,8 +158,14 @@ const Flex = styled.div`
   align-items: center;
   margin-bottom: 5px;
 `;
-const Box = styled.div``;
+const Box = styled.div`
+  display: flex;
+`;
 const Arrow = styled.button<{ color?: string; disabled?: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   cursor: pointer;
   background-color: #373737;
   border-radius: 6px;

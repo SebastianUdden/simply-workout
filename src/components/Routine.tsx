@@ -14,7 +14,8 @@ import { bodyWeight } from "../constants/body-weight";
 import { freeWeight } from "../constants/free-weight";
 import { machine } from "../constants/machine";
 
-interface RoutineProps {
+export interface RoutineProps {
+  id: string;
   name: string;
   format: any;
   exercises: any[];
@@ -96,7 +97,7 @@ const Routine = ({
     const oldWorkout = getOldWorkout();
     const newWorkout = {
       ...oldWorkout,
-      routines: oldWorkout.routines.map((routine: any, index: number) =>
+      routines: oldWorkout.routines?.map((routine: any, index: number) =>
         index !== i ? routine : r
       ),
     };
@@ -120,11 +121,25 @@ const Routine = ({
       >
         {name} {expandIndex === i ? <>&uarr;</> : <>&darr;</>}
       </Title>
-      <Item>Time to complete: {timeToComplete}</Item>
+      <Item>
+        Do: {format.sets} sets * {format.reps} reps ={" "}
+        {format.sets * format.reps} reps
+      </Item>
+      <Item>Rest between sets: {format.rest} sec</Item>
       <Item>Exercises: {exercises.length}</Item>
       <Item>Percentage (+ / -): {format.percentage}%</Item>
+      <Item>
+        <Strong>Time to complete: {timeToComplete}</Strong>
+      </Item>
       {expandIndex === i && (
         <>
+          <Select onChange={handleChangeFormat}>
+            <option>Change format</option>
+            {formats.map((f: Format) => (
+              <option value={f.id}>{getFormatString(f)}</option>
+            ))}
+          </Select>
+
           <Exercises>
             {exercises.map((e: ExerciseProps, i: number) => (
               <Exercise
@@ -143,12 +158,6 @@ const Routine = ({
               <option key={e.id} value={e.id}>
                 {e.category} - {e.name}
               </option>
-            ))}
-          </Select>
-          <Select onChange={handleChangeFormat}>
-            <option>Change format</option>
-            {formats.map((f: Format) => (
-              <option value={f.id}>{getFormatString(f)}</option>
             ))}
           </Select>
         </>
@@ -185,9 +194,11 @@ const Item = styled.li`
   justify-content: space-between;
   align-items: center;
   list-style-type: none;
-  opacity: 0.4;
   font-size: 14px;
   border-radius: 6px;
   margin-bottom: 5px;
+`;
+const Strong = styled.strong`
+  color: magenta;
 `;
 export default Routine;

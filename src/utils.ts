@@ -48,3 +48,9 @@ export const estimateTime = (format: any, exercises: any) => {
     totalExerciseTime + totalExerciseRest + nextExerciseSetup
   );
 };
+
+export const searchFor = (searchTerm: string, additionalSearchterm: string) => {
+  return `https://www.google.com/search?q=${searchTerm}${
+    additionalSearchterm ? `+${additionalSearchterm}` : ""
+  }`;
+};

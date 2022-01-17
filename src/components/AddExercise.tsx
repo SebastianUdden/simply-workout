@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { bodyWeight, BODY_WEIGHT } from "../constants/body-weight";
 import { freeWeight, FREE_WEIGHT } from "../constants/free-weight";
 import { MACHINE, machine } from "../constants/machine";
-import { getOldWorkout, saveWorkout, uuidv4 } from "../utils";
+import { getOldWorkout, saveWorkout, searchFor, uuidv4 } from "../utils";
 import {
   AddButton,
   Button,
@@ -11,9 +11,11 @@ import {
   DisplayName,
   Input,
   Item,
+  Link,
   List,
   Row,
 } from "./Common";
+import SimpleExercise from "./SimpleExercise";
 
 interface RadioProps {
   onSelect: Function;
@@ -58,7 +60,9 @@ const AddExercise = () => {
   useEffect(() => {
     const oldWorkout = getOldWorkout();
     setExercises(
-      oldWorkout.exercises || [...bodyWeight, ...freeWeight, ...machine]
+      oldWorkout.exercises?.length
+        ? oldWorkout.exercises
+        : [...bodyWeight, ...freeWeight, ...machine]
     );
   }, []);
 
@@ -90,16 +94,11 @@ const AddExercise = () => {
               }))
               .sort(bySortString)
               .map((e) => (
-                <Item onClick={() => setNewExercise(e)}>
-                  <Column>
-                    <Row>
-                      {e.category} - {e.name}
-                    </Row>
-                  </Column>
-                  <Column>
-                    <Button onClick={() => handleDelete(e.id)}>&times;</Button>
-                  </Column>
-                </Item>
+                <SimpleExercise
+                  exercise={e}
+                  onSelect={(e: any) => setNewExercise(e)}
+                  onDelete={(id: string) => handleDelete(id)}
+                />
               ))}
           </List>
         </>
