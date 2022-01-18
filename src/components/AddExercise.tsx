@@ -3,18 +3,8 @@ import styled from "styled-components";
 import { bodyWeight, BODY_WEIGHT } from "../constants/body-weight";
 import { freeWeight, FREE_WEIGHT } from "../constants/free-weight";
 import { MACHINE, machine } from "../constants/machine";
-import { getOldWorkout, saveWorkout, searchFor, uuidv4 } from "../utils";
-import {
-  AddButton,
-  Button,
-  Column,
-  DisplayName,
-  Input,
-  Item,
-  Link,
-  List,
-  Row,
-} from "./Common";
+import { getOldWorkout, saveWorkout, uuidv4 } from "../utils";
+import { AddButton, DisplayName, Input, List } from "./Common";
 import SimpleExercise from "./SimpleExercise";
 
 interface RadioProps {

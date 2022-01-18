@@ -184,22 +184,6 @@ const Exercises = styled.ul`
   overflow-y: scroll;
   text-transform: capitalize;
 `;
-const Entry = styled.li`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  list-style-type: none;
-  opacity: 0.4;
-  font-size: 14px;
-  cursor: pointer;
-  :hover {
-    opacity: 0.8;
-  }
-  :active {
-    opacity: 1;
-  }
-`;
 const InfoBox = styled.div`
   margin-top: 20px;
   padding: 20px;
