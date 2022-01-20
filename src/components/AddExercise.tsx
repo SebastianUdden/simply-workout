@@ -4,7 +4,8 @@ import { bodyWeight, BODY_WEIGHT } from "../constants/body-weight";
 import { freeWeight, FREE_WEIGHT } from "../constants/free-weight";
 import { MACHINE, machine } from "../constants/machine";
 import { getOldWorkout, saveWorkout, uuidv4 } from "../utils";
-import { AddButton, DisplayName, Input, List } from "./Common";
+import { AddButton, Input, List } from "./Common";
+import Search from "./Search";
 import SimpleExercise from "./SimpleExercise";
 
 interface RadioProps {
@@ -26,13 +27,16 @@ const bySortString = (a: any, b: any) => {
   return 0;
 };
 
+const defaultExercise = {
+  id: 0,
+  name: "",
+  category: "",
+};
+
 const AddExercise = () => {
   const [exercises, setExercises] = useState<any[]>([]);
-  const [newExercise, setNewExercise] = useState({
-    id: 0,
-    name: "",
-    category: "",
-  });
+  const [newExercise, setNewExercise] = useState(defaultExercise);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleAdd = () => {
     const newExercises = [...exercises, { ...newExercise, id: uuidv4() }];
@@ -71,13 +75,23 @@ const AddExercise = () => {
     ? true
     : false;
 
+  const filteredExercises = exercises.filter(
+    (e) =>
+      e.name.toLowerCase().includes(searchQuery) ||
+      e.category.toLowerCase().includes(searchQuery)
+  );
+
   return (
     <Wrapper>
       {exercises.length !== 0 && (
         <>
           <Label>Current exercises available</Label>
+          <Search
+            onChange={(value: string) => setSearchQuery(value)}
+            searchQuery={searchQuery}
+          />
           <List capitalize={true}>
-            {exercises
+            {filteredExercises
               .map((e) => ({
                 ...e,
                 sortString: `${e.category} - ${e.name}`,
@@ -118,10 +132,11 @@ const AddExercise = () => {
           setNewExercise({ ...newExercise, name: e.target.value })
         }
       />
-      {(newExercise.category || newExercise.name) && (
-        <DisplayName capitalize={true}>
-          {newExercise.category} - {newExercise.name}
-        </DisplayName>
+      {newExercise.category && newExercise.name && (
+        <SimpleExercise
+          exercise={newExercise}
+          onDelete={() => setNewExercise(defaultExercise)}
+        />
       )}
       {newExercise.category && newExercise.name && (
         <AddButton onClick={handleAdd} disabled={alreadyExists}>
@@ -135,6 +150,9 @@ const AddExercise = () => {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  #exercise-name {
+    margin-bottom: 20px;
+  }
 `;
 const Label = styled.label`
   font-weight: 800;

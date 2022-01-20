@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { workoutFormats } from "../constants/formats";
 import { defaultRoutines } from "../constants/routines";
 import { getOldWorkout } from "../utils";
-import Routine, { RoutineProps } from "./Routine";
+import Routine, { RoutineProps } from "./routine/Routine";
 
 const Home = () => {
   const [expandIndex, setExpandIndex] = useState(-1);
@@ -14,9 +14,7 @@ const Home = () => {
   useEffect(() => {
     const oldWorkout = getOldWorkout();
     setRoutines(
-      oldWorkout?.routines
-        ? [...defaultRoutines, ...oldWorkout?.routines]
-        : defaultRoutines
+      oldWorkout?.routines?.length ? [...oldWorkout?.routines] : defaultRoutines
     );
     setFormats(oldWorkout?.formats || workoutFormats);
   }, []);

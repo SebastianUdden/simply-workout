@@ -1,15 +1,17 @@
 import styled from "styled-components";
 
 export const AddButton = styled.button<{ disabled?: boolean }>`
-  margin-top: 20px;
+  margin-top: 5px;
   padding: 20px;
-  background-color: #111;
+  background-color: #000;
   color: #fff;
   font-size: 20px;
+  border-radius: 6px;
   border: none;
   cursor: pointer;
   :hover {
-    background-color: #000;
+    background-color: #fff;
+    color: #000;
   }
   :active {
   }
@@ -49,20 +51,26 @@ export const List = styled.ul<{ capitalize?: boolean }>`
     `
       text-transform: capitalize;
   `}
+  li {
+    opacity: 0.6;
+    :hover {
+      opacity: 1;
+    }
+  }
 `;
 
 export const Item = styled.li`
+  margin: 0;
+  background-color: #111;
   list-style-type: none;
-  opacity: 0.4;
   font-size: 14px;
   border: 1px solid #666;
-  padding: 10px 10px 15px;
+  padding: 5px 10px 8px;
   border-radius: 6px;
   margin-bottom: 5px;
   cursor: pointer;
   :hover {
     color: #fff;
-    opacity: 1;
   }
   :active {
     background-color: #000;
@@ -73,7 +81,6 @@ export const Row = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin: 4px 0;
 `;
 
 export const Column = styled.div`
@@ -82,6 +89,7 @@ export const Column = styled.div`
 `;
 
 export const Input = styled.input`
+  margin: 0 0 10px;
   font-size: 15px;
   background-color: inherit;
   color: inherit;
@@ -110,6 +118,10 @@ export const Button = styled.button`
   background-color: #000;
   border: none;
   border-radius: 6px;
+  cursor: pointer;
+  :hover {
+    opacity: 0.7;
+  }
 `;
 
 export const Label = styled.label`

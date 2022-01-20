@@ -54,3 +54,6 @@ export const searchFor = (searchTerm: string, additionalSearchterm: string) => {
     additionalSearchterm ? `+${additionalSearchterm}` : ""
   }`;
 };
+
+export const getPercentageChange = (value: number, percentage: number) =>
+  Math.round(1000 * value * (1 + percentage / 100)) / 1000;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { searchFor } from "../utils";
-import { Link } from "./Common";
+import { getPercentageChange, searchFor } from "../../utils";
+import { Link } from "../Common";
 
 export interface ExerciseProps {
   id?: string;
@@ -9,22 +9,25 @@ export interface ExerciseProps {
   name: string;
   unit: string;
   value: number;
+  format?: any;
   onChangeValue?: Function;
   onChangePosition?: Function;
   onDelete?: Function;
   i?: number;
   exerciseCount?: number;
+  areas?: string[];
 }
 
 const checkValue = (value: number) => {
   return value >= 0 ? value : 0;
 };
 
-const Exercise = ({
+const EditExercise = ({
   category,
   name,
   unit,
   value,
+  format,
   onChangeValue,
   onChangePosition,
   onDelete,
@@ -34,11 +37,7 @@ const Exercise = ({
   const [showInput, setShowInput] = useState(false);
 
   const changeByPercentage = (percentage: number) => {
-    onChangeValue &&
-      onChangeValue(
-        i,
-        Math.round(1000 * value * (1 + percentage / 100)) / 1000
-      );
+    onChangeValue && onChangeValue(i, getPercentageChange(value, percentage));
     setShowInput(true);
     setTimeout(() => {
       setShowInput(false);
@@ -89,8 +88,12 @@ const Exercise = ({
       <Flex>
         <Box>
           <Box>
-            <Arrow onClick={() => changeByPercentage(1)}>+</Arrow>
-            <Arrow onClick={() => changeByPercentage(-1)}>-</Arrow>
+            <Arrow onClick={() => changeByPercentage(format.percentage)}>
+              +
+            </Arrow>
+            <Arrow onClick={() => changeByPercentage(-format.percentage)}>
+              -
+            </Arrow>
             <div>
               {showInput ? (
                 <Input
@@ -191,4 +194,4 @@ const Tag = styled.span`
   text-transform: capitalize;
 `;
 
-export default Exercise;
+export default EditExercise;

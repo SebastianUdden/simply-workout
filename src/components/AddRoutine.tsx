@@ -13,7 +13,7 @@ import {
   uuidv4,
 } from "../utils";
 import { AddButton, DisplayName, Input, Label } from "./Common";
-import { ExerciseProps } from "./Exercise";
+import { ExerciseProps } from "./routine/EditExercise";
 import SimpleExercise from "./SimpleExercise";
 
 interface Props {

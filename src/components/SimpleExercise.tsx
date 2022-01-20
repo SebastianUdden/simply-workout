@@ -11,7 +11,7 @@ interface Props {
 
 const SimpleExercise = ({ exercise, onSelect, onDelete }: Props) => {
   return (
-    <Item onClick={(e) => onSelect && onSelect(e)}>
+    <Item onClick={() => onSelect && onSelect(exercise)}>
       <Row>
         <Column>
           <Name>{exercise.name}</Name>
@@ -23,7 +23,9 @@ const SimpleExercise = ({ exercise, onSelect, onDelete }: Props) => {
         </Column>
       </Row>
       <Row>
-        <Column>{exercise.category}</Column>
+        <Column>
+          <Category>{exercise.category}</Category>
+        </Column>
         <Column>
           <Row>
             <Link href={searchFor(exercise.name, "how to")} target="_blank">
@@ -42,6 +44,10 @@ const SimpleExercise = ({ exercise, onSelect, onDelete }: Props) => {
 const Name = styled.strong`
   margin-top: 2px;
   font-size: 18px;
+  text-transform: capitalize;
+`;
+const Category = styled.span`
+  text-transform: capitalize;
 `;
 const Delete = styled(Button)`
   margin-left: 5px;
