@@ -34,7 +34,7 @@ const ViewRoutine = ({
 
   return (
     <Wrapper>
-      <Button onClick={() => onHideRoutine()}>&times;</Button>
+      <Close onClick={() => onHideRoutine()}>&times;</Close>
       <Title>{routine.name}</Title>
       <ViewExercise
         {...routine.exercises[selectedIndex]}
@@ -72,6 +72,7 @@ const Arrows = styled.div`
   justify-content: space-between;
 `;
 const Arrow = styled.button<{ disabled?: boolean }>`
+  user-select: none;
   padding: 20px;
   width: 47%;
   font-weight: 800;
@@ -81,7 +82,7 @@ const Arrow = styled.button<{ disabled?: boolean }>`
   color: white;
   cursor: pointer;
   :hover {
-    opacity: 0.8;
+    background-color: #666;
   }
   :active {
     opacity: 0.2;
@@ -95,7 +96,8 @@ const Arrow = styled.button<{ disabled?: boolean }>`
     }
   `}
 `;
-const Button = styled.button`
+const Close = styled.button`
+  user-select: none;
   position: absolute;
   top: 10px;
   right: 20px;

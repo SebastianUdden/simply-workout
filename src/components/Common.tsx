@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const AddButton = styled.button<{ disabled?: boolean }>`
-  margin-top: 5px;
+  margin-top: 15px;
   padding: 20px;
   background-color: #000;
   color: #fff;
-  font-size: 20px;
+  font-size: 30px;
   border-radius: 6px;
   border: none;
   cursor: pointer;
@@ -44,7 +44,7 @@ export const List = styled.ul<{ capitalize?: boolean }>`
   text-align: left;
   padding: 0;
   margin: 0;
-  max-height: 25vh;
+  max-height: 45vh;
   overflow-y: scroll;
   ${(p) =>
     p.capitalize &&
@@ -52,14 +52,13 @@ export const List = styled.ul<{ capitalize?: boolean }>`
       text-transform: capitalize;
   `}
   li {
-    opacity: 0.6;
     :hover {
-      opacity: 1;
+      background-color: #333;
     }
   }
 `;
 
-export const Item = styled.li`
+export const Item = styled.li<{ bgColor?: string }>`
   margin: 0;
   background-color: #111;
   list-style-type: none;
@@ -67,8 +66,9 @@ export const Item = styled.li`
   border: 1px solid #666;
   padding: 5px 10px 8px;
   border-radius: 6px;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   cursor: pointer;
+  ${(p) => p.bgColor && `background-color: ${p.bgColor};`}
   :hover {
     color: #fff;
   }
@@ -132,6 +132,7 @@ export const Label = styled.label`
 export const Link = styled.a`
   color: orange;
   margin-right: 8px;
+  white-space: nowrap;
   :hover {
     color: magenta;
   }

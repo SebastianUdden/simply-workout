@@ -14,6 +14,7 @@ import {
 } from "../utils";
 import { AddButton, DisplayName, Input, Label } from "./Common";
 import { ExerciseProps } from "./routine/EditExercise";
+import SearchExercises from "./SearchExercises";
 import SimpleExercise from "./SimpleExercise";
 
 interface Props {
@@ -33,14 +34,13 @@ const AddRoutine = ({ onTabChange }: Props) => {
   };
 
   const handleAddType = (e: any) => {
-    if (e.target.value === "Select option") return;
-    const type = exerciseTypes.find((t) => t.id === e.target.value);
     setExercises([
       ...exercises,
       {
-        id: type.id || uuidv4(),
-        name: type.name,
-        category: type.category,
+        id: e.id || uuidv4(),
+        name: e.name,
+        category: e.category,
+        areas: e.areas,
         unit: "kg",
         value: 10,
       },
@@ -88,6 +88,10 @@ const AddRoutine = ({ onTabChange }: Props) => {
     setExerciseTypes(oldWorkout.exercises || defaultTypes);
   }, []);
 
+  // useEffect(() => {
+  //   setShowInfoBox()
+  // }, [exercises])
+
   return (
     <Wrapper>
       <Label>Workout routine name</Label>
@@ -110,20 +114,17 @@ const AddRoutine = ({ onTabChange }: Props) => {
           {format && (
             <>
               <Label>Add workout type</Label>
-              <Select onChange={handleAddType} capitalize={true}>
-                <option>Select type</option>
-                {exerciseTypes.map((e) => (
-                  <option key={e.id} value={e.id}>
-                    {e.category} - {e.name}
-                  </option>
-                ))}
-              </Select>
+              <SearchExercises
+                exercises={exerciseTypes}
+                onSelect={handleAddType}
+              />
               {exercises.length > 0 && (
                 <>
                   <Label>{routineName}</Label>
                   <Exercises>
                     {exercises.map((e: ExerciseProps, i: number) => (
                       <SimpleExercise
+                        bgColor="#333"
                         exercise={e}
                         onDelete={(deleteId: string) =>
                           handleRemoveEntry(deleteId)
@@ -133,18 +134,23 @@ const AddRoutine = ({ onTabChange }: Props) => {
                   </Exercises>
                   <DisplayName>{getFormatString(format)}</DisplayName>
                   <InfoBox>
-                    <Line>
-                      <Span>Workout exercises:</Span>
-                      {exercises.length}
-                    </Line>
-                    <Line>
-                      <Span>Total reps:</Span>
-                      {format.sets * format.reps * exercises.length}
-                    </Line>
-                    <Line>
-                      <Span>Estimated time:</Span>
-                      {timeToComplete}
-                    </Line>
+                    <FlexRow>
+                      <Line>
+                        <Span>Exercises:</Span>
+                        {exercises.length}
+                      </Line>
+                      <Line>
+                        <Span>Total reps:</Span>
+                        {format.sets * format.reps * exercises.length}
+                      </Line>
+                      <Line>
+                        <Span>Est. time:</Span>
+                        {timeToComplete}
+                      </Line>
+                    </FlexRow>
+                    <SmallExercises>
+                      <Line>{exercises.map((e) => e.name).join(" --- ")}</Line>
+                    </SmallExercises>
                   </InfoBox>
                   {!showError && (
                     <AddButton onClick={() => handleAddRoutine()}>
@@ -180,7 +186,6 @@ const Exercises = styled.ul`
   text-align: left;
   padding: 0;
   margin: 0;
-  max-height: 25vh;
   overflow-y: scroll;
   text-transform: capitalize;
 `;
@@ -188,9 +193,26 @@ const InfoBox = styled.div`
   margin-top: 20px;
   padding: 20px;
   border: 1px solid white;
+  position: sticky;
+  bottom: 2px;
+  left: 0;
+  right: 0;
+  background-color: #000;
+`;
+const FlexRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
+const SmallExercises = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  text-transform: capitalize;
+  margin-top: 10px;
+  font-size: 12px;
 `;
 const Line = styled.p`
-  margin: 0;
+  margin: 0 10px 0 0;
 `;
 const Span = styled.span`
   opacity: 0.4;

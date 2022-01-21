@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { getPercentageChange } from "../../utils";
 import { Column, Row } from "../Common";
@@ -12,6 +13,7 @@ const ViewExercise = ({
   areas,
   onChangeValue,
 }: ExerciseProps) => {
+  const [simpleIndex, setSimpleIndex] = useState(-1);
   return (
     <Wrapper>
       <Row>
@@ -23,8 +25,13 @@ const ViewExercise = ({
       <Title>{name}</Title>
       {areas?.length ? (
         <Areas>
-          {areas.map((a: string) => (
-            <Area>{a}</Area>
+          {areas.map((a: string, i: number) => (
+            <Area
+              onClick={() => setSimpleIndex(i === simpleIndex ? -1 : i)}
+              selected={i === simpleIndex}
+            >
+              {a[i === simpleIndex ? 1 : 0]}
+            </Area>
           ))}
         </Areas>
       ) : (
@@ -87,7 +94,7 @@ const Areas = styled.p`
   flex-wrap: wrap;
   margin: 0 0 30px;
 `;
-const Area = styled.span`
+const Area = styled.button<{ selected?: boolean }>`
   background-color: #444;
   color: #fff;
   margin-top: 5px;
@@ -95,6 +102,20 @@ const Area = styled.span`
   padding: 10px;
   text-transform: capitalize;
   border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  font-size: 18px;
+  :hover {
+    background-color: #666;
+  }
+  ${(p) =>
+    p.selected &&
+    `
+    background-color: #999;
+    :hover {
+      background-color: #bbb;
+    }
+  `}
 `;
 const Label = styled.span`
   opacity: 0.5;
@@ -110,6 +131,7 @@ const Value = styled.span<{ big?: boolean }>`
   `}
 `;
 const Button = styled.button`
+  user-select: none;
   margin-top: 10px;
   padding: 20px;
   width: 100%;
@@ -124,7 +146,7 @@ const Button = styled.button`
     margin-right: 0;
   }
   :hover {
-    opacity: 0.8;
+    background-color: #666;
   }
   :active {
     opacity: 0.2;

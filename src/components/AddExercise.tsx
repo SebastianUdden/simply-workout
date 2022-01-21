@@ -4,8 +4,8 @@ import { bodyWeight, BODY_WEIGHT } from "../constants/body-weight";
 import { freeWeight, FREE_WEIGHT } from "../constants/free-weight";
 import { MACHINE, machine } from "../constants/machine";
 import { getOldWorkout, saveWorkout, uuidv4 } from "../utils";
-import { AddButton, Input, List } from "./Common";
-import Search from "./Search";
+import { AddButton, Input } from "./Common";
+import SearchExercises from "./SearchExercises";
 import SimpleExercise from "./SimpleExercise";
 
 interface RadioProps {
@@ -21,12 +21,6 @@ const Radio = ({ onSelect, exercise, constant }: RadioProps) => (
   </RadioWrapper>
 );
 
-const bySortString = (a: any, b: any) => {
-  if (a.sortString > b.sortString) return 1;
-  if (a.sortString < b.sortString) return -1;
-  return 0;
-};
-
 const defaultExercise = {
   id: 0,
   name: "",
@@ -36,7 +30,6 @@ const defaultExercise = {
 const AddExercise = () => {
   const [exercises, setExercises] = useState<any[]>([]);
   const [newExercise, setNewExercise] = useState(defaultExercise);
-  const [searchQuery, setSearchQuery] = useState("");
 
   const handleAdd = () => {
     const newExercises = [...exercises, { ...newExercise, id: uuidv4() }];
@@ -75,36 +68,16 @@ const AddExercise = () => {
     ? true
     : false;
 
-  const filteredExercises = exercises.filter(
-    (e) =>
-      e.name.toLowerCase().includes(searchQuery) ||
-      e.category.toLowerCase().includes(searchQuery)
-  );
-
   return (
     <Wrapper>
       {exercises.length !== 0 && (
         <>
           <Label>Current exercises available</Label>
-          <Search
-            onChange={(value: string) => setSearchQuery(value)}
-            searchQuery={searchQuery}
+          <SearchExercises
+            exercises={exercises}
+            onSelect={(e: any) => setNewExercise(e)}
+            onDelete={(id: string) => handleDelete(id)}
           />
-          <List capitalize={true}>
-            {filteredExercises
-              .map((e) => ({
-                ...e,
-                sortString: `${e.category} - ${e.name}`,
-              }))
-              .sort(bySortString)
-              .map((e) => (
-                <SimpleExercise
-                  exercise={e}
-                  onSelect={(e: any) => setNewExercise(e)}
-                  onDelete={(id: string) => handleDelete(id)}
-                />
-              ))}
-          </List>
         </>
       )}
       <Label>Select category</Label>
@@ -148,6 +121,7 @@ const AddExercise = () => {
 };
 
 const Wrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   #exercise-name {
