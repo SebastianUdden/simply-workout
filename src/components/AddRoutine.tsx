@@ -41,13 +41,14 @@ const AddRoutine = ({ onTabChange }: Props) => {
         name: e.name,
         category: e.category,
         areas: e.areas,
-        unit: "kg",
+        unit: e.unit,
         value: 10,
       },
     ]);
   };
 
   const handleRemoveEntry = (id: string) => {
+    // TODO: use index instead
     setExercises(exercises.filter((e: ExerciseProps) => e.id !== id));
   };
 
@@ -87,10 +88,6 @@ const AddRoutine = ({ onTabChange }: Props) => {
     const defaultTypes = [...bodyWeight, ...freeWeight, ...machine];
     setExerciseTypes(oldWorkout.exercises || defaultTypes);
   }, []);
-
-  // useEffect(() => {
-  //   setShowInfoBox()
-  // }, [exercises])
 
   return (
     <Wrapper>

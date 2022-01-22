@@ -47,8 +47,7 @@ const ViewExercise = ({
         <Column>
           <Label>Challenge</Label>
           <Value big={true}>
-            {Math.round(value * (1 + format.percentage / 100))}
-            {unit}
+            {Math.round(value * (1 + format.percentage / 100))} {unit}
           </Value>
         </Column>
       </Row>

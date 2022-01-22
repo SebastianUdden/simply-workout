@@ -23,7 +23,11 @@ export const defaultRoutines = [
     id: "1",
     name: "Example routine",
     format: selectedFormat,
-    exercises: selectedExercises.map((e) => ({ ...e, unit: "kg", value: 10 })),
+    exercises: selectedExercises.map((e) => ({
+      ...e,
+      unit: e.unit,
+      value: 10,
+    })),
     timeToComplete: estimateTime(selectedFormat, selectedExercises),
   },
 ];
