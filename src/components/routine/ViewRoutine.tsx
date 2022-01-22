@@ -101,10 +101,11 @@ const Arrows = styled.div`
   flex-direction: column;
   justify-content: space-between;
   position: absolute;
+  background-color: inherit;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 20px;
+  padding: 0 20px 20px;
 `;
 const Plus = styled.button<{ disabled?: boolean }>`
   user-select: none;
