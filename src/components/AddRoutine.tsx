@@ -37,7 +37,7 @@ const AddRoutine = ({ onTabChange }: Props) => {
     setExercises([
       ...exercises,
       {
-        id: e.id || uuidv4(),
+        id: uuidv4(),
         name: e.name,
         category: e.category,
         areas: e.areas,

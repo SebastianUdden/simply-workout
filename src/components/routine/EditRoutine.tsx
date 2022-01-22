@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import EditExercise, { ExerciseProps } from "./EditExercise";
-import { Button, Column, Row, Select } from "../Common";
+import { Button, Column, Label, Row, Select } from "../Common";
 import { Format } from "../AddFormat";
 import { useState } from "react";
 import { getFormatString } from "../../utils";
 import { RoutineProps } from "./Routine";
+import SearchExercises from "../SearchExercises";
 
 interface Props {
   routine: RoutineProps;
@@ -95,14 +96,10 @@ const EditRoutine = ({
               />
             ))}
           </Exercises>
-          <Select onChange={onAdd} capitalize={true}>
-            <option>Add workout type</option>
-            {exerciseTypes.map((e) => (
-              <option key={e.id} value={e.id}>
-                {e.category} - {e.name}
-              </option>
-            ))}
-          </Select>
+          <Column>
+            <Label>Add exercise</Label>
+            <SearchExercises exercises={exerciseTypes} onSelect={onAdd} />
+          </Column>
         </>
       )}
     </Wrapper>

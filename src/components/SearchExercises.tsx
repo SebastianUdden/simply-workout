@@ -22,6 +22,7 @@ const SearchExercises = ({ exercises, onSelect, onDelete }: Props) => {
     (e: any) =>
       e.name.toLowerCase().includes(q) ||
       e.category.toLowerCase().includes(q) ||
+      e.unit.toLowerCase().includes(q) ||
       e.areas?.some((a: string[]) => a[0].includes(q) || a[1].includes(q))
   );
   return (

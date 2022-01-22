@@ -62,18 +62,16 @@ const Routine = (props: Props) => {
   };
 
   const handleAddType = (e: any) => {
-    if (e.target.value === "Select option") return;
-    const type = exerciseTypes.find((t) => t.id === e.target.value);
-    e.target.value = "Add workout type";
     setR({
       ...r,
       exercises: [
         ...exercises,
         {
           id: uuidv4(),
-          name: type.name,
-          category: type.category,
-          unit: "kg",
+          name: e.name,
+          category: e.category,
+          areas: e.areas,
+          unit: e.unit,
           value: 10,
         },
       ],
@@ -106,6 +104,8 @@ const Routine = (props: Props) => {
       onHideRoutine={() => setViewRoutine(false)}
       onChangeValue={handleChangeExerciseValue}
       exerciseTypes={exerciseTypes}
+      exercises={exercises}
+      onAdd={handleAddType}
     />
   ) : (
     <EditRoutine

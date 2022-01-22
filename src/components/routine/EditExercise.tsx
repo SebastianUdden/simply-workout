@@ -16,6 +16,7 @@ export interface ExerciseProps {
   i?: number;
   exerciseCount?: number;
   areas?: string[];
+  bgColor?: string;
 }
 
 const checkValue = (value: number) => {
@@ -33,6 +34,7 @@ const EditExercise = ({
   onDelete,
   i,
   exerciseCount,
+  bgColor,
 }: ExerciseProps) => {
   const [showInput, setShowInput] = useState(false);
 
@@ -51,7 +53,7 @@ const EditExercise = ({
   }, [showInput]);
 
   return (
-    <Wrapper>
+    <Wrapper bgColor={bgColor}>
       <Flex>
         <Label>{name}</Label>
         {onChangePosition && (
@@ -119,7 +121,8 @@ const EditExercise = ({
   );
 };
 
-const Wrapper = styled.li`
+const Wrapper = styled.li<{ bgColor?: string }>`
+  ${(p) => p.bgColor && `background-color: ${p.bgColor};`}
   border: 1px solid white;
   padding: 10px;
   margin: 10px 0;

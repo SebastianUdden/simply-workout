@@ -14,13 +14,17 @@ const ViewExercise = ({
   onChangeValue,
 }: ExerciseProps) => {
   const [simpleIndex, setSimpleIndex] = useState(-1);
+  const challenge = Math.round(value * (1 + format.percentage / 100));
+  const repString =
+    unit === "kg" ? `${format.reps} reps` : `${challenge} ${unit}`;
+
   return (
     <Wrapper>
       <Row>
         <Category>{category}</Category>
-        <Category>
-          {format.sets} &times; {format.reps} reps
-        </Category>
+        <Reps>
+          {format.sets} &times; {repString}
+        </Reps>
       </Row>
       <Title>{name}</Title>
       {areas?.length ? (
@@ -45,9 +49,9 @@ const ViewExercise = ({
           </Value>
         </Column>
         <Column>
-          <Label>Challenge</Label>
+          <Label>Challenge ({unit === "kg" ? "Rep" : "Set"})</Label>
           <Value big={true}>
-            {Math.round(value * (1 + format.percentage / 100))} {unit}
+            {challenge} {unit}
           </Value>
         </Column>
       </Row>
@@ -80,6 +84,10 @@ const Wrapper = styled.div`
 `;
 const Category = styled.p`
   text-transform: capitalize;
+  opacity: 0.5;
+  margin: 5px 0;
+`;
+const Reps = styled.p`
   opacity: 0.5;
   margin: 5px 0;
 `;
