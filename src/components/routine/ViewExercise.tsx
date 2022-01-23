@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getPercentageChange } from "../../utils";
 import { Column, Row } from "../Common";
@@ -17,6 +17,20 @@ const ViewExercise = ({
   const challenge = Math.round(value * (1 + format.percentage / 100));
   const repString =
     unit === "kg" ? `${format.reps} reps` : `${challenge} ${unit}`;
+
+  useEffect(() => {
+    const body = document.getElementsByTagName("body")[0];
+    body.style.position = "fixed";
+    body.style.left = "0";
+    body.style.right = "0";
+    document.getElementById("filter-exercises")?.focus();
+    return () => {
+      const body = document.getElementsByTagName("body")[0];
+      body.style.position = "static";
+      body.style.left = "default";
+      body.style.right = "default";
+    };
+  }, []);
 
   return (
     <Wrapper>
@@ -94,7 +108,7 @@ const Reps = styled.p`
 const Title = styled.h2`
   margin: 5px 0;
   text-transform: capitalize;
-  font-size: 35px;
+  font-size: 25px;
 `;
 const Areas = styled.p`
   display: flex;
@@ -111,7 +125,7 @@ const Area = styled.button<{ selected?: boolean }>`
   border-radius: 6px;
   cursor: pointer;
   border: none;
-  font-size: 18px;
+  font-size: 14px;
   :hover {
     background-color: #666;
   }
@@ -126,15 +140,15 @@ const Area = styled.button<{ selected?: boolean }>`
 `;
 const Label = styled.span`
   opacity: 0.5;
-  font-size: 16px;
+  font-size: 14px;
 `;
 const Value = styled.span<{ big?: boolean }>`
   margin-left: 3px;
-  font-size: 26px;
+  font-size: 20px;
   ${(p) =>
     p.big &&
     `
-    font-size: 44px;
+    font-size: 35px;
   `}
 `;
 const Button = styled.button`
@@ -142,7 +156,7 @@ const Button = styled.button`
   margin-top: 10px;
   padding: 20px;
   width: 100%;
-  font-size: 30px;
+  font-size: 18px;
   font-weight: 800;
   background-color: #333;
   border: none;

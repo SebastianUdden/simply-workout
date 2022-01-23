@@ -6,8 +6,6 @@ import ViewExercise from "./ViewExercise";
 
 interface Props {
   routine: RoutineProps;
-  i: number;
-  formats: any[];
   onHideRoutine: Function;
   onChangeValue: Function;
   allExercises: any[];
@@ -17,8 +15,6 @@ interface Props {
 const ViewRoutine = ({
   allExercises,
   routine,
-  i,
-  formats,
   onHideRoutine,
   onChangeValue,
   onAdd,
@@ -52,23 +48,21 @@ const ViewRoutine = ({
           onChangeValue={(value: number) => onChangeValue(selectedIndex, value)}
         />
         <Arrows>
-          <Content>
-            <Row>
-              {isRight && (
-                <Plus onClick={() => setShowNewExercise(true)}>
-                  + Add exercise
-                </Plus>
-              )}
-            </Row>
-            <Row>
-              <Arrow onClick={onGoBack} disabled={isLeft}>
-                &larr;
-              </Arrow>
-              <Arrow onClick={onGoForward} disabled={isRight}>
-                &rarr;
-              </Arrow>
-            </Row>
-          </Content>
+          <Row>
+            {isRight && (
+              <Plus onClick={() => setShowNewExercise(true)}>
+                + Add exercise
+              </Plus>
+            )}
+          </Row>
+          <Row>
+            <Arrow onClick={onGoBack} disabled={isLeft}>
+              &larr;
+            </Arrow>
+            <Arrow onClick={onGoForward} disabled={isRight}>
+              &rarr;
+            </Arrow>
+          </Row>
         </Arrows>
       </Content>
       {showNewExercise && (
@@ -89,7 +83,7 @@ const Wrapper = styled.div`
   right: 0;
   bottom: 0;
   background-color: #222;
-  padding: 30px;
+  padding: 30px 30px 0;
   z-index: 1;
 `;
 const Content = styled.div`
@@ -98,6 +92,9 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  height: 100%;
+  max-height: 98vh;
+  position: relative;
 `;
 const Title = styled.h1`
   margin: 0 40px 20px 0;
@@ -114,15 +111,14 @@ const Arrows = styled.div`
   justify-content: space-between;
   position: absolute;
   background-color: inherit;
-  bottom: 0;
+  bottom: 40px;
   left: 0;
   right: 0;
-  padding: 0 20px 20px;
 `;
 const Plus = styled.button<{ disabled?: boolean }>`
   user-select: none;
-  padding: 20px;
-  font-size: 30px;
+  padding: 20px 15px;
+  font-size: 18px;
   width: 100%;
   font-weight: 800;
   background-color: #333;
@@ -147,7 +143,8 @@ const Plus = styled.button<{ disabled?: boolean }>`
 `;
 const Arrow = styled(Plus)`
   margin-top: 20px;
-  font-size: 40px;
+  font-size: 30px;
+  padding: 15px;
   :first-child {
     margin-right: 20px;
   }

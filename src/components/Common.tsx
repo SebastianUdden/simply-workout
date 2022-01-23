@@ -44,7 +44,7 @@ export const List = styled.ul<{ capitalize?: boolean; noMaxHeight?: boolean }>`
   text-align: left;
   padding: 0;
   margin: 0;
-  max-height: 45vh;
+  max-height: 100%;
   overflow-y: scroll;
   ${(p) =>
     p.noMaxHeight &&

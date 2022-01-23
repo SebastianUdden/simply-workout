@@ -40,8 +40,6 @@ const SearchExercises = ({
   });
 
   const handleAreaClick = (t: string) => {
-    console.log({ t });
-    console.log({ filters });
     if (filters.some((f) => f === t)) {
       setFilters([...filters.filter((f) => f !== t)]);
       return;
@@ -52,17 +50,19 @@ const SearchExercises = ({
   const tags = Array.from(
     new Set(
       exercises
-        .map((e) => e.areas?.map((a) => a[simpleView ? 0 : 1]))
+        .map((e) => e.areas)
         .flat()
         .filter(Boolean)
+        .map((e) => e?.toString())
     )
-  );
+  ).map((t: any) => t.split(","));
 
   return (
     <>
       <Input
         id="filter-exercises"
         type="search"
+        placeholder="Search"
         value={searchQuery}
         onChange={(e: any) => setSearchQuery(e.target.value)}
       />
@@ -71,12 +71,12 @@ const SearchExercises = ({
           <SimpleView onClick={() => setSimpleView(!simpleView)}>
             {simpleView ? "Show muscle areas" : "Show muscle names"}
           </SimpleView>
-          {tags.sort().map((t: any) => (
+          {tags.map((t: any) => (
             <Area
-              selected={filters.some((f) => f === t)}
-              onClick={() => handleAreaClick(t)}
+              selected={filters.some((f) => f === t[0])}
+              onClick={() => handleAreaClick(t[0])}
             >
-              {t}
+              {t[simpleView ? 0 : 1]}
             </Area>
           ))}
         </Tags>

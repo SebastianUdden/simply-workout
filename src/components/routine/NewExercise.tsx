@@ -15,7 +15,17 @@ const NewExercise = ({ onHideNewExercise, allExercises, onAdd }: Props) => {
     onAdd(e);
   };
   useEffect(() => {
+    const body = document.getElementsByTagName("body")[0];
+    body.style.position = "fixed";
+    body.style.left = "0";
+    body.style.right = "0";
     document.getElementById("filter-exercises")?.focus();
+    return () => {
+      const body = document.getElementsByTagName("body")[0];
+      body.style.position = "static";
+      body.style.left = "default";
+      body.style.right = "default";
+    };
   }, []);
   return (
     <Wrapper>
@@ -25,8 +35,9 @@ const NewExercise = ({ onHideNewExercise, allExercises, onAdd }: Props) => {
         <SearchExercises
           exercises={allExercises}
           onSelect={handleAdd}
-          maxHeight={false}
+          maxHeight={true}
         />
+        <br />
       </Content>
     </Wrapper>
   );
@@ -38,9 +49,16 @@ const Wrapper = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: inherit;
-  padding: 30px;
+  background-color: #222;
+  padding: 0 30px;
   z-index: 3;
+`;
+const Content = styled.div`
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-height: 100vh;
 `;
 const Close = styled.button`
   user-select: none;
@@ -57,10 +75,5 @@ const Close = styled.button`
     color: orange;
   }
 `;
-const Content = styled.div`
-  max-width: 800px;
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-`;
+
 export default NewExercise;

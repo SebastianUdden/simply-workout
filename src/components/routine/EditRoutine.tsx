@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import EditExercise, { ExerciseProps } from "./EditExercise";
-import { Button, Column, Label, Row, Select } from "../Common";
+import { Button, Column, Row, Select } from "../Common";
 import { Format } from "../AddFormat";
 import { useState } from "react";
 import { getFormatString } from "../../utils";
 import { RoutineProps } from "./Routine";
-import SearchExercises from "../SearchExercises";
+import NewExercise from "./NewExercise";
 
 interface Props {
   routine: RoutineProps;
@@ -37,7 +37,19 @@ const EditRoutine = ({
   onAdd,
 }: Props) => {
   const [showDelete, setShowDelete] = useState(false);
+  const [showNewExercise, setShowNewExercise] = useState(false);
   const { name, format, exercises, timeToComplete } = routine;
+
+  const handleAdd = (e: any) => {
+    setTimeout(() => {
+      window.scrollTo({
+        left: 0,
+        top: document.body.scrollHeight,
+        behavior: "smooth",
+      });
+    }, 100);
+    onAdd(e);
+  };
 
   return (
     <Wrapper>
@@ -73,7 +85,7 @@ const EditRoutine = ({
       <Item>
         <Strong>Time to complete: {timeToComplete}</Strong>
       </Item>
-      <Start onClick={() => onViewRoutine()}>Start</Start>
+      <BigButton onClick={() => onViewRoutine()}>Start</BigButton>
       {expandIndex === i && (
         <>
           <Select onChange={onChangeFormat}>
@@ -96,10 +108,16 @@ const EditRoutine = ({
               />
             ))}
           </Exercises>
-          <Column>
-            <Label>Add exercise</Label>
-            <SearchExercises exercises={exerciseTypes} onSelect={onAdd} />
-          </Column>
+          <BigButton onClick={() => setShowNewExercise(true)}>
+            Add exercise
+          </BigButton>
+          {showNewExercise && (
+            <NewExercise
+              onAdd={handleAdd}
+              allExercises={exerciseTypes}
+              onHideNewExercise={() => setShowNewExercise(false)}
+            />
+          )}
         </>
       )}
     </Wrapper>
@@ -146,7 +164,7 @@ const Item = styled.li`
 const Strong = styled.strong`
   color: magenta;
 `;
-const Start = styled(Button)`
+const BigButton = styled(Button)`
   margin: 5px 0;
   padding: 12px;
   font-size: 16px;
