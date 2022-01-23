@@ -16,11 +16,11 @@ const SimpleExercise = ({ exercise, onSelect, onDelete, bgColor }: Props) => {
   return (
     <Item onClick={() => onSelect && onSelect(exercise)} bgColor={bgColor}>
       <Row>
-        <Column>
+        <WideColumn>
           <Name>{exercise.name}</Name>
           <Category>{exercise.category}</Category>
-        </Column>
-        <Column>
+        </WideColumn>
+        <WideColumn>
           <FlexRow>
             {exercise?.areas?.map((a: string, i: number) => (
               <Area
@@ -34,11 +34,13 @@ const SimpleExercise = ({ exercise, onSelect, onDelete, bgColor }: Props) => {
               </Area>
             ))}
           </FlexRow>
-        </Column>
+        </WideColumn>
         <Column>
-          <Delete onClick={() => onDelete && onDelete(exercise.id)}>
-            &times;
-          </Delete>
+          {onDelete && (
+            <Delete onClick={() => onDelete && onDelete(exercise.id)}>
+              &times;
+            </Delete>
+          )}
           <Row>
             <Link href={searchFor(exercise.name, "how to")} target="_blank">
               How to
@@ -55,6 +57,7 @@ const SimpleExercise = ({ exercise, onSelect, onDelete, bgColor }: Props) => {
 
 const Name = styled.strong`
   margin-top: 2px;
+  margin-right: 10px;
   font-size: 18px;
   text-transform: capitalize;
 `;
@@ -68,7 +71,7 @@ const Delete = styled(Button)`
   margin-bottom: 15px;
   background-color: red;
 `;
-const Area = styled.button<{ selected?: boolean }>`
+export const Area = styled.button<{ selected?: boolean }>`
   background-color: #444;
   color: #fff;
   margin-top: 5px;
@@ -94,5 +97,8 @@ const Area = styled.button<{ selected?: boolean }>`
 const FlexRow = styled.div`
   display: flex;
   flex-wrap: wrap;
+`;
+const WideColumn = styled(Column)`
+  width: 40%;
 `;
 export default SimpleExercise;

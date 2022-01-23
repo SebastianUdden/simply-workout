@@ -1,24 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Label } from "../Common";
 import SearchExercises from "../SearchExercises";
 
 interface Props {
   onHideNewExercise: Function;
-  exercises: any[];
+  allExercises: any[];
   onAdd: Function;
 }
 
-const NewExercise = ({ onHideNewExercise, exercises, onAdd }: Props) => {
+const NewExercise = ({ onHideNewExercise, allExercises, onAdd }: Props) => {
   const handleAdd = (e: any) => {
     onHideNewExercise();
     onAdd(e);
   };
+  useEffect(() => {
+    document.getElementById("filter-exercises")?.focus();
+  }, []);
   return (
     <Wrapper>
       <Close onClick={() => onHideNewExercise()}>&times;</Close>
-      <Label>Add exercise</Label>
-      <SearchExercises exercises={exercises} onSelect={handleAdd} />
+      <Content>
+        <Label>Add exercise</Label>
+        <SearchExercises
+          exercises={allExercises}
+          onSelect={handleAdd}
+          maxHeight={false}
+        />
+      </Content>
     </Wrapper>
   );
 };
@@ -32,8 +41,6 @@ const Wrapper = styled.div`
   background-color: inherit;
   padding: 30px;
   z-index: 3;
-  display: flex;
-  flex-direction: column;
 `;
 const Close = styled.button`
   user-select: none;
@@ -49,5 +56,11 @@ const Close = styled.button`
   :hover {
     color: orange;
   }
+`;
+const Content = styled.div`
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
 `;
 export default NewExercise;

@@ -40,12 +40,17 @@ export const DisplayName = styled.p<{ capitalize?: boolean }>`
   `}
 `;
 
-export const List = styled.ul<{ capitalize?: boolean }>`
+export const List = styled.ul<{ capitalize?: boolean; noMaxHeight?: boolean }>`
   text-align: left;
   padding: 0;
   margin: 0;
   max-height: 45vh;
   overflow-y: scroll;
+  ${(p) =>
+    p.noMaxHeight &&
+    `
+    max-height: 100%;
+  `}
   ${(p) =>
     p.capitalize &&
     `

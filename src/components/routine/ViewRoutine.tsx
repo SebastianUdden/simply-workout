@@ -9,14 +9,13 @@ interface Props {
   i: number;
   formats: any[];
   onHideRoutine: Function;
-  exerciseTypes: any[];
   onChangeValue: Function;
-  exercises: any[];
+  allExercises: any[];
   onAdd: Function;
 }
 
 const ViewRoutine = ({
-  exercises,
+  allExercises,
   routine,
   i,
   formats,
@@ -45,31 +44,37 @@ const ViewRoutine = ({
   return (
     <Wrapper>
       <Close onClick={() => onHideRoutine()}>&times;</Close>
-      <Title>{routine.name}</Title>
-      <ViewExercise
-        {...routine.exercises[selectedIndex]}
-        format={routine.format}
-        onChangeValue={(value: number) => onChangeValue(selectedIndex, value)}
-      />
-      <Arrows>
-        <Row>
-          {isRight && (
-            <Plus onClick={() => setShowNewExercise(true)}>+ Add exercise</Plus>
-          )}
-        </Row>
-        <Row>
-          <Arrow onClick={onGoBack} disabled={isLeft}>
-            &larr;
-          </Arrow>
-          <Arrow onClick={onGoForward} disabled={isRight}>
-            &rarr;
-          </Arrow>
-        </Row>
-      </Arrows>
+      <Content>
+        <Title>{routine.name}</Title>
+        <ViewExercise
+          {...routine.exercises[selectedIndex]}
+          format={routine.format}
+          onChangeValue={(value: number) => onChangeValue(selectedIndex, value)}
+        />
+        <Arrows>
+          <Content>
+            <Row>
+              {isRight && (
+                <Plus onClick={() => setShowNewExercise(true)}>
+                  + Add exercise
+                </Plus>
+              )}
+            </Row>
+            <Row>
+              <Arrow onClick={onGoBack} disabled={isLeft}>
+                &larr;
+              </Arrow>
+              <Arrow onClick={onGoForward} disabled={isRight}>
+                &rarr;
+              </Arrow>
+            </Row>
+          </Content>
+        </Arrows>
+      </Content>
       {showNewExercise && (
         <NewExercise
           onAdd={handleAdd}
-          exercises={exercises}
+          allExercises={allExercises}
           onHideNewExercise={() => setShowNewExercise(false)}
         />
       )}
@@ -86,6 +91,13 @@ const Wrapper = styled.div`
   background-color: #222;
   padding: 30px;
   z-index: 1;
+`;
+const Content = styled.div`
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
 `;
 const Title = styled.h1`
   margin: 0 40px 20px 0;
@@ -110,12 +122,11 @@ const Arrows = styled.div`
 const Plus = styled.button<{ disabled?: boolean }>`
   user-select: none;
   padding: 20px;
-
+  font-size: 30px;
   width: 100%;
   font-weight: 800;
   background-color: #333;
   border: none;
-  font-size: 40px;
   color: white;
   cursor: pointer;
 
@@ -136,6 +147,7 @@ const Plus = styled.button<{ disabled?: boolean }>`
 `;
 const Arrow = styled(Plus)`
   margin-top: 20px;
+  font-size: 40px;
   :first-child {
     margin-right: 20px;
   }

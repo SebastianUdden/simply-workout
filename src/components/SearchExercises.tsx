@@ -1,12 +1,14 @@
 import { useState } from "react";
+import styled from "styled-components";
 import { Input, List } from "./Common";
 import { ExerciseProps } from "./routine/EditExercise";
-import SimpleExercise from "./SimpleExercise";
+import SimpleExercise, { Area } from "./SimpleExercise";
 
 interface Props {
   exercises: ExerciseProps[];
   onSelect?: Function;
   onDelete?: Function;
+  maxHeight?: boolean;
 }
 
 const bySortString = (a: any, b: any) => {
@@ -15,24 +17,71 @@ const bySortString = (a: any, b: any) => {
   return 0;
 };
 
-const SearchExercises = ({ exercises, onSelect, onDelete }: Props) => {
+const SearchExercises = ({
+  exercises,
+  onSelect,
+  onDelete,
+  maxHeight = true,
+}: Props) => {
+  const [simpleView, setSimpleView] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [filters, setFilters] = useState<any[]>([]);
   const q = searchQuery.toLowerCase();
-  const filteredExercises = exercises.filter(
-    (e: any) =>
-      e.name.toLowerCase().includes(q) ||
-      e.category.toLowerCase().includes(q) ||
-      e.unit.toLowerCase().includes(q) ||
-      e.areas?.some((a: string[]) => a[0].includes(q) || a[1].includes(q))
+  const queries = [...q.split(" "), ...filters];
+
+  const filteredExercises = exercises.filter((e: any) => {
+    return queries.every(
+      (q) =>
+        e.name.toLowerCase().includes(q) ||
+        e.category.toLowerCase().includes(q) ||
+        e.unit.toLowerCase().includes(q) ||
+        e.areas?.some((a: string[]) => a[0].includes(q) || a[1].includes(q))
+    );
+  });
+
+  const handleAreaClick = (t: string) => {
+    console.log({ t });
+    console.log({ filters });
+    if (filters.some((f) => f === t)) {
+      setFilters([...filters.filter((f) => f !== t)]);
+      return;
+    }
+    setFilters([...filters.filter((f) => f !== t), t]);
+  };
+
+  const tags = Array.from(
+    new Set(
+      exercises
+        .map((e) => e.areas?.map((a) => a[simpleView ? 0 : 1]))
+        .flat()
+        .filter(Boolean)
+    )
   );
+
   return (
     <>
       <Input
+        id="filter-exercises"
+        type="search"
         value={searchQuery}
         onChange={(e: any) => setSearchQuery(e.target.value)}
       />
-
-      <List capitalize={true}>
+      {tags?.length > 0 && (
+        <Tags>
+          <SimpleView onClick={() => setSimpleView(!simpleView)}>
+            {simpleView ? "Show muscle areas" : "Show muscle names"}
+          </SimpleView>
+          {tags.sort().map((t: any) => (
+            <Area
+              selected={filters.some((f) => f === t)}
+              onClick={() => handleAreaClick(t)}
+            >
+              {t}
+            </Area>
+          ))}
+        </Tags>
+      )}
+      <List capitalize={true} noMaxHeight={!maxHeight}>
         {filteredExercises
           .map((e) => ({
             ...e,
@@ -50,5 +99,20 @@ const SearchExercises = ({ exercises, onSelect, onDelete }: Props) => {
     </>
   );
 };
+
+const Tags = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+`;
+
+const SimpleView = styled(Area)`
+  padding: 10px;
+  background-color: #000;
+  :hover {
+    background-color: #fff;
+    color: #000;
+  }
+`;
 
 export default SearchExercises;

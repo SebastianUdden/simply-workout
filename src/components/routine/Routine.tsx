@@ -20,6 +20,7 @@ interface Props {
   formats: any[];
   expandIndex: number;
   onExpandIndexChange: Function;
+  allExercises: any[];
 }
 
 const Routine = (props: Props) => {
@@ -103,8 +104,7 @@ const Routine = (props: Props) => {
       routine={r}
       onHideRoutine={() => setViewRoutine(false)}
       onChangeValue={handleChangeExerciseValue}
-      exerciseTypes={exerciseTypes}
-      exercises={exercises}
+      allExercises={props.allExercises}
       onAdd={handleAddType}
     />
   ) : (
