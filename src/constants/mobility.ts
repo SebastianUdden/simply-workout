@@ -1,21 +1,12 @@
 import {
-  ABS,
-  BICEPS,
   CALVES,
-  PECS,
   GLUTES,
   HAMSTRINGS,
   HIP,
-  INNER_THIGH,
   SPINAL_ERECTOR,
   OBLIQUES,
   QUADS,
-  DELTS,
-  TRICEPS,
-  UPPER_TRAPS,
   LOWER_TRAPS,
-  LATS,
-  LOWER_PECS,
 } from "./areas";
 
 export const MOBILITY = "mobility";
