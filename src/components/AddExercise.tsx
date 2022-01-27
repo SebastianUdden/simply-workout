@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { bodyWeight, BODY_WEIGHT } from "../constants/body-weight";
-import { freeWeight, FREE_WEIGHT } from "../constants/free-weight";
-import { MACHINE, machine } from "../constants/machine";
+import { exerciseNames, exerciseTypes } from "../constants/exerciseTypes";
 import { getOldWorkout, saveWorkout, uuidv4 } from "../utils";
 import { AddButton, Input } from "./Common";
 import SearchExercises from "./SearchExercises";
@@ -28,6 +26,7 @@ const defaultExercise = {
 };
 
 const AddExercise = () => {
+  const firstTime = useRef<boolean>(false);
   const [exercises, setExercises] = useState<any[]>([]);
   const [newExercise, setNewExercise] = useState(defaultExercise);
 
@@ -47,9 +46,7 @@ const AddExercise = () => {
   useEffect(() => {
     const oldWorkout = getOldWorkout();
     setExercises(
-      oldWorkout.exercises?.length
-        ? oldWorkout.exercises
-        : [...bodyWeight, ...freeWeight, ...machine]
+      oldWorkout.exercises?.length ? oldWorkout.exercises : exerciseTypes
     );
   }, []);
 
@@ -61,6 +58,20 @@ const AddExercise = () => {
     };
     saveWorkout(newWorkout);
   }, [exercises]);
+
+  useEffect(() => {
+    if (!firstTime.current) {
+      firstTime.current = true;
+      return;
+    }
+    setTimeout(() => {
+      window.scrollTo({
+        left: 0,
+        top: document.body.scrollHeight,
+        behavior: "smooth",
+      });
+    }, 100);
+  }, [newExercise]);
 
   const alreadyExists = exercises.find(
     (w) => w.name === newExercise.name && w.category === newExercise.category
@@ -81,21 +92,13 @@ const AddExercise = () => {
         </>
       )}
       <Label>Select category</Label>
-      <Radio
-        onSelect={(e: any) => setNewExercise(e)}
-        exercise={newExercise}
-        constant={FREE_WEIGHT}
-      />
-      <Radio
-        onSelect={(e: any) => setNewExercise(e)}
-        exercise={newExercise}
-        constant={BODY_WEIGHT}
-      />
-      <Radio
-        onSelect={(e: any) => setNewExercise(e)}
-        exercise={newExercise}
-        constant={MACHINE}
-      />
+      {exerciseNames.map((name) => (
+        <Radio
+          onSelect={(e: any) => setNewExercise(e)}
+          exercise={newExercise}
+          constant={name}
+        />
+      ))}
       <Label>Exercise name</Label>
       <Input
         id="exercise-name"
@@ -124,6 +127,7 @@ const Wrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  padding-bottom: 30px;
   #exercise-name {
     margin-bottom: 20px;
   }

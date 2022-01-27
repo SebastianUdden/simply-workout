@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { bodyWeight } from "../constants/body-weight";
 
 import { workoutFormats } from "../constants/formats";
-import { freeWeight } from "../constants/free-weight";
-import { machine } from "../constants/machine";
 import { defaultRoutines } from "../constants/routines";
 import { getOldWorkout } from "../utils";
+import { exerciseTypes } from "../constants/exerciseTypes";
 import Routine, { RoutineProps } from "./routine/Routine";
 
 const Home = () => {
@@ -22,9 +20,7 @@ const Home = () => {
     );
     setFormats(oldWorkout?.formats || workoutFormats);
     setAllExercies(
-      oldWorkout.exercises?.length
-        ? oldWorkout.exercises
-        : [...bodyWeight, ...freeWeight, ...machine]
+      oldWorkout.exercises?.length ? oldWorkout.exercises : exerciseTypes
     );
   }, []);
 

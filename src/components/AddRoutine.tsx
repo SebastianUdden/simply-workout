@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { HOME } from "../App";
-import { bodyWeight } from "../constants/body-weight";
 import { workoutFormats } from "../constants/formats";
-import { freeWeight } from "../constants/free-weight";
-import { machine } from "../constants/machine";
+import { exerciseTypes as defaultExerciseTypes } from "../constants/exerciseTypes";
 import {
   estimateTime,
   getFormatString,
@@ -85,8 +83,7 @@ const AddRoutine = ({ onTabChange }: Props) => {
   useEffect(() => {
     document.getElementById("routine-name")?.focus();
     const oldWorkout = getOldWorkout();
-    const defaultTypes = [...bodyWeight, ...freeWeight, ...machine];
-    setExerciseTypes(oldWorkout.exercises || defaultTypes);
+    setExerciseTypes(oldWorkout.exercises || defaultExerciseTypes);
   }, []);
 
   return (
