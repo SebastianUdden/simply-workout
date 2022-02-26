@@ -85,19 +85,15 @@ const AddExercise = () => {
 
   return (
     <Wrapper>
-      {exercises.length !== 0 && (
-        <>
-          <TopRow>
-            <Label>Current exercises available</Label>
-            <Reset onClick={handleReset}>Reset</Reset>
-          </TopRow>
-          <SearchExercises
-            exercises={exercises}
-            onSelect={(e: any) => setNewExercise(e)}
-            onDelete={(id: string) => handleDelete(id)}
-          />
-        </>
-      )}
+      <TopRow>
+        <Label>Current exercises available</Label>
+        <Reset onClick={handleReset}>Reset</Reset>
+      </TopRow>
+      <SearchExercises
+        exercises={exercises}
+        onSelect={(e: any) => setNewExercise(e)}
+        onDelete={(id: string) => handleDelete(id)}
+      />
       <Label>Select category</Label>
       {exerciseNames.map((name) => (
         <Radio

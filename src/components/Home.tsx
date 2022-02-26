@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { workoutFormats } from "../constants/formats";
 import { defaultRoutines } from "../constants/routines";
-import { getOldWorkout } from "../utils";
+import { getOldWorkout, saveWorkout } from "../utils";
 import { exerciseTypes } from "../constants/exerciseTypes";
 import Routine, { RoutineProps } from "./routine/Routine";
 
@@ -23,6 +23,11 @@ const Home = () => {
       oldWorkout.exercises?.length ? oldWorkout.exercises : exerciseTypes
     );
   }, []);
+
+  useEffect(() => {
+    const oldWorkout = getOldWorkout();
+    saveWorkout({ ...oldWorkout, routines });
+  }, [routines]);
 
   return (
     <Wrapper>

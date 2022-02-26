@@ -9,6 +9,7 @@ export const ABS = ["abs", "stomach"];
 export const OBLIQUES = ["obliques", "side stomach"];
 export const LATS = ["lats", "wings"];
 export const UPPER_TRAPS = ["upper traps", "neck"];
+export const RHOMBOIDS = ["rhomboids", "middle upper back"];
 export const LOWER_TRAPS = ["lower traps", "upper back"];
 export const SPINAL_ERECTOR = ["spinal erector", "lower back"];
 export const GLUTES = ["glutes", "but"];
