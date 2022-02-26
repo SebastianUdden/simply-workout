@@ -107,7 +107,7 @@ const AddRoutine = ({ onTabChange }: Props) => {
           </Select>
           {format && (
             <>
-              <Label>Add workout type</Label>
+              <Label>Add exercise</Label>
               <SearchExercises
                 exercises={exerciseTypes}
                 onSelect={handleAddType}

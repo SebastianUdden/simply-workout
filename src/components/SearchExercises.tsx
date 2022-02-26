@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { exerciseNames } from "../constants/exerciseTypes";
 import { Input, List } from "./Common";
 import { ExerciseProps } from "./routine/EditExercise";
 import SimpleExercise, { Area } from "./SimpleExercise";
@@ -66,6 +67,18 @@ const SearchExercises = ({
         value={searchQuery}
         onChange={(e: any) => setSearchQuery(e.target.value)}
       />
+      {exerciseNames && (
+        <Tags>
+          {exerciseNames.map((en) => (
+            <Area
+              selected={filters.some((f) => f === en)}
+              onClick={() => handleAreaClick(en)}
+            >
+              {en}
+            </Area>
+          ))}
+        </Tags>
+      )}
       {tags?.length > 0 && (
         <Tags>
           <SimpleView onClick={() => setSimpleView(!simpleView)}>
@@ -103,11 +116,11 @@ const SearchExercises = ({
 const Tags = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 `;
 
 const SimpleView = styled(Area)`
-  padding: 10px;
+  padding: 6px 10px;
   background-color: #000;
   :hover {
     background-color: #fff;

@@ -1,5 +1,5 @@
-export const BICEPS = ["biceps", "upper arms"];
-export const TRICEPS = ["triceps", "upper arms"];
+export const BICEPS = ["biceps", "upper arms front"];
+export const TRICEPS = ["triceps", "upper arms back"];
 export const FOREARMS = ["brachioradialis", "forearms"];
 export const DELTS = ["delts", "shoulders"];
 export const PECS = ["pecs", "chest"];

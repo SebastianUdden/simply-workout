@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { exerciseNames, exerciseTypes } from "../constants/exerciseTypes";
 import { getOldWorkout, saveWorkout, uuidv4 } from "../utils";
-import { AddButton, Input } from "./Common";
+import { AddButton, Input, Row } from "./Common";
 import SearchExercises from "./SearchExercises";
 import SimpleExercise from "./SimpleExercise";
 
@@ -41,6 +41,10 @@ const AddExercise = () => {
 
   const handleDelete = (id: string) => {
     setExercises(exercises.filter((e) => e.id !== id));
+  };
+
+  const handleReset = () => {
+    setExercises(exerciseTypes);
   };
 
   useEffect(() => {
@@ -83,7 +87,10 @@ const AddExercise = () => {
     <Wrapper>
       {exercises.length !== 0 && (
         <>
-          <Label>Current exercises available</Label>
+          <TopRow>
+            <Label>Current exercises available</Label>
+            <Reset onClick={handleReset}>Reset</Reset>
+          </TopRow>
           <SearchExercises
             exercises={exercises}
             onSelect={(e: any) => setNewExercise(e)}
@@ -134,7 +141,6 @@ const Wrapper = styled.div`
 `;
 const Label = styled.label`
   font-weight: 800;
-  margin: 20px 0 10px;
 `;
 const RadioButton = styled.input`
   cursor: pointer;
@@ -158,6 +164,24 @@ const RadioLabel = styled.label`
   opacity: 0.4;
   cursor: pointer;
   text-transform: capitalize;
+`;
+const Reset = styled.button`
+  background-color: #000;
+  color: #fff;
+  padding: 5px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  :hover {
+    background-color: #fff;
+    color: #000;
+  }
+  :active {
+    background-color: #ddd;
+  }
+`;
+const TopRow = styled(Row)`
+  margin: 20px 0 10px;
 `;
 
 export default AddExercise;
