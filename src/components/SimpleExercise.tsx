@@ -12,11 +12,11 @@ interface Props {
 
 const SimpleExercise = ({ exercise, onSelect, onDelete, bgColor }: Props) => {
   const [simpleIndex, setSimpleIndex] = useState(-1);
-
+  const showImage = false;
   return (
     <Item onClick={() => onSelect && onSelect(exercise)} bgColor={bgColor}>
       <Row>
-        {exercise.img && <Image src={exercise.img} />}
+        {showImage && <Image src={exercise.img} />}
         <WideColumn>
           <Name>{exercise.name}</Name>
           <Category>{exercise.category}</Category>
