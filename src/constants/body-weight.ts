@@ -25,6 +25,7 @@ export const bodyWeight = [
     category: BODY_WEIGHT,
     name: "power walk (60 min)",
     unit: "km",
+    img: "https://chefenikjol.files.wordpress.com/2010/09/powerwalk.jpg",
     areas: [
       GLUTES,
       HAMSTRINGS,
@@ -41,6 +42,7 @@ export const bodyWeight = [
     category: BODY_WEIGHT,
     name: "running (30 min)",
     unit: "km",
+    img: "https://previews.123rf.com/images/takoburito/takoburito1612/takoburito161200004/68168078-%ED%9D%B0-%EB%B0%B0%EA%B2%BD%EC%97%90-%EA%B3%A0%EB%A6%BD-%EB%90%9C-%ED%9C%98%ED%8A%B8%EB%8B%88%EC%8A%A4-%EB%82%A8%EC%9E%90-%EC%8B%A4%ED%96%89.jpg",
     areas: [GLUTES, HAMSTRINGS, QUADS, CALVES, ABS, OBLIQUES],
   },
   {
@@ -213,6 +215,7 @@ export const bodyWeight = [
     category: BODY_WEIGHT,
     name: "running (60 min)",
     unit: "km",
+    img: "https://previews.123rf.com/images/takoburito/takoburito1612/takoburito161200004/68168078-%ED%9D%B0-%EB%B0%B0%EA%B2%BD%EC%97%90-%EA%B3%A0%EB%A6%BD-%EB%90%9C-%ED%9C%98%ED%8A%B8%EB%8B%88%EC%8A%A4-%EB%82%A8%EC%9E%90-%EC%8B%A4%ED%96%89.jpg",
     areas: [GLUTES, HAMSTRINGS, QUADS, CALVES, ABS, OBLIQUES],
   },
   {
@@ -220,6 +223,7 @@ export const bodyWeight = [
     category: BODY_WEIGHT,
     name: "running (15 min)",
     unit: "km",
+    img: "https://previews.123rf.com/images/takoburito/takoburito1612/takoburito161200004/68168078-%ED%9D%B0-%EB%B0%B0%EA%B2%BD%EC%97%90-%EA%B3%A0%EB%A6%BD-%EB%90%9C-%ED%9C%98%ED%8A%B8%EB%8B%88%EC%8A%A4-%EB%82%A8%EC%9E%90-%EC%8B%A4%ED%96%89.jpg",
     areas: [GLUTES, HAMSTRINGS, QUADS, CALVES, ABS, OBLIQUES],
   },
   {
@@ -227,6 +231,7 @@ export const bodyWeight = [
     category: BODY_WEIGHT,
     name: "power walk (120 min)",
     unit: "km",
+    img: "https://chefenikjol.files.wordpress.com/2010/09/powerwalk.jpg",
     areas: [
       GLUTES,
       HAMSTRINGS,

@@ -3,7 +3,7 @@ import { workoutFormats } from "./formats";
 import { exerciseTypes } from "../constants/exerciseTypes";
 
 const homeIds = ["3", "6", "5", "9", "13", "21", "10", "15"];
-const outsideIds = ["2", "4", "24", "7", "11", "5", "21", "2"];
+const outsideIds = ["26", "4", "24", "7", "11", "5", "21", "26"];
 const odenplanIds = [
   "124",
   "105",

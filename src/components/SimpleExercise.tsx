@@ -16,6 +16,7 @@ const SimpleExercise = ({ exercise, onSelect, onDelete, bgColor }: Props) => {
   return (
     <Item onClick={() => onSelect && onSelect(exercise)} bgColor={bgColor}>
       <Row>
+        {exercise.img && <Image src={exercise.img} />}
         <WideColumn>
           <Name>{exercise.name}</Name>
           <Category>{exercise.category}</Category>
@@ -54,6 +55,17 @@ const SimpleExercise = ({ exercise, onSelect, onDelete, bgColor }: Props) => {
     </Item>
   );
 };
+
+const Image = styled.img`
+  border-radius: 6px;
+  margin: 5px 5px 5px 0;
+  width: 50px;
+  height: 50px;
+  @media (min-width: 500px) {
+    width: 100px;
+    height: 100px;
+  }
+`;
 
 const Name = styled.strong`
   margin-top: 2px;

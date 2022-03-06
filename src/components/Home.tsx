@@ -15,9 +15,13 @@ const Home = () => {
 
   useEffect(() => {
     const oldWorkout = getOldWorkout();
-    setRoutines(
-      oldWorkout?.routines?.length ? [...oldWorkout?.routines] : defaultRoutines
-    );
+    const workouts = [
+      ...(oldWorkout?.routines || []).filter(
+        (r: any) => !defaultRoutines.some((dr) => dr.id === r?.id)
+      ),
+      ...defaultRoutines,
+    ];
+    setRoutines(workouts);
     setFormats(oldWorkout?.formats || workoutFormats);
     setAllExercies(
       oldWorkout.exercises?.length ? oldWorkout.exercises : exerciseTypes

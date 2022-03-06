@@ -75,13 +75,17 @@ const EditRoutine = ({
           </Row>
         </Column>
       </Row>
-      <Item>
-        Do: {format.sets} sets * {format.reps} reps ={" "}
-        {format.sets * format.reps} reps
-      </Item>
-      <Item>Rest between sets: {format.rest} sec</Item>
-      <Item>Exercises: {exercises.length}</Item>
-      <Item>Percentage (+ / -): {format.percentage}%</Item>
+      {expandIndex === i && (
+        <>
+          <Item>
+            Do: {format.sets} sets * {format.reps} reps ={" "}
+            {format.sets * format.reps} reps
+          </Item>
+          <Item>Rest between sets: {format.rest} sec</Item>
+          <Item>Exercises: {exercises.length}</Item>
+          <Item>Percentage (+ / -): {format.percentage}%</Item>
+        </>
+      )}
       <Item>
         <Strong>Time to complete: {timeToComplete}</Strong>
       </Item>
