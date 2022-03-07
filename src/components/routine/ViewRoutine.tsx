@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { Close } from "../Close";
 import NewExercise from "./NewExercise";
 import { RoutineProps } from "./Routine";
 import ViewExercise from "./ViewExercise";
@@ -125,7 +126,7 @@ const Plus = styled.button<{ disabled?: boolean }>`
   border: none;
   color: white;
   cursor: pointer;
-
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   :hover {
     background-color: #666;
   }
@@ -147,21 +148,6 @@ const Arrow = styled(Plus)`
   padding: 15px;
   :first-child {
     margin-right: 20px;
-  }
-`;
-const Close = styled.button`
-  user-select: none;
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  background-color: inherit;
-  border: none;
-  font-size: 40px;
-  color: white;
-  cursor: pointer;
-  z-index: 2;
-  :hover {
-    color: orange;
   }
 `;
 

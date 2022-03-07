@@ -88,9 +88,18 @@ export const Row = styled.div`
   width: 100%;
 `;
 
-export const Column = styled.div`
+export const Column = styled.div<{ fixed?: boolean }>`
   display: flex;
   flex-direction: column;
+  ${(p) =>
+    p.fixed &&
+    `
+    margin-right: 10px;
+    width: 50%;
+    :last-child {
+      margin-right: 0;
+    }
+  `}
 `;
 
 export const Input = styled.input`

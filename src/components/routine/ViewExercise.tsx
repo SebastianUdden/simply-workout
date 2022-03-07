@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getPercentageChange } from "../../utils";
 import { Column, Row } from "../Common";
+import Timer from "../timer/Timer";
 import { ExerciseProps } from "./EditExercise";
+
+const getChallenge = (value: number, percentage: number) =>
+  Math.round(value * (1 + percentage / 100));
 
 const ViewExercise = ({
   category,
@@ -14,7 +18,9 @@ const ViewExercise = ({
   onChangeValue,
 }: ExerciseProps) => {
   const [simpleIndex, setSimpleIndex] = useState(-1);
-  const challenge = Math.round(value * (1 + format.percentage / 100));
+  const [showTimer, setShowTimer] = useState(false);
+  const [showRepChallenge, setShowRepChallenge] = useState(false);
+  const challenge = getChallenge(value, format.percentage);
   const repString =
     unit === "kg" ? `${format.reps} reps` : `${challenge} ${unit}`;
 
@@ -34,6 +40,9 @@ const ViewExercise = ({
 
   return (
     <Wrapper>
+      {showTimer && (
+        <Timer time={challenge} onClose={() => setShowTimer(false)} />
+      )}
       <Row>
         <Category>{category}</Category>
         <Reps>
@@ -56,17 +65,27 @@ const ViewExercise = ({
         <br />
       )}
       <Row>
-        <Column>
+        <Column fixed>
           <Label>Current</Label>
           <Value>
             {Math.round(value)} {unit}
           </Value>
         </Column>
-        <Column>
+        <Column fixed>
           <Label>Challenge ({unit === "kg" ? "Rep" : "Set"})</Label>
-          <Value big={true}>
-            {challenge} {unit}
-          </Value>
+          <Button
+            onClick={() =>
+              unit === "sec"
+                ? setShowTimer(true)
+                : setShowRepChallenge(!showRepChallenge)
+            }
+          >
+            <Value big>
+              {showRepChallenge
+                ? `${getChallenge(format.reps, format.percentage)} reps`
+                : `${challenge} ${unit}`}
+            </Value>
+          </Button>
         </Column>
       </Row>
       <Row>
@@ -126,6 +145,7 @@ const Area = styled.button<{ selected?: boolean }>`
   cursor: pointer;
   border: none;
   font-size: 14px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   :hover {
     background-color: #666;
   }
@@ -148,7 +168,7 @@ const Value = styled.span<{ big?: boolean }>`
   ${(p) =>
     p.big &&
     `
-    font-size: 35px;
+    font-size: 32px;
   `}
 `;
 const Button = styled.button`
@@ -163,14 +183,18 @@ const Button = styled.button`
   color: white;
   cursor: pointer;
   margin-right: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   :last-child {
     margin-right: 0;
   }
   :hover {
     background-color: #666;
+    box-shadow: none;
   }
   :active {
     opacity: 0.2;
+    box-shadow: none;
   }
   ${(p) =>
     p.disabled &&
