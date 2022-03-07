@@ -72,7 +72,15 @@ const ViewExercise = ({
           </Value>
         </Column>
         <Column fixed>
-          <Label>Challenge ({unit === "kg" ? "Rep" : "Set"})</Label>
+          <Label>
+            Challenge (
+            {unit === "kg"
+              ? showRepChallenge
+                ? `${value} ${unit}`
+                : `${format.reps} reps`
+              : "Set"}
+            )
+          </Label>
           <Button
             onClick={() =>
               unit === "sec"

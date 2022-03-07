@@ -10,4 +10,8 @@ export const Close = styled.button`
   font-size: 70px;
   line-height: 50px;
   z-index: 2;
+  cursor: pointer;
+  :hover {
+    opacity: 0.7;
+  }
 `;

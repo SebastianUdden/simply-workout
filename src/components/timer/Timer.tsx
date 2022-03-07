@@ -38,7 +38,11 @@ const Timer = ({ time, onClose }: Props) => {
   }, []);
 
   return (
-    <Wrapper onClick={() => ratio > 1 && handleClose()} show={show}>
+    <Wrapper
+      onClick={() => ratio > 1 && handleClose()}
+      show={show}
+      isButton={ratio > 1}
+    >
       <Close onClick={handleClose}>&times;</Close>
       <ProgressCircle
         count={count}
@@ -51,7 +55,7 @@ const Timer = ({ time, onClose }: Props) => {
   );
 };
 
-const Wrapper = styled.div<{ show: boolean }>`
+const Wrapper = styled.div<{ show?: boolean; isButton: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -64,13 +68,15 @@ const Wrapper = styled.div<{ show: boolean }>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transform: translateX(100%);
-  transition: transform 700ms ease;
+  transition: transform 700ms ease, background-color 10000ms ease;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   ${(p) =>
-    p.show &&
+    p.show ? "transform: translateX(0);" : "transform: translateX(100%);"}
+  ${(p) =>
+    p.isButton &&
     `
-    transform: translateX(0);
+    cursor: pointer;
+    background-color: #fff;
   `}
 `;
 
