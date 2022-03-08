@@ -34,7 +34,7 @@ export const defaultRoutines = [
     exercises: odenplanExercises.map((e) => ({
       ...e,
       unit: e.unit,
-      value: 10,
+      values: [{ date: "2022-02-03", value: 10 }],
     })),
     timeToComplete: estimateTime(workoutFormats[0], odenplanExercises),
   },
@@ -45,7 +45,7 @@ export const defaultRoutines = [
     exercises: homeExercises.map((e) => ({
       ...e,
       unit: e.unit,
-      value: 10,
+      values: [{ date: "2022-02-03", value: 10 }],
     })),
     timeToComplete: estimateTime(workoutFormats[0], homeExercises),
   },
@@ -56,7 +56,7 @@ export const defaultRoutines = [
     exercises: outsideExercises.map((e) => ({
       ...e,
       unit: e.unit,
-      value: 10,
+      values: [{ date: "2022-02-03", value: 10 }],
     })),
     timeToComplete: estimateTime(workoutFormats[0], outsideExercises),
   },

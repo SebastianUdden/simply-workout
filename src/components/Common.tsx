@@ -96,6 +96,7 @@ export const Column = styled.div<{ fixed?: boolean }>`
     `
     margin-right: 10px;
     width: 50%;
+    min-height: 80px;
     :last-child {
       margin-right: 0;
     }

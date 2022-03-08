@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Close } from "../Close";
+import { ExerciseValue } from "./EditExercise";
 import NewExercise from "./NewExercise";
 import { RoutineProps } from "./Routine";
 import ViewExercise from "./ViewExercise";
@@ -20,11 +21,18 @@ const ViewRoutine = ({
   onChangeValue,
   onAdd,
 }: Props) => {
+  const [show, setShow] = useState(false);
   const [showNewExercise, setShowNewExercise] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const isLeft = selectedIndex === 0;
   const isRight = selectedIndex === routine.exercises.length - 1;
 
+  const handleClose = () => {
+    setShow(false);
+    setTimeout(() => {
+      onHideRoutine();
+    }, 1000);
+  };
   const onGoForward = () => {
     if (isRight) return;
     setSelectedIndex(selectedIndex + 1);
@@ -38,15 +46,21 @@ const ViewRoutine = ({
     setSelectedIndex(selectedIndex + 1);
   };
 
+  useEffect(() => {
+    setShow(true);
+  }, []);
+
   return (
-    <Wrapper>
-      <Close onClick={() => onHideRoutine()}>&times;</Close>
+    <Wrapper show={show}>
+      <Close onClick={handleClose}>&times;</Close>
       <Content>
         <Title>{routine.name}</Title>
         <ViewExercise
           {...routine.exercises[selectedIndex]}
           format={routine.format}
-          onChangeValue={(value: number) => onChangeValue(selectedIndex, value)}
+          onChangeValue={(value: ExerciseValue) =>
+            onChangeValue(selectedIndex, value)
+          }
         />
         <Arrows>
           <Row>
@@ -77,15 +91,20 @@ const ViewRoutine = ({
   );
 };
 
-const Wrapper = styled.div`
-  position: absolute;
+const Wrapper = styled.div<{ show: boolean }>`
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background-color: #222;
-  padding: 30px 30px 0;
+  color: #fff;
+  padding: 30px 15px 0;
   z-index: 1;
+  transition: transform 700ms ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  ${(p) =>
+    p.show ? "transform: translateX(0);" : "transform: translateX(100%);"}
 `;
 const Content = styled.div`
   width: 100%;

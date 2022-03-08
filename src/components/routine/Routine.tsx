@@ -3,6 +3,7 @@ import EditRoutine from "./EditRoutine";
 import ViewRoutine from "./ViewRoutine";
 import { exerciseTypes as defaultExerciseTypes } from "../../constants/exerciseTypes";
 import { estimateTime, getOldWorkout, saveWorkout, uuidv4 } from "../../utils";
+import { ExerciseValue } from "./EditExercise";
 
 export interface RoutineProps {
   id: string;
@@ -27,12 +28,19 @@ const Routine = (props: Props) => {
   const [r, setR] = useState(props.routine);
   const { exercises } = r;
 
-  const handleChangeExerciseValue = (i: number, value: number) => {
+  const handleChangeExerciseValue = (i: number, value: ExerciseValue) => {
+    const exercises = r.exercises.map((e, index) => {
+      let values = e.values.slice();
+      const latest = e.values[e.values.length - 1];
+      if (latest.date === value.date) {
+        values.pop();
+      }
+      values.push(value);
+      return i !== index ? e : { ...e, values };
+    });
     setR({
       ...r,
-      exercises: r.exercises.map((e, index) =>
-        i !== index ? e : { ...e, value }
-      ),
+      exercises,
     });
   };
 
@@ -95,27 +103,30 @@ const Routine = (props: Props) => {
     setExerciseTypes(oldWorkout.exercises || defaultExerciseTypes);
   }, []);
 
-  return viewRoutine ? (
-    <ViewRoutine
-      {...props}
-      routine={r}
-      onHideRoutine={() => setViewRoutine(false)}
-      onChangeValue={handleChangeExerciseValue}
-      allExercises={props.allExercises}
-      onAdd={handleAddType}
-    />
-  ) : (
-    <EditRoutine
-      {...props}
-      routine={r}
-      onViewRoutine={() => setViewRoutine(true)}
-      exerciseTypes={exerciseTypes}
-      onChangeFormat={handleChangeFormat}
-      onChangeValue={handleChangeExerciseValue}
-      onChangePosition={handleChangeExercisePosition}
-      onDelete={handleDeleteExercise}
-      onAdd={handleAddType}
-    />
+  return (
+    <>
+      {viewRoutine && (
+        <ViewRoutine
+          {...props}
+          routine={r}
+          onHideRoutine={() => setViewRoutine(false)}
+          onChangeValue={handleChangeExerciseValue}
+          allExercises={props.allExercises}
+          onAdd={handleAddType}
+        />
+      )}
+      <EditRoutine
+        {...props}
+        routine={r}
+        onViewRoutine={() => setViewRoutine(true)}
+        exerciseTypes={exerciseTypes}
+        onChangeFormat={handleChangeFormat}
+        onChangeValue={handleChangeExerciseValue}
+        onChangePosition={handleChangeExercisePosition}
+        onDelete={handleDeleteExercise}
+        onAdd={handleAddType}
+      />
+    </>
   );
 };
 

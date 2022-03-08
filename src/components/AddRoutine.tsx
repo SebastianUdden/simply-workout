@@ -6,6 +6,7 @@ import { exerciseTypes as defaultExerciseTypes } from "../constants/exerciseType
 import {
   estimateTime,
   getFormatString,
+  getNewDate,
   getOldWorkout,
   saveWorkout,
   uuidv4,
@@ -40,7 +41,7 @@ const AddRoutine = ({ onTabChange }: Props) => {
         category: e.category,
         areas: e.areas,
         unit: e.unit,
-        value: 10,
+        values: [...e.values, { date: getNewDate(), value: 10 }],
       },
     ]);
   };

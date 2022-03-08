@@ -57,3 +57,13 @@ export const searchFor = (searchTerm: string, additionalSearchterm: string) => {
 
 export const getPercentageChange = (value: number, percentage: number) =>
   Math.round(1000 * value * (1 + percentage / 100)) / 1000;
+
+export const getNewDate = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = getZero(now.getMonth() + 1);
+  const date = getZero(now.getDate());
+  return `${year}-${month}-${date}`;
+};
+
+export const getZero = (count: number) => (count < 10 ? `0${count}` : count);

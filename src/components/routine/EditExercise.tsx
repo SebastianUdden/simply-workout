@@ -3,12 +3,16 @@ import styled from "styled-components";
 import { getPercentageChange, searchFor } from "../../utils";
 import { Link } from "../Common";
 
+export interface ExerciseValue {
+  date: string;
+  value: number;
+}
 export interface ExerciseProps {
   id?: string;
   category?: string;
   name: string;
   unit: string;
-  value: number;
+  values: ExerciseValue[];
   format?: any;
   onChangeValue?: Function;
   onChangePosition?: Function;
@@ -27,7 +31,7 @@ const EditExercise = ({
   category,
   name,
   unit,
-  value,
+  values,
   format,
   onChangeValue,
   onChangePosition,
@@ -37,6 +41,7 @@ const EditExercise = ({
   bgColor,
 }: ExerciseProps) => {
   const [showInput, setShowInput] = useState(false);
+  const value = values[values.length].value;
 
   const changeByPercentage = (percentage: number) => {
     onChangeValue && onChangeValue(i, getPercentageChange(value, percentage));

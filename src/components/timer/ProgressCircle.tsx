@@ -1,6 +1,5 @@
 import styled from "styled-components";
-
-const getZero = (count: number) => (count < 10 ? `0${count}` : count);
+import { getZero } from "../../utils";
 
 const formatCount = (count: number) => {
   const minutes = getZero(Math.floor(count / 60));

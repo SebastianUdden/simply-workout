@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { getPercentageChange } from "../../utils";
+import { getNewDate, getPercentageChange } from "../../utils";
 import { Column, Row } from "../Common";
+import History from "../History";
 import Timer from "../timer/Timer";
 import { ExerciseProps } from "./EditExercise";
 
@@ -13,13 +14,15 @@ const ViewExercise = ({
   name,
   format,
   unit,
-  value,
+  values,
   areas,
   onChangeValue,
 }: ExerciseProps) => {
   const [simpleIndex, setSimpleIndex] = useState(-1);
   const [showTimer, setShowTimer] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
   const [showRepChallenge, setShowRepChallenge] = useState(false);
+  const value = values[values.length - 1]?.value;
   const challenge = getChallenge(value, format.percentage);
   const repString =
     unit === "kg" ? `${format.reps} reps` : `${challenge} ${unit}`;
@@ -29,9 +32,11 @@ const ViewExercise = ({
     body.style.position = "fixed";
     body.style.left = "0";
     body.style.right = "0";
+    body.style.overflow = "hidden";
     document.getElementById("filter-exercises")?.focus();
     return () => {
       const body = document.getElementsByTagName("body")[0];
+      body.style.overflow = "auto";
       body.style.position = "static";
       body.style.left = "default";
       body.style.right = "default";
@@ -40,6 +45,14 @@ const ViewExercise = ({
 
   return (
     <Wrapper>
+      {showHistory && (
+        <History
+          title={name}
+          values={values}
+          unit={unit}
+          onClose={() => setShowHistory(false)}
+        />
+      )}
       {showTimer && (
         <Timer time={challenge} onClose={() => setShowTimer(false)} />
       )}
@@ -66,7 +79,17 @@ const ViewExercise = ({
       )}
       <Row>
         <Column fixed>
-          <Label>Current</Label>
+          <Label>
+            Current
+            {values.length > 1 && (
+              <>
+                {" "}
+                <TextButton onClick={() => setShowHistory(true)}>
+                  Show history
+                </TextButton>
+              </>
+            )}
+          </Label>
           <Value>
             {Math.round(value)} {unit}
           </Value>
@@ -76,12 +99,12 @@ const ViewExercise = ({
             Challenge (
             {unit === "kg"
               ? showRepChallenge
-                ? `${value} ${unit}`
+                ? `${Math.round(value)} ${unit}`
                 : `${format.reps} reps`
               : "Set"}
             )
           </Label>
-          <Button
+          <TimerButton
             onClick={() =>
               unit === "sec"
                 ? setShowTimer(true)
@@ -93,14 +116,17 @@ const ViewExercise = ({
                 ? `${getChallenge(format.reps, format.percentage)} reps`
                 : `${challenge} ${unit}`}
             </Value>
-          </Button>
+          </TimerButton>
         </Column>
       </Row>
       <Row>
         <Button
           onClick={() =>
             onChangeValue &&
-            onChangeValue(getPercentageChange(value, -format.percentage))
+            onChangeValue({
+              date: getNewDate(),
+              value: getPercentageChange(value, -format.percentage),
+            })
           }
         >
           Fail (-{format.percentage}%)
@@ -108,7 +134,10 @@ const ViewExercise = ({
         <Button
           onClick={() =>
             onChangeValue &&
-            onChangeValue(getPercentageChange(value, format.percentage))
+            onChangeValue({
+              date: getNewDate(),
+              value: getPercentageChange(value, format.percentage),
+            })
           }
         >
           Success (+{format.percentage}%)
@@ -176,7 +205,7 @@ const Value = styled.span<{ big?: boolean }>`
   ${(p) =>
     p.big &&
     `
-    font-size: 32px;
+    font-size: 28px;
   `}
 `;
 const Button = styled.button`
@@ -212,6 +241,15 @@ const Button = styled.button`
        opacity: 0.2;
     }
   `}
+`;
+const TimerButton = styled(Button)`
+  padding: 10px;
+`;
+const TextButton = styled(Area)`
+  margin-top: -5px;
+  width: auto;
+  font-size: 12px;
+  padding: 5px;
 `;
 
 export default ViewExercise;
