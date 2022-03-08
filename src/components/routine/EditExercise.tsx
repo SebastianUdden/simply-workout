@@ -41,10 +41,14 @@ const EditExercise = ({
   bgColor,
 }: ExerciseProps) => {
   const [showInput, setShowInput] = useState(false);
-  const value = values[values.length].value;
+  const e = values[values.length - 1];
 
   const changeByPercentage = (percentage: number) => {
-    onChangeValue && onChangeValue(i, getPercentageChange(value, percentage));
+    onChangeValue &&
+      onChangeValue(i, {
+        ...e,
+        value: getPercentageChange(e.value, percentage),
+      });
     setShowInput(true);
     setTimeout(() => {
       setShowInput(false);
@@ -106,7 +110,7 @@ const EditExercise = ({
                 <Input
                   id={`${name}-input`}
                   onBlur={() => setShowInput(false)}
-                  value={value}
+                  value={e.value}
                   onChange={(e: any) =>
                     onChangeValue &&
                     onChangeValue(i, checkValue(e.target.value))
@@ -114,7 +118,7 @@ const EditExercise = ({
                 />
               ) : (
                 <FakeInput onClick={() => setShowInput(true)}>
-                  {Math.round(value)}
+                  {Math.round(e.value)}
                 </FakeInput>
               )}
               <Span>{unit}</Span>

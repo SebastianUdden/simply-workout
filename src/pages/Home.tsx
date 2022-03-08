@@ -8,6 +8,7 @@ import { exerciseTypes } from "../constants/exerciseTypes";
 import Routine, { RoutineProps } from "../components/routine/Routine";
 
 const Home = () => {
+  const [hide, setHide] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const [expandIndex, setExpandIndex] = useState(-1);
   const [formats, setFormats] = useState([]);
@@ -34,7 +35,7 @@ const Home = () => {
   }, [routines]);
 
   return (
-    <Wrapper>
+    <Wrapper hide={hide}>
       {routines && (
         <Routines>
           {routines.map((r: any, i: number) => (
@@ -53,7 +54,19 @@ const Home = () => {
         {showDelete ? "Cancel" : "Reset to default routines"}
       </Button>
       {showDelete && (
-        <Button onClick={() => setRoutines(defaultRoutines)} danger>
+        <Button
+          onClick={() => {
+            setHide(true);
+            setTimeout(() => {
+              setRoutines([]);
+            }, 500);
+            setTimeout(() => {
+              setRoutines(defaultRoutines);
+              setHide(false);
+            }, 520);
+          }}
+          danger
+        >
           Remove saved routines
         </Button>
       )}
@@ -61,8 +74,15 @@ const Home = () => {
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ hide: boolean }>`
   padding: 20px 0;
+  opacity: 1;
+  transition: opacity 500ms ease;
+  ${(p) =>
+    p.hide &&
+    `
+    opacity: 0;
+  `}
 `;
 const Routines = styled.ul`
   list-style-type: none;
@@ -82,6 +102,12 @@ const Button = styled.button<{ danger: boolean }>`
     `
     background-color: #aa0000;
   `}
+  :hover {
+    opacity: 0.8;
+  }
+  :active {
+    opacity: 0.5;
+  }
 `;
 
 export default Home;
