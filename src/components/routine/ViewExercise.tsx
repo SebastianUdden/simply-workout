@@ -80,7 +80,7 @@ const ViewExercise = ({
       <Row>
         <Column fixed>
           <Label>
-            Current
+            <span>Current</span>
             {values.length > 1 && (
               <>
                 {" "}
@@ -96,13 +96,15 @@ const ViewExercise = ({
         </Column>
         <Column fixed>
           <Label>
-            Challenge (
-            {unit === "kg"
-              ? showRepChallenge
-                ? `${Math.round(value)} ${unit}`
-                : `${format.reps} reps`
-              : "Set"}
-            )
+            <span>
+              Challenge (
+              {unit === "kg"
+                ? showRepChallenge
+                  ? `${Math.round(value)} ${unit}`
+                  : `${format.reps} reps`
+                : "Set"}
+              )
+            </span>
           </Label>
           <TimerButton
             onClick={() =>
@@ -195,9 +197,11 @@ const Area = styled.button<{ selected?: boolean }>`
     }
   `}
 `;
-const Label = styled.span`
-  opacity: 0.5;
+const Label = styled.label`
   font-size: 14px;
+  span {
+    opacity: 0.5;
+  }
 `;
 const Value = styled.span<{ big?: boolean }>`
   margin-left: 3px;
@@ -247,6 +251,7 @@ const TimerButton = styled(Button)`
 `;
 const TextButton = styled(Area)`
   margin-top: -5px;
+  background-color: #ff00ff;
   width: auto;
   font-size: 12px;
   padding: 5px;

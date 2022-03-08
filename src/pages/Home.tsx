@@ -8,6 +8,7 @@ import { exerciseTypes } from "../constants/exerciseTypes";
 import Routine, { RoutineProps } from "../components/routine/Routine";
 
 const Home = () => {
+  const [showDelete, setShowDelete] = useState(false);
   const [expandIndex, setExpandIndex] = useState(-1);
   const [formats, setFormats] = useState([]);
   const [routines, setRoutines] = useState<RoutineProps[]>([]);
@@ -15,12 +16,11 @@ const Home = () => {
 
   useEffect(() => {
     const oldWorkout = getOldWorkout();
-    const workouts = [
-      ...(oldWorkout?.routines || []).filter(
-        (r: any) => !defaultRoutines.some((dr) => dr.id === r?.id)
-      ),
-      ...defaultRoutines,
-    ];
+    const newDefault = defaultRoutines.filter(
+      (r: any) => !oldWorkout?.routines?.some((dr: any) => dr?.id === r.id)
+    );
+    const workouts = [...(oldWorkout?.routines || []), ...newDefault];
+
     setRoutines(workouts);
     setFormats(oldWorkout?.formats || workoutFormats);
     setAllExercies(
@@ -49,6 +49,14 @@ const Home = () => {
           ))}
         </Routines>
       )}
+      <Button onClick={() => setShowDelete(!showDelete)} danger={!showDelete}>
+        {showDelete ? "Cancel" : "Reset to default routines"}
+      </Button>
+      {showDelete && (
+        <Button onClick={() => setRoutines(defaultRoutines)} danger>
+          Remove saved routines
+        </Button>
+      )}
     </Wrapper>
   );
 };
@@ -59,6 +67,21 @@ const Wrapper = styled.div`
 const Routines = styled.ul`
   list-style-type: none;
   padding: 0;
+`;
+const Button = styled.button<{ danger: boolean }>`
+  background-color: #333;
+  margin-bottom: 10px;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  font-size: 20px;
+  border-radius: 6px;
+  ${(p) =>
+    p.danger &&
+    `
+    background-color: #aa0000;
+  `}
 `;
 
 export default Home;

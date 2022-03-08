@@ -88,7 +88,7 @@ const History = ({ title, values, unit, onClose }: Props) => {
           <Row>
             <DateText>{selected.date}:</DateText>
             <Value>
-              {selected.value} {unit}
+              {Math.round(selected.value)} {unit}
             </Value>
           </Row>
         )}
