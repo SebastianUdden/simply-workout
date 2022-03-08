@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import EditExercise, { ExerciseProps } from "./EditExercise";
 import { Button, Column, Row, Select } from "../Common";
-import { Format } from "../AddFormat";
+import { Format } from "../../pages/AddFormat";
 import { useState } from "react";
 import { getFormatString } from "../../utils";
 import { RoutineProps } from "./Routine";

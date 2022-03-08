@@ -11,10 +11,10 @@ import {
   saveWorkout,
   uuidv4,
 } from "../utils";
-import { AddButton, DisplayName, Input, Label } from "./Common";
-import { ExerciseProps } from "./routine/EditExercise";
-import SearchExercises from "./SearchExercises";
-import SimpleExercise from "./SimpleExercise";
+import { AddButton, DisplayName, Input, Label } from "../components/Common";
+import { ExerciseProps } from "../components/routine/EditExercise";
+import SearchExercises from "../components/SearchExercises";
+import SimpleExercise from "../components/SimpleExercise";
 
 interface Props {
   onTabChange: Function;

@@ -1,18 +1,18 @@
 import { useState } from "react";
 import "./App.css";
-import AddExercise from "./components/AddExercise";
-import AddRoutine from "./components/AddRoutine";
+import AddExercise from "./pages/AddExercise";
+import AddRoutine from "./pages/AddRoutine";
 import Header from "./components/Header";
-import AddFormat from "./components/AddFormat";
+import AddFormat from "./pages/AddFormat";
 import styled from "styled-components";
-import Home from "./components/Home";
+import Home from "./pages/Home";
 
 export const HOME = "home";
 export const EXERCISE = "exercise";
 export const FORMAT = "format";
 export const ROUTINE = "routine";
 
-function App() {
+const App = () => {
   const [tab, setTab] = useState(HOME);
 
   return (
@@ -28,7 +28,7 @@ function App() {
       </Content>
     </div>
   );
-}
+};
 
 const Content = styled.div`
   box-sizing: border-box;

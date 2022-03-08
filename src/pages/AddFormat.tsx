@@ -11,7 +11,7 @@ import {
   List,
   Row,
   Select,
-} from "./Common";
+} from "../components/Common";
 
 export interface Format {
   id: string;

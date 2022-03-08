@@ -5,7 +5,7 @@ import { workoutFormats } from "../constants/formats";
 import { defaultRoutines } from "../constants/routines";
 import { getOldWorkout, saveWorkout } from "../utils";
 import { exerciseTypes } from "../constants/exerciseTypes";
-import Routine, { RoutineProps } from "./routine/Routine";
+import Routine, { RoutineProps } from "../components/routine/Routine";
 
 const Home = () => {
   const [expandIndex, setExpandIndex] = useState(-1);

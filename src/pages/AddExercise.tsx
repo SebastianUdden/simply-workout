@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { exerciseNames, exerciseTypes } from "../constants/exerciseTypes";
 import { getOldWorkout, saveWorkout, uuidv4 } from "../utils";
-import { AddButton, Input, Row } from "./Common";
-import SearchExercises from "./SearchExercises";
-import SimpleExercise from "./SimpleExercise";
+import { AddButton, Input, Row } from "../components/Common";
+import SearchExercises from "../components/SearchExercises";
+import SimpleExercise from "../components/SimpleExercise";
 
 interface RadioProps {
   onSelect: Function;

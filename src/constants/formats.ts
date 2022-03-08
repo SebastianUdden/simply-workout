@@ -1,4 +1,4 @@
-import { Format } from "../components/AddFormat";
+import { Format } from "../pages/AddFormat";
 
 export const workoutFormats: Format[] = [
   { id: "1", sets: 3, reps: 10, rest: 45, percentage: 5 },
