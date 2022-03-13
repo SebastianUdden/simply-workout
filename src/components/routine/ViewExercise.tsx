@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { getNewDate, getPercentageChange } from "../../utils";
 import { Column, Row } from "../Common";
 import History from "../History";
-import { animations, getAnimation } from "../stickman/animations";
+import { getAnimation } from "../stickman/animations";
 import { getDirection } from "../stickman/direction";
 import Stickman from "../stickman/Stickman";
 import Timer from "../timer/Timer";
