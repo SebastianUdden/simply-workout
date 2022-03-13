@@ -54,7 +54,10 @@ const EditRoutine = ({
   return (
     <Wrapper>
       <Row>
-        <Title>{name}</Title>
+        <Title>
+          <Circle color={routine.color} />
+          {name}
+        </Title>
         <Column>
           <Row>
             <SmallButton
@@ -145,6 +148,8 @@ const Exercises = styled.ul`
   padding: 0;
 `;
 const Title = styled.h2`
+  display: flex;
+  align-items: center;
   margin: 0;
   margin-bottom: 5px;
   color: orange;
@@ -201,6 +206,14 @@ const SmallButton = styled.button<{ color?: string; disabled?: boolean }>`
     opacity: 0.1;
     cursor: not-allowed;
   `}
+`;
+const Circle = styled.div<{ color?: string }>`
+  margin-right: 6px;
+  margin-top: 1px;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  background-color: ${(p) => p.color || "#666"};
 `;
 
 export default EditRoutine;

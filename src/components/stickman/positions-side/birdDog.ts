@@ -24,7 +24,7 @@ export const birdDogLow = {
     y: [90],
   },
   hip: {
-    x: [40],
+    x: [41],
     y: [75],
   },
   rightKnee: {
@@ -36,8 +36,8 @@ export const birdDogLow = {
     y: [89],
   },
   rightFoot: {
-    x: [28],
-    y: [91],
+    x: [29],
+    y: [90],
   },
   leftFoot: {
     x: [27],
@@ -83,8 +83,8 @@ export const birdDogHigh = {
     y: [76],
   },
   rightFoot: {
-    x: [28],
-    y: [90],
+    x: [29],
+    y: [91],
   },
   leftFoot: {
     x: [14],
@@ -122,7 +122,7 @@ export const birdDogHighReverse = {
     y: [75],
   },
   leftKnee: {
-    x: [42],
+    x: [41],
     y: [90],
   },
   rightKnee: {

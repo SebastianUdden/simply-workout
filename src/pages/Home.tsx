@@ -6,6 +6,7 @@ import { defaultRoutines } from "../constants/routines";
 import { getOldWorkout, saveWorkout } from "../utils";
 import { exerciseTypes } from "../constants/exerciseTypes";
 import Routine, { RoutineProps } from "../components/routine/Routine";
+import WorkoutHistory from "../components/WorkoutHistory";
 
 const Home = () => {
   const [hide, setHide] = useState(false);
@@ -36,6 +37,7 @@ const Home = () => {
 
   return (
     <Wrapper hide={hide}>
+      <WorkoutHistory routines={routines} />
       {routines && (
         <Routines>
           {routines.map((r: any, i: number) => (

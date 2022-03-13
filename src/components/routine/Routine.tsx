@@ -8,6 +8,7 @@ import { ExerciseValue } from "./EditExercise";
 export interface RoutineProps {
   id: string;
   name: string;
+  color: string;
   format: any;
   exercises: any[];
   timeToComplete?: string;

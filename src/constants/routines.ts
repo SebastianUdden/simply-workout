@@ -30,6 +30,7 @@ export const defaultRoutines = [
   {
     id: "1",
     name: "Gym routine",
+    color: "magenta",
     format: workoutFormats[0],
     exercises: odenplanExercises.map((e) => ({
       ...e,
@@ -41,6 +42,7 @@ export const defaultRoutines = [
   {
     id: "2",
     name: "Home routine",
+    color: "orange",
     format: workoutFormats[0],
     exercises: homeExercises.map((e) => ({
       ...e,
@@ -52,6 +54,7 @@ export const defaultRoutines = [
   {
     id: "3",
     name: "Outside routine",
+    color: "green",
     format: workoutFormats[0],
     exercises: outsideExercises.map((e) => ({
       ...e,

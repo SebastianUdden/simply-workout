@@ -23,6 +23,7 @@ interface Props {
 const AddRoutine = ({ onTabChange }: Props) => {
   const [showError, setShowError] = useState(false);
   const [routineName, setRoutineName] = useState("");
+  const [routineColor, setRoutineColor] = useState("");
   const [format, setFormat] = useState<any>(undefined);
   const [exercises, setExercises] = useState<ExerciseProps[]>([]);
   const [exerciseTypes, setExerciseTypes] = useState<any[]>([]);
@@ -97,6 +98,15 @@ const AddRoutine = ({ onTabChange }: Props) => {
         onChange={(e: any) => setRoutineName(e.target.value)}
       />
       {showError && <Error>Routine name already exists!</Error>}
+      <Label>Workout tag color</Label>
+      <ColorInput
+        color={routineColor}
+        id="routine-color"
+        placeholder="grey"
+        type="color"
+        value={routineColor}
+        onChange={(e: any) => setRoutineColor(e.target.value)}
+      />
       {routineName && (
         <>
           <Label>Add workout format</Label>
@@ -215,6 +225,15 @@ const Span = styled.span`
 `;
 const Error = styled.p`
   color: red;
+`;
+const ColorInput = styled(Input)<{ color?: string }>`
+  background-color: ${(p) => p.color || "grey"};
+  border: none;
+  opacity: 1;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
 `;
 
 export default AddRoutine;
