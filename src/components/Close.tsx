@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 export const Close = styled.button`
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 8px;
+  right: 8px;
+  width: 52px;
   background-color: inherit;
   color: inherit;
   border: none;

@@ -90,6 +90,7 @@ export const Row = styled.div`
 
 export const Column = styled.div<{ fixed?: boolean }>`
   display: flex;
+  max-width: 100%;
   flex-direction: column;
   ${(p) =>
     p.fixed &&

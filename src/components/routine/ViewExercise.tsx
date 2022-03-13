@@ -189,7 +189,9 @@ const Title = styled.h2`
 `;
 const Areas = styled.p`
   display: flex;
-  flex-wrap: wrap;
+  overflow-x: scroll;
+  padding-bottom: 8px;
+  max-width: 100%;
   margin: 0 0 30px;
 `;
 const Area = styled.button<{ selected?: boolean }>`
@@ -199,6 +201,7 @@ const Area = styled.button<{ selected?: boolean }>`
   margin-right: 5px;
   padding: 10px;
   text-transform: capitalize;
+  white-space: nowrap;
   border-radius: 6px;
   cursor: pointer;
   border: none;

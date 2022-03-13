@@ -214,9 +214,9 @@ const D = styled.div`
 `;
 const Number = styled.span`
   position: absolute;
-  top: 4px;
+  top: 5px;
   right: 5px;
-  font-size: 22px;
+  font-size: 16px;
 `;
 export const WorkoutDot = styled.div<{ bgColor?: string }>`
   width: 5px;
@@ -234,6 +234,7 @@ const Arrow = styled.button`
   margin: 0 5px;
   padding: 5px;
   cursor: pointer;
+  user-select: none;
   :hover {
     opacity: 0.8;
   }
