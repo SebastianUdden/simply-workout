@@ -82,53 +82,55 @@ const History = ({ title, values, unit, onClose }: Props) => {
   return (
     <Wrapper show={show} isButton={false}>
       <Close onClick={() => handleClose()}>&times;</Close>
-      <Title>{title}</Title>
-      <Container>
-        {selected && (
-          <Row>
-            <DateText>{selected.date}:</DateText>
-            <Value>
-              {Math.round(selected.value)} {unit}
-            </Value>
-          </Row>
-        )}
-        <Graph>
-          {filteredEntries.map((e: any) => (
-            <Bar
-              onClick={() => setSelected(e)}
-              isSelected={e.date === selected.date}
-              value={e.value}
-              percentage={Math.floor((e.value / maxValue) * 100)}
-            />
-          ))}
-        </Graph>
-        <ButtonRow>
-          <Button
-            isSelected={span === FIVE_YEARS}
-            onClick={() => handleSpanChange(FIVE_YEARS)}
-          >
-            {FIVE_YEARS}
-          </Button>
-          <Button
-            isSelected={span === ONE_YEAR}
-            onClick={() => handleSpanChange(ONE_YEAR)}
-          >
-            {ONE_YEAR}
-          </Button>{" "}
-          <Button
-            isSelected={span === SIX_MONTHS}
-            onClick={() => handleSpanChange(SIX_MONTHS)}
-          >
-            {SIX_MONTHS}
-          </Button>{" "}
-          <Button
-            isSelected={span === LATEST}
-            onClick={() => handleSpanChange(LATEST)}
-          >
-            {LATEST}
-          </Button>
-        </ButtonRow>
-      </Container>
+      <GraphWrapper>
+        <Title>{title}</Title>
+        <Container>
+          {selected && (
+            <Row>
+              <DateText>{selected.date}:</DateText>
+              <Value>
+                {Math.round(selected.value)} {unit}
+              </Value>
+            </Row>
+          )}
+          <Graph>
+            {filteredEntries.map((e: any) => (
+              <Bar
+                onClick={() => setSelected(e)}
+                isSelected={e.date === selected.date}
+                value={e.value}
+                percentage={Math.floor((e.value / maxValue) * 100)}
+              />
+            ))}
+          </Graph>
+          <ButtonRow>
+            <Button
+              isSelected={span === FIVE_YEARS}
+              onClick={() => handleSpanChange(FIVE_YEARS)}
+            >
+              {FIVE_YEARS}
+            </Button>
+            <Button
+              isSelected={span === ONE_YEAR}
+              onClick={() => handleSpanChange(ONE_YEAR)}
+            >
+              {ONE_YEAR}
+            </Button>{" "}
+            <Button
+              isSelected={span === SIX_MONTHS}
+              onClick={() => handleSpanChange(SIX_MONTHS)}
+            >
+              {SIX_MONTHS}
+            </Button>{" "}
+            <Button
+              isSelected={span === LATEST}
+              onClick={() => handleSpanChange(LATEST)}
+            >
+              {LATEST}
+            </Button>
+          </ButtonRow>
+        </Container>
+      </GraphWrapper>
     </Wrapper>
   );
 };
@@ -157,6 +159,15 @@ const Wrapper = styled.div<{ show?: boolean; isButton: boolean }>`
     cursor: pointer;
     background-color: #fff;
   `}
+`;
+const GraphWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 800px;
+  width: 100%;
+  height 100%;
 `;
 
 const Title = styled.h1`
@@ -231,6 +242,7 @@ const Button = styled.button<{ isSelected: boolean }>`
   margin-right: 4px;
   border: none;
   background-color: #890089;
+  cursor: pointer;
   :last-of-type {
     margin: 0;
   }

@@ -226,8 +226,10 @@ const Stickman = ({
 };
 
 const StickBox = styled.svg<{ size: string }>`
-  width: ${(p) => p.size || "300px"};
-  height: ${(p) => p.size || "300px"};
+  width: ${(p) => p.size || "250px"};
+  height: ${(p) => p.size || "250px"};
+  max-width: 250px;
+  max-height: 250px;
   fill: white;
   stroke: white;
   stroke-width: 5px;

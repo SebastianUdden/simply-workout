@@ -137,7 +137,7 @@ const Arrows = styled.div`
 `;
 const Plus = styled.button<{ disabled?: boolean }>`
   user-select: none;
-  padding: 20px 15px;
+  padding: 17px 15px;
   font-size: 18px;
   width: 100%;
   font-weight: 800;

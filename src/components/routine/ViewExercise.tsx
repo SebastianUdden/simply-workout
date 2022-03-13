@@ -91,7 +91,7 @@ const ViewExercise = ({
           <Stickman
             size="60%"
             position={position}
-            duration={2.5}
+            duration={2}
             direction={direction}
           />
         </StickmanRow>
@@ -234,7 +234,7 @@ const Value = styled.span<{ big?: boolean }>`
 const Button = styled.button`
   user-select: none;
   margin-top: 10px;
-  padding: 20px;
+  padding: 15px;
   width: 100%;
   font-size: 18px;
   font-weight: 800;
