@@ -116,6 +116,8 @@ const Calendar = ({ dates }: Props) => {
     daysInLastMonth,
   } = datetime;
 
+  console.log({ dates });
+
   const weekEl = weeks.map((day, i) => {
     const d = getDate(i, firstIndex, lastIndex, daysInLastMonth);
     const m = month + d.month;
@@ -148,6 +150,7 @@ const Calendar = ({ dates }: Props) => {
 };
 
 const Wrapper = styled.div`
+  margin-bottom: 10px;
   * {
     box-sizing: border-box;
   }
@@ -215,12 +218,13 @@ const Number = styled.span`
   right: 5px;
   font-size: 22px;
 `;
-const WorkoutDot = styled.div<{ bgColor?: string }>`
+export const WorkoutDot = styled.div<{ bgColor?: string }>`
   width: 5px;
   height: 5px;
   border-radius: 50%;
   background-color: ${(p) => p.bgColor || "inherit"};
   margin-right: 3px;
+  margin-bottom: 3px;
 `;
 const Arrow = styled.button`
   background-color: inherit;

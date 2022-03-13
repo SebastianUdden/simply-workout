@@ -1,6 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import Calendar from "./Calendar";
+import Calendar, { WorkoutDot } from "./Calendar";
+
+const getUnique = (arr: any) =>
+  Array.from(
+    new Set(arr.map((e: any) => e.values.map((d: any) => d.date)).flat())
+  );
 
 interface Props {
   routines: any;
@@ -9,11 +14,11 @@ interface Props {
 const WorkoutHistory = ({ routines }: Props) => {
   const workoutDates = routines
     .map((r: any) =>
-      Array.from(
-        new Set(
-          r.exercises.map((e: any) => e.values.map((d: any) => d.date)).flat()
-        )
-      ).map((d) => ({ date: d, name: r.name, color: r.color }))
+      getUnique(r.exercises).map((d) => ({
+        date: d,
+        name: r.name,
+        color: r.color,
+      }))
     )
     .flat()
     .reduce((results: any, item: any) => {
@@ -31,13 +36,26 @@ const WorkoutHistory = ({ routines }: Props) => {
       }
       return results;
     }, []);
+
   return (
     <Wrapper>
       <Calendar dates={workoutDates} />
+      {routines.map((r: any) => (
+        <YearSum>
+          {getUnique(r.exercises).map((e) => (
+            <WorkoutDot bgColor={r.color} />
+          ))}
+        </YearSum>
+      ))}
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div``;
-
+const YearSum = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 4px;
+  margin-bottom: 4px;
+`;
 export default WorkoutHistory;
