@@ -94,14 +94,17 @@ const History = ({ title, values, unit, onClose }: Props) => {
             </Row>
           )}
           <Graph>
-            {filteredEntries.map((e: any) => (
-              <Bar
-                onClick={() => setSelected(e)}
-                isSelected={e.date === selected.date}
-                value={e.value}
-                percentage={Math.floor((e.value / maxValue) * 100)}
-              />
-            ))}
+            {filteredEntries.map(
+              (e: any) =>
+                e.date && (
+                  <Bar
+                    onClick={() => setSelected(e)}
+                    isSelected={e.date === selected.date}
+                    value={e.value}
+                    percentage={Math.floor((e.value / maxValue) * 100)}
+                  />
+                )
+            )}
           </Graph>
           <ButtonRow>
             <Button

@@ -5,7 +5,7 @@ import Calendar, { WorkoutDot } from "./Calendar";
 const getUnique = (arr: any) =>
   Array.from(
     new Set(arr.map((e: any) => e.values.map((d: any) => d.date)).flat())
-  );
+  ).filter(Boolean);
 
 interface Props {
   routines: any;
