@@ -11,12 +11,35 @@ import { anim } from "./components/stickman/Animation";
 import {
   burpee,
   jump,
+  pullup,
+  pushup,
   raiseArms,
   sitdown,
+  situp,
   squat,
   stand,
+  plank,
+  gluteBridge,
+  calfRaise,
+  sidePlank,
+  birdDog,
+  running,
 } from "./components/stickman/animations";
-import { standingArmsHigh } from "./components/stickman/positions-side/standing";
+import {
+  birdDogHigh,
+  birdDogLow,
+} from "./components/stickman/positions-side/birdDog";
+import {
+  runningPart1,
+  runningPart2,
+  runningPart3,
+  runningPart4,
+  runningPart5,
+  runningPart6,
+  runningPart7,
+  runningPart8,
+  runningPart9,
+} from "./components/stickman/positions-side/running";
 
 export const HOME = "home";
 export const EXERCISE = "exercise";
@@ -31,14 +54,17 @@ const App = () => {
     // ...anim(anim(standingSide, sittingSide), standingSide),
     // ...anim(anim(standingSide, proneSide), standingSide),
     // ...anim(pushupHigh, pushupLow, true),
-    ...anim(burpee),
-    // ...anim([bearBack, squat, bearBack]),
-    // ...standingArmsHigh,
+    ...runningPart3,
   };
   return (
     <div>
       <Header onTabChange={(value: string) => setTab(value)} />
-      {/* <Stickman position={position} duration={4} /> */}
+      {/* <Stickman
+        position={anim(running)}
+        duration={0.7}
+        direction="Side"
+        size="40%"
+      /> */}
       <Content>
         {tab === HOME && <Home />}
         {tab === EXERCISE && <AddExercise />}

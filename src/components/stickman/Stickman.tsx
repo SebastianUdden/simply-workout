@@ -24,6 +24,7 @@ interface Props {
   duration?: number;
   direction?: "Forward" | "Side";
   position?: Position;
+  size?: string;
 }
 
 export const DEFAULT_POSITION = {
@@ -44,6 +45,7 @@ const Stickman = ({
   duration = 3,
   direction = "Side",
   position = DEFAULT_POSITION,
+  size = "100%",
 }: Props) => {
   const d = duration;
   const {
@@ -60,264 +62,172 @@ const Stickman = ({
     leftFoot,
   } = position;
 
+  const leftUpperArm = (
+    <LeftUpperArm
+      x1={shoulder.x[0]}
+      y1={shoulder.y[0]}
+      x2={leftElbow.x[0]}
+      y2={leftElbow.y[0]}
+    >
+      <Ani arr={shoulder.x} attr="x1" dur={d} />
+      <Ani arr={shoulder.y} attr="y1" dur={d} />
+      <Ani arr={leftElbow.x} attr="x2" dur={d} />
+      <Ani arr={leftElbow.y} attr="y2" dur={d} />
+    </LeftUpperArm>
+  );
+  const rightUpperArm = (
+    <RightUpperArm
+      x1={shoulder.x[0]}
+      y1={shoulder.y[0]}
+      x2={rightElbow.x[0]}
+      y2={rightElbow.y[0]}
+    >
+      <Ani arr={shoulder.x} attr="x1" dur={d} />
+      <Ani arr={shoulder.y} attr="y1" dur={d} />
+      <Ani arr={rightElbow.x} attr="x2" dur={d} />
+      <Ani arr={rightElbow.y} attr="y2" dur={d} />
+    </RightUpperArm>
+  );
+  const neck = (
+    <Neck x1={head.x[0]} y1={head.y[0]} x2={shoulder.x[0]} y2={shoulder.y[0]}>
+      <Ani arr={head.x} attr="x1" dur={d} />
+      <Ani arr={head.y} attr="y1" dur={d} />
+      <Ani arr={shoulder.x} attr="x2" dur={d} />
+      <Ani arr={shoulder.y} attr="y2" dur={d} />
+    </Neck>
+  );
+  const torso = (
+    <Torso x1={shoulder.x[0]} y1={shoulder.y[0]} x2={hip.x[0]} y2={hip.y[0]}>
+      <Ani arr={shoulder.x} attr="x1" dur={d} />
+      <Ani arr={shoulder.y} attr="y1" dur={d} />
+      <Ani arr={hip.x} attr="x2" dur={d} />
+      <Ani arr={hip.y} attr="y2" dur={d} />
+    </Torso>
+  );
+  const leftLowerArm = (
+    <LeftLowerArm
+      x1={leftElbow.x[0]}
+      y1={leftElbow.y[0]}
+      x2={leftHand.x[0]}
+      y2={leftHand.y[0]}
+    >
+      <Ani arr={leftElbow.x} attr="x1" dur={d} />
+      <Ani arr={leftElbow.y} attr="y1" dur={d} />
+      <Ani arr={leftHand.x} attr="x2" dur={d} />
+      <Ani arr={leftHand.y} attr="y2" dur={d} />
+    </LeftLowerArm>
+  );
+  const rightLowerArm = (
+    <RightLowerArm
+      x1={rightElbow.x[0]}
+      y1={rightElbow.y[0]}
+      x2={rightHand.x[0]}
+      y2={rightHand.y[0]}
+    >
+      <Ani arr={rightElbow.x} attr="x1" dur={d} />
+      <Ani arr={rightElbow.y} attr="y1" dur={d} />
+      <Ani arr={rightHand.x} attr="x2" dur={d} />
+      <Ani arr={rightHand.y} attr="y2" dur={d} />
+    </RightLowerArm>
+  );
+  const leftUpperLeg = (
+    <LeftUpperLeg
+      x1={hip.x[0]}
+      y1={hip.y[0]}
+      x2={leftKnee.x[0]}
+      y2={leftKnee.y[0]}
+    >
+      <Ani arr={hip.x} attr="x1" dur={d} />
+      <Ani arr={hip.y} attr="y1" dur={d} />
+      <Ani arr={leftKnee.x} attr="x2" dur={d} />
+      <Ani arr={leftKnee.y} attr="y2" dur={d} />
+    </LeftUpperLeg>
+  );
+  const leftLowerLeg = (
+    <LeftLowerLeg
+      x1={leftKnee.x[0]}
+      y1={leftKnee.y[0]}
+      x2={leftFoot.x[0]}
+      y2={leftFoot.y[0]}
+    >
+      <Ani arr={leftKnee.x} attr="x1" dur={d} />
+      <Ani arr={leftKnee.y} attr="y1" dur={d} />
+      <Ani arr={leftFoot.x} attr="x2" dur={d} />
+      <Ani arr={leftFoot.y} attr="y2" dur={d} />
+    </LeftLowerLeg>
+  );
+  const rightUpperLeg = (
+    <RightUpperLeg
+      x1={hip.x[0]}
+      y1={hip.y[0]}
+      x2={rightKnee.x[0]}
+      y2={rightKnee.y[0]}
+    >
+      <Ani arr={hip.x} attr="x1" dur={d} />
+      <Ani arr={hip.y} attr="y1" dur={d} />
+      <Ani arr={rightKnee.x} attr="x2" dur={d} />
+      <Ani arr={rightKnee.y} attr="y2" dur={d} />
+    </RightUpperLeg>
+  );
+  const rightLowerLeg = (
+    <RightLowerLeg
+      x1={rightKnee.x[0]}
+      y1={rightKnee.y[0]}
+      x2={rightFoot.x[0]}
+      y2={rightFoot.y[0]}
+    >
+      <Ani arr={rightKnee.x} attr="x1" dur={d} />
+      <Ani arr={rightKnee.y} attr="y1" dur={d} />
+      <Ani arr={rightFoot.x} attr="x2" dur={d} />
+      <Ani arr={rightFoot.y} attr="y2" dur={d} />
+    </RightLowerLeg>
+  );
+  const theHead = (
+    <Head cx={head.x[0]} cy={head.y[0]} r="3">
+      <Ani arr={head.x} attr="cx" dur={d} />
+      <Ani arr={head.y} attr="cy" dur={d} />
+    </Head>
+  );
+
   return (
-    <Wrapper>
-      <StickBox viewBox="0 0 100 100">
-        {direction === "Forward" && (
-          <>
-            <LeftUpperArm
-              x1={shoulder.x[0]}
-              y1={shoulder.y[0]}
-              x2={leftElbow.x[0]}
-              y2={leftElbow.y[0]}
-            >
-              <Ani arr={shoulder.x} attr="x1" dur={d} />
-              <Ani arr={shoulder.y} attr="y1" dur={d} />
-              <Ani arr={leftElbow.x} attr="x2" dur={d} />
-              <Ani arr={leftElbow.y} attr="y2" dur={d} />
-            </LeftUpperArm>
-            <RightUpperArm
-              x1={shoulder.x[0]}
-              y1={shoulder.y[0]}
-              x2={rightElbow.x[0]}
-              y2={rightElbow.y[0]}
-            >
-              <Ani arr={shoulder.x} attr="x1" dur={d} />
-              <Ani arr={shoulder.y} attr="y1" dur={d} />
-              <Ani arr={rightElbow.x} attr="x2" dur={d} />
-              <Ani arr={rightElbow.y} attr="y2" dur={d} />
-            </RightUpperArm>
-            <Neck
-              x1={head.x[0]}
-              y1={head.y[0]}
-              x2={shoulder.x[0]}
-              y2={shoulder.y[0]}
-            >
-              <Ani arr={head.x} attr="x1" dur={d} />
-              <Ani arr={head.y} attr="y1" dur={d} />
-            </Neck>
-            <Torso
-              x1={shoulder.x[0]}
-              y1={shoulder.y[0]}
-              x2={hip.x[0]}
-              y2={hip.y[0]}
-            >
-              <Ani arr={shoulder.x} attr="x1" dur={d} />
-              <Ani arr={shoulder.y} attr="y1" dur={d} />
-              <Ani arr={hip.x} attr="x2" dur={d} />
-              <Ani arr={hip.y} attr="y2" dur={d} />
-            </Torso>
-            <LeftLowerArm
-              x1={leftElbow.x[0]}
-              y1={leftElbow.y[0]}
-              x2={leftHand.x[0]}
-              y2={leftHand.y[0]}
-            >
-              <Ani arr={leftElbow.x} attr="x1" dur={d} />
-              <Ani arr={leftElbow.y} attr="y1" dur={d} />
-              <Ani arr={leftHand.x} attr="x2" dur={d} />
-              <Ani arr={leftHand.y} attr="y2" dur={d} />
-            </LeftLowerArm>
-            <RightLowerArm
-              x1={rightElbow.x[0]}
-              y1={rightElbow.y[0]}
-              x2={rightHand.x[0]}
-              y2={rightHand.y[0]}
-            >
-              <Ani arr={rightElbow.x} attr="x1" dur={d} />
-              <Ani arr={rightElbow.y} attr="y1" dur={d} />
-              <Ani arr={rightHand.x} attr="x2" dur={d} />
-              <Ani arr={rightHand.y} attr="y2" dur={d} />
-            </RightLowerArm>
-            <LeftUpperLeg
-              x1={hip.x[0]}
-              y1={hip.y[0]}
-              x2={leftKnee.x[0]}
-              y2={leftKnee.y[0]}
-            >
-              <Ani arr={hip.x} attr="x1" dur={d} />
-              <Ani arr={hip.y} attr="y1" dur={d} />
-              <Ani arr={leftKnee.x} attr="x2" dur={d} />
-              <Ani arr={leftKnee.y} attr="y2" dur={d} />
-            </LeftUpperLeg>
-            <LeftLowerLeg
-              x1={leftKnee.x[0]}
-              y1={leftKnee.y[0]}
-              x2={leftFoot.x[0]}
-              y2={leftFoot.y[0]}
-            >
-              <Ani arr={leftKnee.x} attr="x1" dur={d} />
-              <Ani arr={leftKnee.y} attr="y1" dur={d} />
-              <Ani arr={leftFoot.x} attr="x2" dur={d} />
-              <Ani arr={leftFoot.y} attr="y2" dur={d} />
-            </LeftLowerLeg>
-            <RightUpperLeg
-              x1={hip.x[0]}
-              y1={hip.y[0]}
-              x2={rightKnee.x[0]}
-              y2={rightKnee.y[0]}
-            >
-              <Ani arr={hip.x} attr="x1" dur={d} />
-              <Ani arr={hip.y} attr="y1" dur={d} />
-              <Ani arr={rightKnee.x} attr="x2" dur={d} />
-              <Ani arr={rightKnee.y} attr="y2" dur={d} />
-            </RightUpperLeg>
-            <RightLowerLeg
-              x1={rightKnee.x[0]}
-              y1={rightKnee.y[0]}
-              x2={rightFoot.x[0]}
-              y2={rightFoot.y[0]}
-            >
-              <Ani arr={rightKnee.x} attr="x1" dur={d} />
-              <Ani arr={rightKnee.y} attr="y1" dur={d} />
-              <Ani arr={rightFoot.x} attr="x2" dur={d} />
-              <Ani arr={rightFoot.y} attr="y2" dur={d} />
-            </RightLowerLeg>
-            <Head cx={head.x[0]} cy={head.y[0]} r="5">
-              <Ani arr={head.x} attr="cx" dur={d} />
-              <Ani arr={head.y} attr="cy" dur={d} />
-            </Head>
-          </>
-        )}
-        {direction === "Side" && (
-          <>
-            <LeftLowerArm
-              x1={leftElbow.x[0]}
-              y1={leftElbow.y[0]}
-              x2={leftHand.x[0]}
-              y2={leftHand.y[0]}
-            >
-              <Ani arr={leftElbow.x} attr="x1" dur={d} />
-              <Ani arr={leftElbow.y} attr="y1" dur={d} />
-              <Ani arr={leftHand.x} attr="x2" dur={d} />
-              <Ani arr={leftHand.y} attr="y2" dur={d} />
-            </LeftLowerArm>
-
-            <LeftUpperArm
-              x1={shoulder.x[0]}
-              y1={shoulder.y[0]}
-              x2={leftElbow.x[0]}
-              y2={leftElbow.y[0]}
-            >
-              <Ani arr={shoulder.x} attr="x1" dur={d} />
-              <Ani arr={shoulder.y} attr="y1" dur={d} />
-              <Ani arr={leftElbow.x} attr="x2" dur={d} />
-              <Ani arr={leftElbow.y} attr="y2" dur={d} />
-            </LeftUpperArm>
-
-            <Neck
-              x1={head.x[0]}
-              y1={head.y[0]}
-              x2={shoulder.x[0]}
-              y2={shoulder.y[0]}
-            >
-              <Ani arr={head.x} attr="x1" dur={d} />
-              <Ani arr={head.y} attr="y1" dur={d} />
-              <Ani arr={shoulder.x} attr="x2" dur={d} />
-              <Ani arr={shoulder.y} attr="y2" dur={d} />
-            </Neck>
-            <Head cx={head.x[0]} cy={head.y[0]} r="5">
-              <Ani arr={head.x} attr="cx" dur={d} />
-              <Ani arr={head.y} attr="cy" dur={d} />
-            </Head>
-            <LeftLowerLeg
-              x1={leftKnee.x[0]}
-              y1={leftKnee.y[0]}
-              x2={leftFoot.x[0]}
-              y2={leftFoot.y[0]}
-            >
-              <Ani arr={leftKnee.x} attr="x1" dur={d} />
-              <Ani arr={leftKnee.y} attr="y1" dur={d} />
-              <Ani arr={leftFoot.x} attr="x2" dur={d} />
-              <Ani arr={leftFoot.y} attr="y2" dur={d} />
-            </LeftLowerLeg>
-            <LeftUpperLeg
-              x1={hip.x[0]}
-              y1={hip.y[0]}
-              x2={leftKnee.x[0]}
-              y2={leftKnee.y[0]}
-            >
-              <Ani arr={hip.x} attr="x1" dur={d} />
-              <Ani arr={hip.y} attr="y1" dur={d} />
-              <Ani arr={leftKnee.x} attr="x2" dur={d} />
-              <Ani arr={leftKnee.y} attr="y2" dur={d} />
-            </LeftUpperLeg>
-            <Torso
-              x1={shoulder.x[0]}
-              y1={shoulder.y[0]}
-              x2={hip.x[0]}
-              y2={hip.y[0]}
-            >
-              <Ani arr={shoulder.x} attr="x1" dur={d} />
-              <Ani arr={shoulder.y} attr="y1" dur={d} />
-              <Ani arr={hip.x} attr="x2" dur={d} />
-              <Ani arr={hip.y} attr="y2" dur={d} />
-            </Torso>
-
-            <RightUpperLeg
-              x1={hip.x[0]}
-              y1={hip.y[0]}
-              x2={rightKnee.x[0]}
-              y2={rightKnee.y[0]}
-            >
-              <Ani arr={hip.x} attr="x1" dur={d} />
-              <Ani arr={hip.y} attr="y1" dur={d} />
-              <Ani arr={rightKnee.x} attr="x2" dur={d} />
-              <Ani arr={rightKnee.y} attr="y2" dur={d} />
-            </RightUpperLeg>
-            <RightLowerLeg
-              x1={rightKnee.x[0]}
-              y1={rightKnee.y[0]}
-              x2={rightFoot.x[0]}
-              y2={rightFoot.y[0]}
-            >
-              <Ani arr={rightKnee.x} attr="x1" dur={d} />
-              <Ani arr={rightKnee.y} attr="y1" dur={d} />
-              <Ani arr={rightFoot.x} attr="x2" dur={d} />
-              <Ani arr={rightFoot.y} attr="y2" dur={d} />
-            </RightLowerLeg>
-            <RightUpperArm
-              x1={shoulder.x[0]}
-              y1={shoulder.y[0]}
-              x2={rightElbow.x[0]}
-              y2={rightElbow.y[0]}
-            >
-              <Ani arr={shoulder.x} attr="x1" dur={d} />
-              <Ani arr={shoulder.y} attr="y1" dur={d} />
-              <Ani arr={rightElbow.x} attr="x2" dur={d} />
-              <Ani arr={rightElbow.y} attr="y2" dur={d} />
-            </RightUpperArm>
-            <RightLowerArm
-              x1={rightElbow.x[0]}
-              y1={rightElbow.y[0]}
-              x2={rightHand.x[0]}
-              y2={rightHand.y[0]}
-            >
-              <Ani arr={rightElbow.x} attr="x1" dur={d} />
-              <Ani arr={rightElbow.y} attr="y1" dur={d} />
-              <Ani arr={rightHand.x} attr="x2" dur={d} />
-              <Ani arr={rightHand.y} attr="y2" dur={d} />
-            </RightLowerArm>
-          </>
-        )}
-      </StickBox>
-    </Wrapper>
+    <StickBox viewBox="0 0 100 100" size={size}>
+      {direction === "Forward" && (
+        <>
+          {leftUpperArm}
+          {rightUpperArm}
+          {neck}
+          {torso}
+          {leftLowerArm}
+          {rightLowerArm}
+          {leftUpperLeg}
+          {leftLowerLeg}
+          {rightUpperLeg}
+          {rightLowerLeg}
+          {theHead}
+        </>
+      )}
+      {direction === "Side" && (
+        <>
+          {leftLowerArm}
+          {leftUpperArm}
+          {neck}
+          {theHead}
+          {leftLowerLeg}
+          {leftUpperLeg}
+          {torso}
+          {rightUpperLeg}
+          {rightLowerLeg}
+          {rightUpperArm}
+          {rightLowerArm}
+        </>
+      )}
+    </StickBox>
   );
 };
 
-const Wrapper = styled.div`
-  box-sizing: border-box;
-  margin-top: 30px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const StickBox = styled.svg`
-  border: 2px solid white;
-  width: 300px;
-  height: 300px;
+const StickBox = styled.svg<{ size: string }>`
+  width: ${(p) => p.size || "300px"};
+  height: ${(p) => p.size || "300px"};
   fill: white;
   stroke: white;
   stroke-width: 5px;

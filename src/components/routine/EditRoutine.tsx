@@ -93,9 +93,11 @@ const EditRoutine = ({
       {expandIndex === i && (
         <>
           <Select onChange={onChangeFormat}>
-            <option>Change format</option>
+            <option key="change format">Change format</option>
             {formats.map((f: Format) => (
-              <option value={f.id}>{getFormatString(f)}</option>
+              <option key={f.id} value={f.id}>
+                {getFormatString(f)}
+              </option>
             ))}
           </Select>
 
@@ -128,7 +130,7 @@ const EditRoutine = ({
   );
 };
 
-const Wrapper = styled.li`
+const Wrapper = styled.div`
   border: 1px solid #666;
   border-radius: 12px;
   padding: 10px;

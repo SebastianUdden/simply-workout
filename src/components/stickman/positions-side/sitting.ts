@@ -1,7 +1,7 @@
 export const sitting = {
   head: {
     x: [40],
-    y: [33],
+    y: [36],
   },
   shoulder: {
     x: [40],
@@ -47,31 +47,31 @@ export const sitting = {
 
 export const squatHigh = {
   head: {
-    x: [55],
-    y: [38],
+    x: [57],
+    y: [40],
   },
   shoulder: {
-    x: [51],
+    x: [53],
     y: [48],
   },
   rightElbow: {
-    x: [54],
-    y: [62],
+    x: [60],
+    y: [58],
   },
   leftElbow: {
-    x: [53],
-    y: [62],
+    x: [59],
+    y: [58],
   },
   rightHand: {
-    x: [65],
-    y: [63],
+    x: [71],
+    y: [59],
   },
   leftHand: {
-    x: [63],
-    y: [64],
+    x: [69],
+    y: [56],
   },
   hip: {
-    x: [44],
+    x: [46],
     y: [72],
   },
   rightKnee: {
@@ -81,6 +81,53 @@ export const squatHigh = {
   leftKnee: {
     x: [56],
     y: [74],
+  },
+  rightFoot: {
+    x: [51],
+    y: [90],
+  },
+  leftFoot: {
+    x: [52],
+    y: [90],
+  },
+};
+
+export const squatLow = {
+  head: {
+    x: [60],
+    y: [51],
+  },
+  shoulder: {
+    x: [56],
+    y: [58],
+  },
+  rightElbow: {
+    x: [68],
+    y: [58],
+  },
+  leftElbow: {
+    x: [67],
+    y: [58],
+  },
+  rightHand: {
+    x: [79],
+    y: [56],
+  },
+  leftHand: {
+    x: [77],
+    y: [57],
+  },
+  hip: {
+    x: [46],
+    y: [79],
+  },
+  rightKnee: {
+    x: [61],
+    y: [77],
+  },
+  leftKnee: {
+    x: [60],
+    y: [76],
   },
   rightFoot: {
     x: [51],

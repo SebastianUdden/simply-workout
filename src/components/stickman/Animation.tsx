@@ -48,6 +48,7 @@ export const simpleAnim = (
 };
 
 export const anim = (arr: any) => {
+  if (!arr || arr.length === 0) return undefined;
   return arr.reduce(
     (a: any, b: any) => ({
       head: getXY(a.head, b.head),

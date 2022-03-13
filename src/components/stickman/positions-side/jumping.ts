@@ -1,7 +1,7 @@
 export const jumpHigh = {
   head: {
     x: [50],
-    y: [13],
+    y: [17],
   },
   shoulder: {
     x: [50],
@@ -47,8 +47,8 @@ export const jumpHigh = {
 
 export const jumpMiddle = {
   head: {
-    x: [50],
-    y: [16],
+    x: [51],
+    y: [20],
   },
   shoulder: {
     x: [50],
@@ -95,7 +95,7 @@ export const jumpMiddle = {
 export const jumpLow = {
   head: {
     x: [50],
-    y: [18],
+    y: [21],
   },
   shoulder: {
     x: [50],

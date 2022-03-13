@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { getNewDate, getPercentageChange } from "../../utils";
 import { Column, Row } from "../Common";
 import History from "../History";
+import { animations, getAnimation } from "../stickman/animations";
+import { getDirection } from "../stickman/direction";
+import Stickman from "../stickman/Stickman";
 import Timer from "../timer/Timer";
 import { ExerciseProps } from "./EditExercise";
 
@@ -26,6 +29,8 @@ const ViewExercise = ({
   const challenge = getChallenge(value, format.percentage);
   const repString =
     unit === "kg" ? `${format.reps} reps` : `${challenge} ${unit}`;
+  const position = getAnimation(name);
+  const direction = getDirection(name);
 
   useEffect(() => {
     const body = document.getElementsByTagName("body")[0];
@@ -62,20 +67,34 @@ const ViewExercise = ({
           {format.sets} &times; {repString}
         </Reps>
       </Row>
-      <Title>{name}</Title>
-      {areas?.length ? (
-        <Areas>
-          {areas.map((a: string, i: number) => (
-            <Area
-              onClick={() => setSimpleIndex(i === simpleIndex ? -1 : i)}
-              selected={i === simpleIndex}
-            >
-              {a[i === simpleIndex ? 1 : 0]}
-            </Area>
-          ))}
-        </Areas>
-      ) : (
-        <br />
+      <Row>
+        <Column>
+          <Title>{name} </Title>
+          {areas?.length ? (
+            <Areas>
+              {areas.map((a: string, i: number) => (
+                <Area
+                  onClick={() => setSimpleIndex(i === simpleIndex ? -1 : i)}
+                  selected={i === simpleIndex}
+                >
+                  {a[i === simpleIndex ? 1 : 0]}
+                </Area>
+              ))}
+            </Areas>
+          ) : (
+            <br />
+          )}
+        </Column>
+      </Row>
+      {position && (
+        <StickmanRow>
+          <Stickman
+            size="60%"
+            position={position}
+            duration={2.5}
+            direction={direction}
+          />
+        </StickmanRow>
       )}
       <Row>
         <Column fixed>
@@ -255,6 +274,11 @@ const TextButton = styled(Area)`
   width: auto;
   font-size: 12px;
   padding: 5px;
+`;
+const StickmanRow = styled(Row)`
+  justify-content: center;
+  margin-top: -35px;
+  margin-bottom: 10px;
 `;
 
 export default ViewExercise;

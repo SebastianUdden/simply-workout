@@ -1,7 +1,7 @@
 export const standing = {
   head: {
     x: [50],
-    y: [18],
+    y: [21],
   },
   shoulder: {
     x: [50],
@@ -48,7 +48,7 @@ export const standing = {
 export const standingAlt = {
   head: {
     x: [50],
-    y: [17],
+    y: [20],
   },
   shoulder: {
     x: [50],
@@ -95,7 +95,7 @@ export const standingAlt = {
 export const standingArmsHigh = {
   head: {
     x: [50],
-    y: [21],
+    y: [24],
   },
   shoulder: {
     x: [50],
@@ -103,19 +103,19 @@ export const standingArmsHigh = {
   },
   rightElbow: {
     x: [53],
-    y: [16],
+    y: [20],
   },
   leftElbow: {
     x: [51],
-    y: [16],
+    y: [20],
   },
   rightHand: {
     x: [52],
-    y: [3],
+    y: [8],
   },
   leftHand: {
     x: [50],
-    y: [3],
+    y: [8],
   },
   hip: {
     x: [50],

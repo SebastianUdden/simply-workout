@@ -1,93 +1,93 @@
-export const bearFront = {
+export const plankAlt1 = {
   head: {
-    x: [85],
-    y: [67],
+    x: [87],
+    y: [75],
   },
   shoulder: {
-    x: [76],
-    y: [68],
+    x: [78],
+    y: [76],
   },
   rightElbow: {
     x: [75],
-    y: [80],
+    y: [90],
   },
   leftElbow: {
-    x: [76],
-    y: [79],
+    x: [74],
+    y: [89],
   },
   rightHand: {
-    x: [77],
+    x: [87],
     y: [90],
   },
   leftHand: {
-    x: [76],
+    x: [86],
     y: [90],
   },
   hip: {
     x: [50],
-    y: [70],
-  },
-  rightKnee: {
-    x: [59],
     y: [80],
   },
+  rightKnee: {
+    x: [30],
+    y: [87],
+  },
   leftKnee: {
-    x: [60],
-    y: [79],
+    x: [30],
+    y: [86],
   },
   rightFoot: {
-    x: [47],
-    y: [90],
+    x: [11],
+    y: [91],
   },
   leftFoot: {
-    x: [49],
+    x: [10],
     y: [90],
   },
 };
 
-export const bearBack = {
+export const plankAlt2 = {
   head: {
-    x: [77],
-    y: [66],
+    x: [87],
+    y: [76],
   },
   shoulder: {
-    x: [68],
-    y: [68],
+    x: [78],
+    y: [77],
   },
   rightElbow: {
-    x: [72],
-    y: [80],
+    x: [75],
+    y: [90],
   },
   leftElbow: {
-    x: [71],
-    y: [79],
+    x: [74],
+    y: [89],
   },
   rightHand: {
-    x: [77],
+    x: [87],
     y: [90],
   },
   leftHand: {
-    x: [76],
+    x: [86],
     y: [90],
   },
   hip: {
-    x: [44],
-    y: [72],
+    x: [50],
+    y: [80],
   },
   rightKnee: {
-    x: [57],
-    y: [76],
+    x: [30],
+    y: [86],
   },
   leftKnee: {
-    x: [56],
-    y: [75],
+    x: [30],
+    y: [86],
   },
   rightFoot: {
-    x: [47],
-    y: [90],
+    x: [11],
+    y: [91],
   },
   leftFoot: {
-    x: [49],
+    x: [10],
     y: [90],
   },
 };

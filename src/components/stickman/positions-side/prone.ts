@@ -1,7 +1,7 @@
 export const prone = {
   head: {
-    x: [90],
-    y: [87],
+    x: [86],
+    y: [88],
   },
   shoulder: {
     x: [78],

@@ -40,6 +40,7 @@ const Home = () => {
         <Routines>
           {routines.map((r: any, i: number) => (
             <Routine
+              key={r.id}
               routine={r}
               i={i}
               formats={formats}

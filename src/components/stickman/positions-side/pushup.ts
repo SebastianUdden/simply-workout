@@ -1,11 +1,11 @@
 export const pushupLow = {
   head: {
-    x: [89],
-    y: [84],
+    x: [87],
+    y: [85],
   },
   shoulder: {
     x: [78],
-    y: [85],
+    y: [86],
   },
   rightElbow: {
     x: [65],
@@ -47,7 +47,7 @@ export const pushupLow = {
 
 export const pushupHigh = {
   head: {
-    x: [87],
+    x: [85],
     y: [65],
   },
   shoulder: {
@@ -94,7 +94,7 @@ export const pushupHigh = {
 
 export const pushupKneeHigh = {
   head: {
-    x: [84],
+    x: [82],
     y: [65],
   },
   shoulder: {
