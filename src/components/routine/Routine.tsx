@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import EditRoutine from "./EditRoutine";
 import ViewRoutine from "./ViewRoutine";
 import { exerciseTypes as defaultExerciseTypes } from "../../constants/exerciseTypes";
-import { estimateTime, getOldWorkout, saveWorkout, uuidv4 } from "../../utils";
+import { estimateTime, getOldWorkout, uuidv4 } from "../../utils";
 import { ExerciseValue } from "./EditExercise";
 
 export interface RoutineProps {
@@ -20,10 +20,11 @@ interface Props {
   formats: any[];
   expandIndex: number;
   onExpandIndexChange: Function;
+  onUpdateRoutine: Function;
   allExercises: any[];
 }
 
-const Routine = (props: Props) => {
+const Routine = ({ onUpdateRoutine, ...props }: Props) => {
   const [viewRoutine, setViewRoutine] = useState(false);
   const [exerciseTypes, setExerciseTypes] = useState<any[]>([]);
   const [r, setR] = useState(props.routine);
@@ -87,14 +88,7 @@ const Routine = (props: Props) => {
   };
 
   useEffect(() => {
-    const oldWorkout = getOldWorkout();
-    const newWorkout = {
-      ...oldWorkout,
-      routines: oldWorkout.routines?.map((routine: any, index: number) =>
-        index !== props.i ? routine : r
-      ) || [r],
-    };
-    saveWorkout(newWorkout);
+    onUpdateRoutine(r);
     // eslint-disable-next-line
   }, [r]);
 

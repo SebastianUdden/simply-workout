@@ -116,8 +116,6 @@ const Calendar = ({ dates }: Props) => {
     daysInLastMonth,
   } = datetime;
 
-  console.log({ dates });
-
   const weekEl = weeks.map((day, i) => {
     const d = getDate(i, firstIndex, lastIndex, daysInLastMonth);
     const m = month + d.month;

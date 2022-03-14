@@ -49,6 +49,11 @@ const Home = () => {
               expandIndex={expandIndex}
               onExpandIndexChange={(i: number) => setExpandIndex(i)}
               allExercises={allExercises}
+              onUpdateRoutine={(routine: any) => {
+                setRoutines(
+                  routines.map((r) => (r.id === routine.id ? routine : r))
+                );
+              }}
             />
           ))}
         </Routines>
@@ -70,7 +75,7 @@ const Home = () => {
           }}
           danger
         >
-          Remove saved routines
+          Permanently remove saved routines
         </Button>
       )}
     </Wrapper>
@@ -100,6 +105,7 @@ const Button = styled.button<{ danger: boolean }>`
   width: 100%;
   font-size: 20px;
   border-radius: 6px;
+  cursor: pointer;
   ${(p) =>
     p.danger &&
     `
