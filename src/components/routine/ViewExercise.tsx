@@ -29,7 +29,7 @@ const ViewExercise = ({
   const challenge = getChallenge(value, format.percentage);
   const repString =
     unit === "kg" ? `${format.reps} reps` : `${challenge} ${unit}`;
-  const position = getAnimation(name);
+  const animation = getAnimation(name);
   const direction = getDirection(name);
 
   useEffect(() => {
@@ -86,12 +86,12 @@ const ViewExercise = ({
           )}
         </Column>
       </Row>
-      {position && (
+      {animation && (
         <StickmanRow>
           <Stickman
             size="60%"
-            position={position}
-            duration={2}
+            position={animation.positions}
+            duration={animation.speed || 2}
             direction={direction}
           />
         </StickmanRow>

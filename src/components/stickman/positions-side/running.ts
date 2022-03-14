@@ -24,7 +24,7 @@ export const runningPart1 = {
     y: [48],
   },
   hip: {
-    x: [49.5],
+    x: [49],
     y: [56],
   },
   rightKnee: {
@@ -165,7 +165,7 @@ export const runningPart4 = {
     y: [46],
   },
   hip: {
-    x: [49.5],
+    x: [49],
     y: [56],
   },
   rightKnee: {
@@ -212,7 +212,7 @@ export const runningPart5 = {
     y: [46],
   },
   hip: {
-    x: [49.5],
+    x: [49],
     y: [56],
   },
   rightKnee: {
@@ -353,7 +353,7 @@ export const runningPart8 = {
     y: [43],
   },
   hip: {
-    x: [49.5],
+    x: [49],
     y: [56],
   },
   rightKnee: {
