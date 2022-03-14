@@ -89,7 +89,7 @@ const ViewExercise = ({
       {animation && (
         <StickmanRow>
           <Stickman
-            size="60%"
+            size="58%"
             position={animation.positions}
             duration={animation.speed || 2}
             direction={direction}
@@ -227,19 +227,19 @@ const Label = styled.label`
 `;
 const Value = styled.span<{ big?: boolean }>`
   margin-left: 3px;
-  font-size: 20px;
+  font-size: 16px;
   ${(p) =>
     p.big &&
     `
-    font-size: 28px;
+    font-size: 20px;
   `}
 `;
 const Button = styled.button`
   user-select: none;
   margin-top: 10px;
-  padding: 15px;
+  padding: 15px 10px;
   width: 100%;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 800;
   background-color: #333;
   border: none;

@@ -49,6 +49,9 @@ const Home = () => {
               expandIndex={expandIndex}
               onExpandIndexChange={(i: number) => setExpandIndex(i)}
               allExercises={allExercises}
+              onDeleteRoutine={(id: string) =>
+                setRoutines(routines.filter((r) => r.id !== id))
+              }
               onUpdateRoutine={(routine: any) => {
                 setRoutines(
                   routines.map((r) => (r.id === routine.id ? routine : r))

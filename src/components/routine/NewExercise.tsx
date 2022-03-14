@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import { Close } from "../Close";
 import { Label } from "../Common";
 import SearchExercises from "../SearchExercises";
 
@@ -59,21 +60,6 @@ const Content = styled.div`
   flex-direction: column;
   margin: 0 auto;
   max-height: 100vh;
-`;
-const Close = styled.button`
-  user-select: none;
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  background-color: inherit;
-  border: none;
-  font-size: 40px;
-  color: white;
-  cursor: pointer;
-  z-index: 4;
-  :hover {
-    color: orange;
-  }
 `;
 
 export default NewExercise;

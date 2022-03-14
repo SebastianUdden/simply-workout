@@ -111,6 +111,7 @@ export const Input = styled.input`
   color: inherit;
   border: 1px solid white;
   padding: 15px;
+  border-radius: 6px;
 `;
 
 export const Select = styled.select<{ capitalize?: boolean }>`

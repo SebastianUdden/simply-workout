@@ -6,8 +6,7 @@ import Header from "./components/Header";
 import AddFormat from "./pages/AddFormat";
 import styled from "styled-components";
 import Home from "./pages/Home";
-// import Stickman, { DEFAULT_POSITION } from "./components/stickman/Stickman";
-// import { anim } from "./components/stickman/Animation";
+// import Stickman from "./components/stickman/Stickman";
 // import {
 //   burpee,
 //   jump,
@@ -24,6 +23,7 @@ import Home from "./pages/Home";
 //   sidePlank,
 //   birdDog,
 //   running,
+//   getAnimation,
 // } from "./components/stickman/animations";
 // import {
 //   birdDogHigh,
@@ -40,6 +40,11 @@ import Home from "./pages/Home";
 //   runningPart8,
 //   runningPart9,
 // } from "./components/stickman/positions-side/running";
+// import { dipLow } from "./components/stickman/positions-side/dip";
+// import {
+//   lungeHigh,
+//   lungeLow,
+// } from "./components/stickman/positions-side/lunge";
 
 export const HOME = "home";
 export const EXERCISE = "exercise";
@@ -49,19 +54,18 @@ export const ROUTINE = "routine";
 const App = () => {
   const [tab, setTab] = useState(HOME);
 
-  // const position = {
-  //   ...DEFAULT_POSITION,
-  //   // ...anim(anim(standingSide, sittingSide), standingSide),
-  //   // ...anim(anim(standingSide, proneSide), standingSide),
-  //   // ...anim(pushupHigh, pushupLow, true),
-  //   ...runningPart3,
-  // };
   return (
     <div>
       <Header onTabChange={(value: string) => setTab(value)} />
       {/* <Stickman
-        position={anim(running)}
+        position={lungeHigh}
         duration={0.7}
+        direction="Side"
+        size="40%"
+      />
+      <Stickman
+        position={getAnimation("lunge")?.positions}
+        duration={getAnimation("lunge")?.speed}
         direction="Side"
         size="40%"
       /> */}

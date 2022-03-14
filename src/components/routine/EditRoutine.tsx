@@ -20,6 +20,7 @@ interface Props {
   onChangePosition: Function;
   onDelete: Function;
   onAdd: any;
+  onDeleteRoutine: Function;
 }
 
 const EditRoutine = ({
@@ -34,6 +35,7 @@ const EditRoutine = ({
   onChangeValue,
   onChangePosition,
   onDelete,
+  onDeleteRoutine,
   onAdd,
 }: Props) => {
   const [showDelete, setShowDelete] = useState(false);
@@ -49,6 +51,14 @@ const EditRoutine = ({
       });
     }, 100);
     onAdd(e);
+  };
+  const handleDelete = () => {
+    if (showDelete === true) {
+      setShowDelete(false);
+      onDeleteRoutine(routine.id);
+      return;
+    }
+    setShowDelete(true);
   };
 
   return (
@@ -70,10 +80,14 @@ const EditRoutine = ({
               {expandIndex === i ? <>&uarr;</> : <>&darr;</>}
             </SmallButton>
             <SmallButton
-              onClick={() => setShowDelete(true)}
+              onClick={handleDelete}
               style={{ backgroundColor: "red" }}
             >
-              {showDelete ? <>Cancel</> : <>&times;</>}
+              {showDelete ? (
+                <span style={{ fontSize: "12px" }}>Del</span>
+              ) : (
+                <>&times;</>
+              )}
             </SmallButton>
           </Row>
         </Column>

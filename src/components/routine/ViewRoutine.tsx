@@ -64,16 +64,12 @@ const ViewRoutine = ({
         />
         <Arrows>
           <Row>
-            {isRight && (
-              <Plus onClick={() => setShowNewExercise(true)}>
-                + Add exercise
-              </Plus>
-            )}
-          </Row>
-          <Row>
             <Arrow onClick={onGoBack} disabled={isLeft}>
               &larr;
             </Arrow>
+            {isRight && (
+              <Plus onClick={() => setShowNewExercise(true)}>+ Add</Plus>
+            )}
             <Arrow onClick={onGoForward} disabled={isRight}>
               &rarr;
             </Arrow>
@@ -99,7 +95,7 @@ const Wrapper = styled.div<{ show: boolean }>`
   bottom: 0;
   background-color: #222;
   color: #fff;
-  padding: 30px 15px 0;
+  padding: 0 15px;
   z-index: 1;
   transition: transform 700ms ease;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -117,9 +113,10 @@ const Content = styled.div`
   position: relative;
 `;
 const Title = styled.h1`
-  margin: 0 40px 20px 0;
+  margin: 5px 40px 0 0;
   color: orange;
   opacity: 0.7;
+  font-size: 30px;
 `;
 const Row = styled.div`
   width: 100%;
@@ -131,14 +128,14 @@ const Arrows = styled.div`
   justify-content: space-between;
   position: absolute;
   background-color: inherit;
-  bottom: 40px;
+  bottom: 5px;
   left: 0;
   right: 0;
 `;
 const Plus = styled.button<{ disabled?: boolean }>`
   user-select: none;
-  padding: 17px 15px;
-  font-size: 18px;
+  padding: 15px;
+  font-size: 14px;
   width: 100%;
   font-weight: 800;
   background-color: #333;
@@ -146,6 +143,7 @@ const Plus = styled.button<{ disabled?: boolean }>`
   color: white;
   cursor: pointer;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  margin-right: 10px;
   :hover {
     background-color: #666;
   }
@@ -162,11 +160,9 @@ const Plus = styled.button<{ disabled?: boolean }>`
   `}
 `;
 const Arrow = styled(Plus)`
-  margin-top: 20px;
-  font-size: 30px;
-  padding: 15px;
-  :first-child {
-    margin-right: 20px;
+  font-size: 20px;
+  :last-of-type {
+    margin-right: 0;
   }
 `;
 

@@ -234,6 +234,7 @@ const StickBox = styled.svg<{ size: string }>`
   stroke: white;
   stroke-width: 5px;
   stroke-linecap: round;
+  border: 1px solid white;
 `;
 const Head = styled.circle`
   stroke: #555;

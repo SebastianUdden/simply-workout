@@ -22,6 +22,7 @@ interface Props {
   onExpandIndexChange: Function;
   onUpdateRoutine: Function;
   allExercises: any[];
+  onDeleteRoutine: Function;
 }
 
 const Routine = ({ onUpdateRoutine, ...props }: Props) => {
@@ -119,6 +120,7 @@ const Routine = ({ onUpdateRoutine, ...props }: Props) => {
         onChangeValue={handleChangeExerciseValue}
         onChangePosition={handleChangeExercisePosition}
         onDelete={handleDeleteExercise}
+        onDeleteRoutine={props.onDeleteRoutine}
         onAdd={handleAddType}
       />
     </>

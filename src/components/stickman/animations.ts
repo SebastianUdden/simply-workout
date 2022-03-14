@@ -8,6 +8,7 @@ import {
 } from "./positions-side/birdDog";
 import { calfRaiseHigh, calfRaiseLow } from "./positions-side/calrRaise";
 import { chinupHigh, chinupMiddle } from "./positions-side/chinup";
+import { dipHigh, dipLow } from "./positions-side/dip";
 import { gluteBridgeHigh, gluteBridgeLow } from "./positions-side/gluteBridge";
 import { jumpHigh, jumpLow, jumpMiddle } from "./positions-side/jumping";
 import { plankAlt1, plankAlt2 } from "./positions-side/plank";
@@ -24,13 +25,20 @@ import {
   runningPart8,
   runningPart9,
 } from "./positions-side/running";
-import { sitting, squatHigh, squatLow } from "./positions-side/sitting";
+import { squatHigh, squatLow } from "./positions-side/squat";
 import { situpLow, situpHigh } from "./positions-side/situp";
 import {
   standing,
   standingAlt,
   standingArmsHigh,
 } from "./positions-side/standing";
+import { sitting } from "./positions-side/sitting";
+import {
+  lungeHigh,
+  lungeHighAlt,
+  lungeLow,
+  lungeLowAlt,
+} from "./positions-side/lunge";
 
 export const stand = {
   speed: 2,
@@ -68,6 +76,20 @@ export const situp = {
 export const squat = {
   speed: 2,
   animation: [standing, squatHigh, squatLow, squatHigh, standing],
+};
+export const lunge = {
+  speed: 5,
+  animation: [
+    standing,
+    lungeHigh,
+    lungeLow,
+    lungeHigh,
+    standing,
+    lungeHighAlt,
+    lungeLowAlt,
+    lungeHighAlt,
+    standing,
+  ],
 };
 export const plank = {
   speed: 2,
@@ -140,6 +162,10 @@ export const chinup = {
     standingArmsHigh,
   ],
 };
+export const dip = {
+  speed: 1.5,
+  animation: [dipLow, dipHigh, dipLow],
+};
 export const burpee = {
   speed: 2,
   animation: [
@@ -186,6 +212,8 @@ export const animations: any = {
   chinup,
   pushupKnee,
   pullup,
+  dip,
+  lunge,
 };
 
 export const getAnimation = (name: string) => {
