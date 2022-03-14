@@ -78,7 +78,7 @@ export const gluteBridge = {
   animation: [gluteBridgeLow, gluteBridgeHigh, gluteBridgeLow],
 };
 export const calfRaise = {
-  speed: 2,
+  speed: 1.3,
   animation: [calfRaiseLow, calfRaiseHigh, calfRaiseLow],
 };
 export const sidePlank = {
