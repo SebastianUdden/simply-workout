@@ -37,25 +37,49 @@ const WorkoutHistory = ({ routines }: Props) => {
       return results;
     }, []);
 
-  return (
-    <Wrapper>
-      <Calendar dates={workoutDates} />
-      {routines.map((r: any) => (
-        <YearSum>
-          {getUnique(r.exercises).map((e) => (
+  const yearsum = routines
+    .map((r: any) => {
+      const now = new Date();
+      const workoutDots = getUnique(r.exercises);
+      const filteredDots = workoutDots.filter(
+        (w: any) => new Date(w) > new Date(now.getFullYear(), 0, 0)
+      );
+      if (filteredDots.length === 0) return null;
+      return (
+        <Dots>
+          {filteredDots.map((w) => (
             <WorkoutDot bgColor={r.color} />
           ))}
-        </YearSum>
-      ))}
+        </Dots>
+      );
+    })
+    .filter(Boolean);
+  return yearsum.length === 0 ? null : (
+    <Wrapper>
+      <Calendar dates={workoutDates} />
+      <YearSum>
+        <Label>Workouts this year</Label>
+        {yearsum}
+      </YearSum>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div``;
 const YearSum = styled.div`
+  background-color: #000;
+  border-radius: 6px;
+  padding: 0 10px 10px;
+`;
+const Label = styled.label`
+  color: #666;
+  font-size: 14px;
+  font-weight: 700;
+`;
+const Dots = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-left: 4px;
-  margin-bottom: 4px;
+  margin-top: 4px;
 `;
 export default WorkoutHistory;
