@@ -66,6 +66,7 @@ const Home = () => {
           onClick={() => {
             setHide(true);
             setTimeout(() => {
+              setShowDelete(!showDelete);
               setRoutines([]);
             }, 500);
             setTimeout(() => {
