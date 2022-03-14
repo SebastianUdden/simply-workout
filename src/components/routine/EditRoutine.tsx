@@ -152,7 +152,6 @@ const Title = styled.h2`
   align-items: center;
   margin: 0;
   margin-bottom: 5px;
-  color: orange;
   font-size: 22px;
   cursor: pointer;
   user-select: none;
@@ -173,7 +172,7 @@ const Item = styled.li`
   margin-bottom: 5px;
 `;
 const Strong = styled.strong`
-  color: magenta;
+  color: #666;
 `;
 const BigButton = styled(Button)`
   margin: 5px 0;
