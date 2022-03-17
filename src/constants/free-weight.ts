@@ -285,19 +285,12 @@ export const freeWeight = [
   {
     id: "137",
     category: FREE_WEIGHT,
-    name: "lateral raise",
-    unit: "kg",
-    areas: [DELTS, TRICEPS],
-  },
-  {
-    id: "138",
-    category: FREE_WEIGHT,
     name: "reverse flye",
     unit: "kg",
     areas: [RHOMBOIDS, UPPER_TRAPS, DELTS],
   },
   {
-    id: "139",
+    id: "138",
     category: FREE_WEIGHT,
     name: "dumbbell one arm row",
     unit: "kg",

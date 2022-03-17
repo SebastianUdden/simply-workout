@@ -52,7 +52,7 @@ export const machine = [
   {
     id: "205",
     category: MACHINE,
-    name: "30-degree lat pulldown",
+    name: "lat pulldown 30 degree",
     unit: "kg",
     areas: [DELTS, BICEPS, FOREARMS],
   },

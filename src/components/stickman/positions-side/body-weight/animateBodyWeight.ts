@@ -28,6 +28,7 @@ import { lungeHigh, lungeHighAlt, lungeLow, lungeLowAlt } from "./lunge";
 import { pushupBosuBallHigh, pushupBosuBallLow } from "./pushupBosuBall";
 import { pushupTrxHigh, pushupTrxLow } from "./pushupTRX";
 import { barbellAbRolloutHigh, barbellAbRolloutLow } from "./barbellAbRollout";
+import { splitSquatHigh, splitSquatLow } from "./splitSquat";
 
 export const stand = {
   duration: 2,
@@ -80,6 +81,16 @@ export const situp = {
 export const squat = {
   duration: 3,
   animation: [standing, squatHigh, squatLow, squatHigh, standing],
+};
+export const splitSquat = {
+  duration: 3,
+  animation: [
+    standing,
+    splitSquatHigh,
+    splitSquatLow,
+    splitSquatHigh,
+    standing,
+  ],
 };
 export const lunge = {
   duration: 5,
@@ -207,6 +218,7 @@ export const animateBodyWeight = {
   barbellAbRollout,
   situp,
   squat,
+  splitSquat,
   plank,
   gluteBridge,
   calfRaise,

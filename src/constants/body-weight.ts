@@ -243,4 +243,11 @@ export const bodyWeight = [
       UPPER_TRAPS,
     ],
   },
+  {
+    id: "28",
+    category: BODY_WEIGHT,
+    name: "split squat",
+    unit: "reps",
+    areas: [QUADS, GLUTES],
+  },
 ];

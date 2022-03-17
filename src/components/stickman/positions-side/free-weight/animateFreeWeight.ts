@@ -82,6 +82,15 @@ export const barbellBenchPress = {
   prop: "bench",
   hands: "barbell",
 };
+const overheadBarbellPress = {
+  duration: 3,
+  animation: [
+    dumbbellStandingOverheadPressLow,
+    dumbbellStandingOverheadPressHigh,
+    dumbbellStandingOverheadPressLow,
+  ],
+  hands: "barbell",
+};
 
 export const animateFreeWeight = {
   dumbbellBenchPress,
@@ -90,4 +99,5 @@ export const animateFreeWeight = {
   dumbbellLateralRaise,
   dumbbellOneArmRow,
   barbellBenchPress,
+  overheadBarbellPress,
 };
