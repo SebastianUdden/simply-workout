@@ -48,7 +48,7 @@ const Selection = ({
     <Select onChange={handleChangeValue} value={value}>
       <option>{defaultOption}</option>
       {options.map((o) => (
-        <option>{o}</option>
+        <option key={o}>{o}</option>
       ))}
     </Select>
   </>
@@ -126,7 +126,7 @@ const AddFormat = () => {
           <Label>Current workout formats available</Label>
           <List>
             {formats.map((f) => (
-              <Item onClick={() => setNewFormat(f)}>
+              <Item key={f.id} onClick={() => setNewFormat(f)}>
                 <Row>
                   <Column>
                     <Row>

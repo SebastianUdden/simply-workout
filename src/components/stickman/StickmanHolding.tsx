@@ -1,23 +1,8 @@
 import styled from "styled-components";
 import Ani from "./Animation";
-export interface PositionArray {
-  x: number[];
-  y: number[];
-}
-
-export interface Positions {
-  head: PositionArray;
-  shoulder: PositionArray;
-  rightElbow: PositionArray;
-  rightHand: PositionArray;
-  leftElbow: PositionArray;
-  leftHand: PositionArray;
-  hip: PositionArray;
-  rightKnee: PositionArray;
-  rightFoot: PositionArray;
-  leftKnee: PositionArray;
-  leftFoot: PositionArray;
-}
+import { LeftDisc, RightDisc } from "./Dumbbell";
+import { overhang } from "./props/Pulldown";
+import { Positions } from "./Stickman";
 
 interface Props {
   duration?: number;
@@ -25,6 +10,9 @@ interface Props {
   positions?: Positions;
   size?: string;
   background?: any;
+  left?: boolean;
+  right?: boolean;
+  hands: string;
 }
 
 export const DEFAULT_POSITIONS = {
@@ -41,12 +29,15 @@ export const DEFAULT_POSITIONS = {
   leftFoot: { x: [47], y: [90] },
 };
 
-const Stickman = ({
+const StickmanHolding = ({
   duration = 3,
   direction = "Side",
   positions = DEFAULT_POSITIONS,
   size = "100%",
   background,
+  left = true,
+  right = true,
+  hands,
 }: Props) => {
   const d = duration;
   const {
@@ -62,7 +53,7 @@ const Stickman = ({
     leftKnee,
     leftFoot,
   } = positions;
-
+  const discSize = hands === "barbell" ? 6 : 5;
   const leftUpperArm = (
     <LeftUpperArm
       x1={shoulder.x[0]}
@@ -190,10 +181,121 @@ const Stickman = ({
     </Head>
   );
 
+  const leftDumbbellL = (
+    <LeftDisc
+      id="left-discL"
+      cx={leftHand.x[0] - 1}
+      cy={leftHand.y[0]}
+      r={discSize}
+    >
+      <Ani arr={leftHand.x} attr="cx" dur={d} />
+      <Ani arr={leftHand.y} attr="cy" dur={d} />
+    </LeftDisc>
+  );
+  const leftDumbbellR = (
+    <RightDisc
+      id="left-discR"
+      cx={leftHand.x[0] + 1}
+      cy={leftHand.y[0]}
+      r={discSize}
+    >
+      <Ani arr={leftHand.x} attr="cx" dur={d} />
+      <Ani arr={leftHand.y} attr="cy" dur={d} />
+    </RightDisc>
+  );
+  const rightDumbbellL = (
+    <LeftDisc
+      id="right-discL"
+      cx={rightHand.x[0] - 1}
+      cy={rightHand.y[0]}
+      r={discSize}
+    >
+      <Ani arr={rightHand.x} attr="cx" dur={d} />
+      <Ani arr={rightHand.y} attr="cy" dur={d} />
+    </LeftDisc>
+  );
+  const rightDumbbellR = (
+    <RightDisc
+      id="right-discR"
+      cx={rightHand.x[0] + 1}
+      cy={rightHand.y[0]}
+      r={discSize}
+    >
+      <Ani arr={rightHand.x} attr="cx" dur={d} />
+      <Ani arr={rightHand.y} attr="cy" dur={d} />
+    </RightDisc>
+  );
+  const machineBar = (
+    <MachineBar
+      x1={rightHand.x[0]}
+      y1={rightHand.y[0]}
+      x2={leftHand.x[0]}
+      y2={leftHand.y[0]}
+    >
+      <Ani arr={rightHand.x} attr="x1" dur={d} />
+      <Ani arr={rightHand.y} attr="y1" dur={d} />
+      <Ani arr={leftHand.x} attr="x2" dur={d} />
+      <Ani arr={leftHand.y} attr="y2" dur={d} />
+    </MachineBar>
+  );
+  const machineLine = (
+    <MachineLine
+      x1={leftHand.x[0]}
+      y1={leftHand.y[0]}
+      x2={overhang.x}
+      y2={overhang.y}
+    >
+      <Ani arr={leftHand.x} attr="x1" dur={d} />
+      <Ani arr={leftHand.y} attr="y1" dur={d} />
+    </MachineLine>
+  );
+
+  if (hands === "machine-bar") {
+    return (
+      <StickBox viewBox="0 0 100 100" size={size}>
+        {direction === "Forward" && (
+          <>
+            {background}
+            {leftUpperArm}
+            {rightUpperArm}
+            {neck}
+            {torso}
+            {leftLowerArm}
+            {rightLowerArm}
+            {leftUpperLeg}
+            {leftLowerLeg}
+            {rightUpperLeg}
+            {rightLowerLeg}
+            {theHead}
+          </>
+        )}
+        {direction === "Side" && (
+          <>
+            {leftLowerArm}
+            {leftUpperArm}
+            {machineBar}
+            {machineLine}
+            {neck}
+            {theHead}
+            {leftLowerLeg}
+            {leftUpperLeg}
+            {background}
+            {torso}
+            {rightUpperLeg}
+            {rightLowerLeg}
+            {rightUpperArm}
+            {rightLowerArm}
+          </>
+        )}
+      </StickBox>
+    );
+  }
+
   return (
     <StickBox viewBox="0 0 100 100" size={size}>
       {direction === "Forward" && (
         <>
+          {background}
           {leftUpperArm}
           {rightUpperArm}
           {neck}
@@ -209,18 +311,22 @@ const Stickman = ({
       )}
       {direction === "Side" && (
         <>
+          {left ? leftDumbbellL : null}
           {leftLowerArm}
           {leftUpperArm}
+          {left ? leftDumbbellR : null}
           {neck}
           {theHead}
           {leftLowerLeg}
           {leftUpperLeg}
+          {background}
           {torso}
           {rightUpperLeg}
           {rightLowerLeg}
-          {background}
           {rightUpperArm}
+          {right ? rightDumbbellL : null}
           {rightLowerArm}
+          {right ? rightDumbbellR : null}
         </>
       )}
     </StickBox>
@@ -275,5 +381,13 @@ const RightUpperLeg = styled(Leg)`
 const RightLowerLeg = styled(Leg)`
   stroke: #888;
 `;
+const MachineBar = styled.line`
+  stroke: #000;
+  stroke-width: 4;
+`;
+const MachineLine = styled.line`
+  stroke: #777;
+  stroke-width: 1;
+`;
 
-export default Stickman;
+export default StickmanHolding;

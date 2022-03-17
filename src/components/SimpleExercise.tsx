@@ -1,7 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { searchFor } from "../utils";
-import { Button, Column, Item, Link, Row } from "./Common";
+import { Item, Link as LinkUI, Row } from "./Common";
+import { getAnimation } from "./stickman/animations";
+import { getDirection } from "./stickman/direction";
+import StickmanWithProps from "./stickman/StickmanWithProps";
 
 interface Props {
   exercise: any;
@@ -10,18 +13,36 @@ interface Props {
   bgColor?: string;
 }
 
-const SimpleExercise = ({ exercise, onSelect, onDelete, bgColor }: Props) => {
+const SimpleExercise = ({ exercise, onSelect, bgColor }: Props) => {
   const [simpleIndex, setSimpleIndex] = useState(-1);
   const showImage = false;
+
+  const animation = getAnimation(exercise.name);
+  const direction = getDirection(exercise.name);
+
   return (
-    <Item onClick={() => onSelect && onSelect(exercise)} bgColor={bgColor}>
+    <Item
+      key={exercise.id}
+      onClick={() => onSelect && onSelect(exercise)}
+      bgColor={bgColor}
+    >
+      {showImage && <Image src={exercise.img} />}
       <Row>
-        {showImage && <Image src={exercise.img} />}
-        <WideColumn>
-          <Name>{exercise.name}</Name>
-          <Category>{exercise.category}</Category>
-        </WideColumn>
-        <WideColumn>
+        <Column>
+          <FlexRow>
+            <Name>{exercise.name}</Name>
+          </FlexRow>
+          <FlexRow>
+            <Category>{exercise.category}</Category>{" "}
+          </FlexRow>
+          <FlexRow>
+            <Link href={searchFor(exercise.name, "how to")} target="_blank">
+              How to
+            </Link>{" "}
+            <Link href={searchFor(exercise.name, "muscles")} target="_blank">
+              Muscles
+            </Link>
+          </FlexRow>
           <FlexRow>
             {exercise?.areas?.map((a: string, i: number) => (
               <Area
@@ -35,23 +56,22 @@ const SimpleExercise = ({ exercise, onSelect, onDelete, bgColor }: Props) => {
               </Area>
             ))}
           </FlexRow>
-        </WideColumn>
-        <Column>
-          {onDelete && (
-            <Delete onClick={() => onDelete && onDelete(exercise.id)}>
-              &times;
-            </Delete>
-          )}
-          <Row>
-            <Link href={searchFor(exercise.name, "how to")} target="_blank">
-              How to
-            </Link>{" "}
-            <Link href={searchFor(exercise.name, "muscles")} target="_blank">
-              Muscles
-            </Link>
-          </Row>
+        </Column>
+        <Column width="70%">
+          <StickmanWithProps
+            direction={direction}
+            animationProps={animation}
+            category={exercise.category}
+          />
         </Column>
       </Row>
+      {/* <Column>
+        {onDelete && (
+          <Delete onClick={() => onDelete && onDelete(exercise.id)}>
+            &times;
+          </Delete>
+        )}
+      </Column> */}
     </Item>
   );
 };
@@ -76,13 +96,14 @@ const Name = styled.strong`
 const Category = styled.span`
   text-transform: capitalize;
   opacity: 0.7;
+  margin-right: auto;
 `;
-const Delete = styled(Button)`
-  margin-left: auto;
-  width: 30px;
-  margin-bottom: 15px;
-  background-color: red;
-`;
+// const Delete = styled(Button)`
+//   margin-left: auto;
+//   width: 30px;
+//   margin-bottom: 15px;
+//   background-color: red;
+// `;
 export const Area = styled.button<{ selected?: boolean }>`
   background-color: #444;
   color: #fff;
@@ -109,8 +130,22 @@ export const Area = styled.button<{ selected?: boolean }>`
 const FlexRow = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 3px;
 `;
-const WideColumn = styled(Column)`
-  width: 40%;
+const Column = styled.div<{ width?: string }>`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 200px;
+  ${(p) =>
+    p.width &&
+    `
+    justify-content: center;
+    width: ${p.width};
+  `}
 `;
+const Link = styled(LinkUI)`
+  margin: 2px 8px 2px 0;
+`;
+
 export default SimpleExercise;

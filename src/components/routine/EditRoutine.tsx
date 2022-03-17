@@ -62,7 +62,7 @@ const EditRoutine = ({
   };
 
   return (
-    <Wrapper>
+    <Wrapper key={routine.id}>
       <Row>
         <Title>
           <Circle color={routine.color} />

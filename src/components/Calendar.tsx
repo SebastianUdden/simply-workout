@@ -49,7 +49,9 @@ const getWorkoutsThisDay = (d: any, m: any, dates: any) => {
   return dates.map((dt: any) => {
     const newDate = new Date(dt.date);
     return newDate.getDate() === d.date && m === newDate.getMonth()
-      ? dt.activities.map((a: any) => <WorkoutDot bgColor={a.color} />)
+      ? dt.activities.map((a: any) => (
+          <WorkoutDot key={a.color} bgColor={a.color} />
+        ))
       : null;
   });
 };
@@ -121,6 +123,7 @@ const Calendar = ({ dates }: Props) => {
     const m = month + d.month;
     return (
       <Day
+        key={d.date}
         isToday={i === date + firstIndex - 1 && m === new Date().getMonth()}
         thisMonth={d.month === 0}
       >
@@ -139,7 +142,7 @@ const Calendar = ({ dates }: Props) => {
       </Title>
       <Week>
         {days.map((d) => (
-          <D>{d}</D>
+          <D key={d}>{d}</D>
         ))}
       </Week>
       <Month>{weekEl}</Month>

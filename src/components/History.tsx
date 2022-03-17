@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import { Close } from "./Close";
+import Modal from "./Modal";
 import { ExerciseValue } from "./routine/EditExercise";
 
 const FIVE_YEARS = "5 years";
@@ -56,32 +56,20 @@ interface Props {
 }
 
 const History = ({ title, values, unit, onClose }: Props) => {
-  const [show, setShow] = useState(false);
   const [span, setSpan] = useState(LATEST);
   const [selected, setSelected] = useState(values[values.length - 1]);
 
-  const handleClose = () => {
-    setShow(false);
-    setTimeout(() => {
-      onClose();
-    }, 1000);
-  };
   const handleSpanChange = (value: string) => {
     setSpan(value);
     const e = getFilteredEntries(values, value);
     setSelected(e[e.length - 1]);
   };
 
-  useEffect(() => {
-    setShow(true);
-  }, []);
-
   const maxValue = Math.max(...values.map((e) => e.value));
   const filteredEntries = getFilteredEntries(values, span);
 
   return (
-    <Wrapper show={show} isButton={false}>
-      <Close onClick={() => handleClose()}>&times;</Close>
+    <Modal onClose={onClose}>
       <GraphWrapper>
         <Title>{title}</Title>
         <Container>
@@ -98,6 +86,7 @@ const History = ({ title, values, unit, onClose }: Props) => {
               (e: any) =>
                 e.date && (
                   <Bar
+                    key={e.date}
                     onClick={() => setSelected(e)}
                     isSelected={e.date === selected.date}
                     value={e.value}
@@ -134,35 +123,10 @@ const History = ({ title, values, unit, onClose }: Props) => {
           </ButtonRow>
         </Container>
       </GraphWrapper>
-    </Wrapper>
+    </Modal>
   );
 };
 
-const Wrapper = styled.div<{ show?: boolean; isButton: boolean }>`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #000;
-  color: #fff;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transition: transform 700ms ease, background-color 10000ms ease;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  padding: 15px;
-  ${(p) =>
-    p.show ? "transform: translateX(0);" : "transform: translateX(100%);"}
-  ${(p) =>
-    p.isButton &&
-    `
-    cursor: pointer;
-    background-color: #fff;
-  `}
-`;
 const GraphWrapper = styled.div`
   display: flex;
   flex-direction: column;

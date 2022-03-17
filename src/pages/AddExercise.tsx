@@ -97,6 +97,7 @@ const AddExercise = () => {
       <Label>Select category</Label>
       {exerciseNames.map((name) => (
         <Radio
+          key={name}
           onSelect={(e: any) => setNewExercise(e)}
           exercise={newExercise}
           constant={name}

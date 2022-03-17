@@ -28,6 +28,7 @@ const checkValue = (value: number) => {
 };
 
 const EditExercise = ({
+  id,
   category,
   name,
   unit,
@@ -41,6 +42,13 @@ const EditExercise = ({
   bgColor,
 }: ExerciseProps) => {
   const [showInput, setShowInput] = useState(false);
+  useEffect(() => {
+    if (!showInput) return;
+    document.getElementById(`${name}-input`)?.focus();
+    // eslint-disable-next-line
+  }, [showInput]);
+
+  if (!values || values.length === 0) return null;
   const e = values[values.length - 1];
 
   const changeByPercentage = (percentage: number) => {
@@ -54,15 +62,8 @@ const EditExercise = ({
       setShowInput(false);
     }, 3000);
   };
-
-  useEffect(() => {
-    if (!showInput) return;
-    document.getElementById(`${name}-input`)?.focus();
-    // eslint-disable-next-line
-  }, [showInput]);
-
   return (
-    <Wrapper bgColor={bgColor}>
+    <Wrapper key={`${id}${Math.random()}`} bgColor={bgColor}>
       <Flex>
         <Label>{name}</Label>
         {onChangePosition && (

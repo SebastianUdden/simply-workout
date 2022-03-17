@@ -5,7 +5,7 @@ import { Column, Row } from "../Common";
 import History from "../History";
 import { getAnimation } from "../stickman/animations";
 import { getDirection } from "../stickman/direction";
-import Stickman from "../stickman/Stickman";
+import StickmanWithProps from "../stickman/StickmanWithProps";
 import Timer from "../timer/Timer";
 import { ExerciseProps } from "./EditExercise";
 
@@ -74,6 +74,7 @@ const ViewExercise = ({
             <Areas>
               {areas.map((a: string, i: number) => (
                 <Area
+                  key={a[0]}
                   onClick={() => setSimpleIndex(i === simpleIndex ? -1 : i)}
                   selected={i === simpleIndex}
                 >
@@ -88,11 +89,11 @@ const ViewExercise = ({
       </Row>
       {animation && (
         <StickmanRow>
-          <Stickman
-            size="58%"
-            position={animation.positions}
-            duration={animation.speed || 2}
+          <StickmanWithProps
+            size="58vw"
             direction={direction}
+            animationProps={animation}
+            category={category}
           />
         </StickmanRow>
       )}

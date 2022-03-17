@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
 import styled from "styled-components";
-import { Close } from "../Close";
 import { Label } from "../Common";
+import Modal from "../Modal";
 import SearchExercises from "../SearchExercises";
 
 interface Props {
@@ -15,22 +14,9 @@ const NewExercise = ({ onHideNewExercise, allExercises, onAdd }: Props) => {
     onHideNewExercise();
     onAdd(e);
   };
-  useEffect(() => {
-    const body = document.getElementsByTagName("body")[0];
-    body.style.position = "fixed";
-    body.style.left = "0";
-    body.style.right = "0";
-    document.getElementById("filter-exercises")?.focus();
-    return () => {
-      const body = document.getElementsByTagName("body")[0];
-      body.style.position = "static";
-      body.style.left = "default";
-      body.style.right = "default";
-    };
-  }, []);
+
   return (
-    <Wrapper>
-      <Close onClick={() => onHideNewExercise()}>&times;</Close>
+    <Modal onClose={onHideNewExercise} bgColor="#222">
       <Content>
         <Label>Add exercise</Label>
         <SearchExercises
@@ -40,20 +26,10 @@ const NewExercise = ({ onHideNewExercise, allExercises, onAdd }: Props) => {
         />
         <br />
       </Content>
-    </Wrapper>
+    </Modal>
   );
 };
 
-const Wrapper = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #222;
-  padding: 0 30px;
-  z-index: 3;
-`;
 const Content = styled.div`
   max-width: 800px;
   display: flex;

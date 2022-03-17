@@ -68,10 +68,10 @@ export const Item = styled.li<{ bgColor?: string }>`
   background-color: #111;
   list-style-type: none;
   font-size: 14px;
-  border: 1px solid #666;
+  border: none;
   padding: 5px 10px 8px;
   border-radius: 6px;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
   cursor: pointer;
   ${(p) => p.bgColor && `background-color: ${p.bgColor};`}
   :hover {

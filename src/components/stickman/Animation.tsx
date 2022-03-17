@@ -1,4 +1,4 @@
-import { Position, PositionArray } from "./Stickman";
+import { Positions, PositionArray } from "./Stickman";
 
 const getXY = (bp1: PositionArray, bp2: PositionArray) => ({
   x: [...bp1.x, ...bp2.x],
@@ -6,8 +6,8 @@ const getXY = (bp1: PositionArray, bp2: PositionArray) => ({
 });
 
 export const simpleAnim = (
-  pos1: Position,
-  pos2: Position,
+  pos1: Positions,
+  pos2: Positions,
   goBack?: boolean
 ) => {
   return {

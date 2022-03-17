@@ -82,7 +82,7 @@ const Routine = ({ onUpdateRoutine, ...props }: Props) => {
           category: e.category,
           areas: e.areas,
           unit: e.unit,
-          value: 10,
+          values: [{ date: undefined, value: 10 }],
         },
       ],
     });

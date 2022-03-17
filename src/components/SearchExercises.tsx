@@ -40,12 +40,16 @@ const SearchExercises = ({
     );
   });
 
-  const handleAreaClick = (t: string) => {
-    if (filters.some((f) => f === t)) {
+  const handleAreaClick = (t: string, clear?: boolean) => {
+    if (!clear && filters.some((f) => f === t)) {
       setFilters([...filters.filter((f) => f !== t)]);
       return;
     }
-    setFilters([...filters.filter((f) => f !== t), t]);
+    if (!clear) {
+      setFilters([...filters.filter((f) => f !== t), t]);
+      return;
+    }
+    setFilters([t]);
   };
 
   const tags = Array.from(
@@ -72,7 +76,7 @@ const SearchExercises = ({
           {exerciseNames.map((en) => (
             <Area
               selected={filters.some((f) => f === en)}
-              onClick={() => handleAreaClick(en)}
+              onClick={() => handleAreaClick(en, true)}
             >
               {en}
             </Area>

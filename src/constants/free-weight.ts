@@ -69,7 +69,7 @@ export const freeWeight = [
   {
     id: "107",
     category: FREE_WEIGHT,
-    name: "single-leg deadlift",
+    name: "single leg deadlift",
     unit: "kg",
     areas: [GLUTES, HAMSTRINGS, SPINAL_ERECTOR, ABS, OBLIQUES],
   },
@@ -171,7 +171,7 @@ export const freeWeight = [
   {
     id: "122",
     category: FREE_WEIGHT,
-    name: "half-kneeling landmine press",
+    name: "half kneeling landmine press",
     unit: "kg",
     areas: [DELTS],
   },
@@ -241,7 +241,7 @@ export const freeWeight = [
   {
     id: "132",
     category: FREE_WEIGHT,
-    name: "barbell bent-over row",
+    name: "barbell bent over row",
     unit: "kg",
     areas: [LOWER_TRAPS, RHOMBOIDS, LATS, DELTS, LOWER_PECS],
   },
@@ -299,7 +299,7 @@ export const freeWeight = [
   {
     id: "139",
     category: FREE_WEIGHT,
-    name: "dumbbell one-arm row",
+    name: "dumbbell one arm row",
     unit: "kg",
     areas: [UPPER_TRAPS, LOWER_TRAPS, DELTS, BICEPS, HIP],
   },
