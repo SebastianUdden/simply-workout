@@ -9,19 +9,19 @@ export const jumpHigh = {
   },
   rightElbow: {
     x: [59],
-    y: [18],
+    y: [9],
   },
   leftElbow: {
     x: [60],
-    y: [18],
+    y: [10],
   },
   rightHand: {
-    x: [61],
-    y: [8],
+    x: [57],
+    y: [3],
   },
   leftHand: {
-    x: [60],
-    y: [5],
+    x: [56],
+    y: [0],
   },
   hip: {
     x: [50],

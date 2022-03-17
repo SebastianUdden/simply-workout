@@ -9,9 +9,12 @@ const formatName = (name: string) => {
     .trim()
     .split(" ")
     .map((word, i) =>
-      i !== 0 ? `${word[0].toUpperCase()}${word.slice(1, word.length)}` : word
+      i !== 0
+        ? `${word[0].toUpperCase()}${word.toLowerCase().slice(1, word.length)}`
+        : word.toLowerCase()
     )
     .join("");
+  console.log({ newName });
   return newName;
 };
 

@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import Bench from "./props/Bench";
+import BosuBall from "./props/BosuBall";
 import CurlBench from "./props/CurlBench";
 import DipsBar from "./props/DipsBar";
 import Pulldown from "./props/Pulldown";
 import PullupsBar from "./props/PullupBar";
+import TrxSuspension from "./props/TrxSuspension";
 import Stickman, { Positions } from "./Stickman";
 import StickmanHolding from "./StickmanHolding";
 
@@ -29,6 +31,8 @@ const getProp = (prop: string | undefined) => {
   if (prop === "pulldown") return <Pulldown />;
   if (prop === "dips-bar") return <DipsBar />;
   if (prop === "pullups-bar") return <PullupsBar />;
+  if (prop === "bosu-ball") return <BosuBall />;
+  if (prop === "trx-suspension") return <TrxSuspension />;
   return null;
 };
 

@@ -25,6 +25,9 @@ import { situpLow, situpHigh } from "./situp";
 import { standing, standingAlt, standingArmsHigh } from "./standing";
 import { sitting } from "./sitting";
 import { lungeHigh, lungeHighAlt, lungeLow, lungeLowAlt } from "./lunge";
+import { pushupBosuBallHigh, pushupBosuBallLow } from "./pushupBosuBall";
+import { pushupTrxHigh, pushupTrxLow } from "./pushupTRX";
+import { barbellAbRolloutHigh, barbellAbRolloutLow } from "./barbellAbRollout";
 
 export const stand = {
   duration: 2,
@@ -54,6 +57,21 @@ export const jump = {
 export const pushup = {
   duration: 2,
   animation: [pushupLow, pushupHigh, pushupLow],
+};
+export const bosuBallPushup = {
+  duration: 2,
+  animation: [pushupBosuBallLow, pushupBosuBallHigh, pushupBosuBallLow],
+  prop: "bosu-ball",
+};
+export const trxSuspendedPushup = {
+  duration: 2,
+  animation: [pushupTrxLow, pushupTrxHigh, pushupTrxLow],
+  hands: "trx-suspension",
+};
+export const barbellAbRollout = {
+  duration: 4,
+  animation: [barbellAbRolloutLow, barbellAbRolloutHigh, barbellAbRolloutLow],
+  hands: "barbell",
 };
 export const situp = {
   duration: 2,
@@ -184,6 +202,9 @@ export const burpee = {
 
 export const animateBodyWeight = {
   pushup,
+  bosuBallPushup,
+  trxSuspendedPushup,
+  barbellAbRollout,
   situp,
   squat,
   plank,

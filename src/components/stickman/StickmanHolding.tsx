@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Ani from "./Animation";
 import { LeftDisc, RightDisc } from "./Dumbbell";
 import { overhang } from "./props/Pulldown";
+import { suspension } from "./props/TrxSuspension";
 import { Positions } from "./Stickman";
 
 interface Props {
@@ -249,6 +250,41 @@ const StickmanHolding = ({
       <Ani arr={leftHand.y} attr="y1" dur={d} />
     </MachineLine>
   );
+  const suspensionGrip = (
+    <MachineBar
+      x1={rightHand.x[0]}
+      y1={rightHand.y[0]}
+      x2={leftHand.x[0]}
+      y2={leftHand.y[0]}
+    >
+      <Ani arr={rightHand.x} attr="x1" dur={d} />
+      <Ani arr={rightHand.y} attr="y1" dur={d} />
+      <Ani arr={leftHand.x} attr="x2" dur={d} />
+      <Ani arr={leftHand.y} attr="y2" dur={d} />
+    </MachineBar>
+  );
+  const suspensionLineL = (
+    <MachineLine
+      x1={leftHand.x[0]}
+      y1={leftHand.y[0]}
+      x2={suspension.x1}
+      y2={suspension.y}
+    >
+      <Ani arr={leftHand.x} attr="x1" dur={d} />
+      <Ani arr={leftHand.y} attr="y1" dur={d} />
+    </MachineLine>
+  );
+  const suspensionLineR = (
+    <MachineLine
+      x1={rightHand.x[0]}
+      y1={rightHand.y[0]}
+      x2={suspension.x2}
+      y2={suspension.y}
+    >
+      <Ani arr={rightHand.x} attr="x1" dur={d} />
+      <Ani arr={rightHand.y} attr="y1" dur={d} />
+    </MachineLine>
+  );
 
   if (hands === "machine-bar") {
     return (
@@ -281,6 +317,47 @@ const StickmanHolding = ({
             {leftUpperLeg}
             {background}
             {torso}
+            {rightUpperLeg}
+            {rightLowerLeg}
+            {rightUpperArm}
+            {rightLowerArm}
+          </>
+        )}
+      </StickBox>
+    );
+  }
+  if (hands === "trx-suspension") {
+    return (
+      <StickBox viewBox="0 0 100 100" size={size}>
+        {direction === "Forward" && (
+          <>
+            {background}
+            {leftUpperArm}
+            {rightUpperArm}
+            {neck}
+            {torso}
+            {leftLowerArm}
+            {rightLowerArm}
+            {leftUpperLeg}
+            {leftLowerLeg}
+            {rightUpperLeg}
+            {rightLowerLeg}
+            {theHead}
+          </>
+        )}
+        {direction === "Side" && (
+          <>
+            {leftLowerArm}
+            {leftUpperArm}
+            {suspensionGrip}
+            {suspensionLineL}
+            {neck}
+            {theHead}
+            {leftLowerLeg}
+            {leftUpperLeg}
+            {background}
+            {torso}
+            {suspensionLineR}
             {rightUpperLeg}
             {rightLowerLeg}
             {rightUpperArm}
