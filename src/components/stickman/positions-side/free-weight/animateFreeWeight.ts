@@ -22,6 +22,7 @@ import {
   dumbbellOneArmRowHigh,
   dumbbellOneArmRowLow,
 } from "./dumbbellOneArmRow";
+import { barbellBackSquatHigh, barbellBackSquatLow } from "./barbellBackSquat";
 
 export const dumbbellBenchPress = {
   duration: 2,
@@ -91,6 +92,17 @@ const overheadBarbellPress = {
   ],
   hands: "barbell",
 };
+const barbellBackSquat = {
+  duration: 5,
+  animation: [
+    barbellBackSquatHigh,
+    barbellBackSquatHigh,
+    barbellBackSquatLow,
+    barbellBackSquatLow,
+    barbellBackSquatHigh,
+  ],
+  hands: "barbell",
+};
 
 export const animateFreeWeight = {
   dumbbellBenchPress,
@@ -100,4 +112,5 @@ export const animateFreeWeight = {
   dumbbellOneArmRow,
   barbellBenchPress,
   overheadBarbellPress,
+  barbellBackSquat,
 };

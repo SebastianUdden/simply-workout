@@ -368,6 +368,47 @@ const StickmanHolding = ({
     );
   }
 
+  if (hands === "barbell") {
+    return (
+      <StickBox viewBox="0 0 100 100" size={size}>
+        {direction === "Forward" && (
+          <>
+            {background}
+            {leftUpperArm}
+            {rightUpperArm}
+            {neck}
+            {torso}
+            {leftLowerArm}
+            {rightLowerArm}
+            {leftUpperLeg}
+            {leftLowerLeg}
+            {rightUpperLeg}
+            {rightLowerLeg}
+            {theHead}
+          </>
+        )}
+        {direction === "Side" && (
+          <>
+            {left ? leftDumbbellL : null}
+            {leftLowerArm}
+            {leftUpperArm}
+            {neck}
+            {theHead}
+            {leftLowerLeg}
+            {leftUpperLeg}
+            {background}
+            {torso}
+            {rightUpperLeg}
+            {rightLowerLeg}
+            {rightUpperArm}
+            {rightLowerArm}
+            {right ? rightDumbbellR : null}
+          </>
+        )}
+      </StickBox>
+    );
+  }
+
   return (
     <StickBox viewBox="0 0 100 100" size={size}>
       {direction === "Forward" && (

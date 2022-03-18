@@ -33,6 +33,19 @@ import {
   bulgarianSplitSquatHigh,
   bulgarianSplitSquatLow,
 } from "./bulgarianSplitSquat";
+import {
+  pushupPunchersLeftLow,
+  pushupPunchersLeftHigh,
+  pushupPunchersMiddleHigh,
+  pushupPunchersRightHigh,
+  pushupPunchersRightLow,
+} from "./pushupPunchers";
+import {
+  jackknifeSitupHigh,
+  jackknifeSitupLow,
+  jackknifeSitupMiddle,
+} from "./jackknifeSitup";
+import { walkingPart1, walkingPart2 } from "./walking";
 
 export const stand = {
   duration: 2,
@@ -64,6 +77,21 @@ export const pushup = {
   animation: [pushupLow, pushupHigh, pushupLow],
 };
 export const diamondPushup = pushup;
+export const punchersPushup = {
+  duration: 4,
+  animation: [
+    pushupPunchersLeftLow,
+    pushupPunchersLeftHigh,
+    pushupPunchersMiddleHigh,
+    pushupPunchersRightHigh,
+    pushupPunchersRightLow,
+    pushupPunchersRightHigh,
+    pushupPunchersMiddleHigh,
+    pushupPunchersLeftHigh,
+    pushupPunchersLeftLow,
+  ],
+  prop: "stability-ball",
+};
 export const bosuBallPushup = {
   duration: 2,
   animation: [pushupBosuBallLow, pushupBosuBallHigh, pushupBosuBallLow],
@@ -82,6 +110,16 @@ export const barbellAbRollout = {
 export const situp = {
   duration: 2,
   animation: [situpLow, situpHigh, situpLow],
+};
+export const jackknifeSitup = {
+  duration: 2,
+  animation: [
+    jackknifeSitupLow,
+    jackknifeSitupMiddle,
+    jackknifeSitupHigh,
+    jackknifeSitupMiddle,
+    jackknifeSitupLow,
+  ],
 };
 export const squat = {
   duration: 3,
@@ -162,6 +200,10 @@ export const running = {
     runningPart1,
   ],
 };
+export const powerWalk = {
+  duration: 0.9,
+  animation: [walkingPart1, walkingPart2, walkingPart1],
+};
 
 export const sitdown = {
   duration: 2,
@@ -222,10 +264,12 @@ export const burpee = {
 export const animateBodyWeight = {
   pushup,
   diamondPushup,
+  punchersPushup,
   bosuBallPushup,
   trxSuspendedPushup,
   barbellAbRollout,
   situp,
+  jackknifeSitup,
   squat,
   splitSquat,
   bulgarianSplitSquat,
@@ -235,6 +279,7 @@ export const animateBodyWeight = {
   sidePlank,
   birdDog,
   running,
+  powerWalk,
   chinup,
   pushupKnee,
   pullup,

@@ -6,6 +6,7 @@ import DipsBar from "./props/DipsBar";
 import Pulldown from "./props/Pulldown";
 import PullupsBar from "./props/PullupBar";
 import SidewaysBench from "./props/SidewaysBench";
+import StabilityBall from "./props/StabilityBall";
 import TrxSuspension from "./props/TrxSuspension";
 import Stickman, { Positions } from "./Stickman";
 import StickmanHolding from "./StickmanHolding";
@@ -34,6 +35,7 @@ const getProp = (prop: string | undefined) => {
   if (prop === "dips-bar") return <DipsBar />;
   if (prop === "pullups-bar") return <PullupsBar />;
   if (prop === "bosu-ball") return <BosuBall />;
+  if (prop === "stability-ball") return <StabilityBall />;
   if (prop === "trx-suspension") return <TrxSuspension />;
   return null;
 };
