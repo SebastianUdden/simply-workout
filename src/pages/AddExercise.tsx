@@ -141,6 +141,7 @@ const Label = styled.label`
 `;
 const RadioButton = styled.input`
   cursor: pointer;
+  font-size: 16px;
 `;
 const RadioWrapper = styled.div`
   display: flex;
@@ -165,7 +166,7 @@ const RadioLabel = styled.label`
 const Reset = styled.button`
   background-color: #000;
   color: #fff;
-  padding: 5px;
+  padding: 10px;
   border: none;
   border-radius: 6px;
   cursor: pointer;

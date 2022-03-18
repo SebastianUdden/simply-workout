@@ -2,7 +2,7 @@ import styled from "styled-components";
 import EditExercise, { ExerciseProps } from "./EditExercise";
 import { Button, Column, Row, Select } from "../Common";
 import { Format } from "../../pages/AddFormat";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getFormatString } from "../../utils";
 import { RoutineProps } from "./Routine";
 import NewExercise from "./NewExercise";
@@ -38,6 +38,8 @@ const EditRoutine = ({
   onDeleteRoutine,
   onAdd,
 }: Props) => {
+  const [showFullView, setShowFullView] = useState(false);
+  const [maxHeight, setMaxHeight] = useState(105);
   const [showDelete, setShowDelete] = useState(false);
   const [showNewExercise, setShowNewExercise] = useState(false);
   const { name, format, exercises, timeToComplete } = routine;
@@ -61,8 +63,13 @@ const EditRoutine = ({
     setShowDelete(true);
   };
 
+  useEffect(() => {
+    setShowFullView(expandIndex === i);
+    setMaxHeight(routine.exercises.length * 300 + 300);
+  }, [routine, expandIndex, i]);
+
   return (
-    <Wrapper key={routine.id}>
+    <Wrapper key={routine.id} showFullView={showFullView} maxHeight={maxHeight}>
       <Row>
         <Title>
           <Circle color={routine.color} />
@@ -128,6 +135,7 @@ const EditRoutine = ({
                 onDelete={onDelete}
                 exerciseCount={exercises.length - 1}
                 i={i}
+                bgColor="#111"
               />
             ))}
           </Exercises>
@@ -147,11 +155,19 @@ const EditRoutine = ({
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ showFullView: boolean; maxHeight: number }>`
   border: 1px solid #666;
   border-radius: 12px;
   padding: 10px;
   margin-bottom: 10px;
+  max-height: 105px;
+  transition: max-height 500ms ease;
+  overflow: hidden;
+  ${(p) =>
+    p.showFullView &&
+    `
+    max-height: ${p.maxHeight}px;
+  `}
 `;
 const Exercises = styled.ul`
   margin: 10px 0;

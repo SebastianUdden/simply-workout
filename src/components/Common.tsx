@@ -106,7 +106,7 @@ export const Column = styled.div<{ fixed?: boolean }>`
 
 export const Input = styled.input`
   margin: 0 0 10px;
-  font-size: 15px;
+  font-size: 16px;
   background-color: inherit;
   color: inherit;
   border: 1px solid white;

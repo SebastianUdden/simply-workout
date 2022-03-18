@@ -1,93 +1,93 @@
-export const splitSquatLow = {
+export const bulgarianSplitSquatLow = {
   head: {
-    x: [60],
+    x: [65],
     y: [48],
   },
   shoulder: {
-    x: [58],
+    x: [63],
     y: [56],
   },
   rightElbow: {
-    x: [51],
-    y: [62],
+    x: [64],
+    y: [66],
   },
   leftElbow: {
-    x: [61],
-    y: [63],
+    x: [65],
+    y: [66],
   },
   rightHand: {
-    x: [51],
-    y: [72],
+    x: [70],
+    y: [58],
   },
   leftHand: {
-    x: [68],
-    y: [69],
+    x: [69],
+    y: [58],
   },
   hip: {
-    x: [56],
-    y: [76],
+    x: [64],
+    y: [75],
   },
   rightKnee: {
-    x: [68],
+    x: [76],
     y: [77],
   },
   leftKnee: {
     x: [54],
-    y: [89],
+    y: [83],
   },
   rightFoot: {
-    x: [67],
+    x: [71],
     y: [89],
   },
   leftFoot: {
     x: [42],
-    y: [90],
+    y: [74],
   },
 };
 
-export const splitSquatHigh = {
+export const bulgarianSplitSquatHigh = {
   head: {
-    x: [59],
-    y: [41],
+    x: [69],
+    y: [35],
   },
   shoulder: {
-    x: [57],
-    y: [49],
+    x: [67],
+    y: [44],
   },
   rightElbow: {
-    x: [53],
-    y: [58],
+    x: [75],
+    y: [54],
   },
   leftElbow: {
-    x: [57],
-    y: [58],
+    x: [70],
+    y: [54],
   },
   rightHand: {
-    x: [54],
-    y: [69],
+    x: [78],
+    y: [44],
   },
   leftHand: {
-    x: [61],
-    y: [66],
+    x: [75],
+    y: [44],
   },
   hip: {
-    x: [57],
-    y: [68],
+    x: [68],
+    y: [65],
   },
   rightKnee: {
-    x: [63],
+    x: [72],
     y: [77],
   },
   leftKnee: {
-    x: [53],
-    y: [81],
+    x: [56],
+    y: [70],
   },
   rightFoot: {
-    x: [67],
+    x: [71],
     y: [89],
   },
   leftFoot: {
     x: [42],
-    y: [90],
+    y: [74],
   },
 };

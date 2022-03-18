@@ -202,6 +202,7 @@ const ButtonRow = styled(Row)`
   height: 11%;
 `;
 const Button = styled.button<{ isSelected: boolean }>`
+  font-size: 16px;
   height: 90%;
   width: 100%;
   color: inherit;

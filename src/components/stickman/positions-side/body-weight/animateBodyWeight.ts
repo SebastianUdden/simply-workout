@@ -29,6 +29,10 @@ import { pushupBosuBallHigh, pushupBosuBallLow } from "./pushupBosuBall";
 import { pushupTrxHigh, pushupTrxLow } from "./pushupTRX";
 import { barbellAbRolloutHigh, barbellAbRolloutLow } from "./barbellAbRollout";
 import { splitSquatHigh, splitSquatLow } from "./splitSquat";
+import {
+  bulgarianSplitSquatHigh,
+  bulgarianSplitSquatLow,
+} from "./bulgarianSplitSquat";
 
 export const stand = {
   duration: 2,
@@ -59,6 +63,7 @@ export const pushup = {
   duration: 2,
   animation: [pushupLow, pushupHigh, pushupLow],
 };
+export const diamondPushup = pushup;
 export const bosuBallPushup = {
   duration: 2,
   animation: [pushupBosuBallLow, pushupBosuBallHigh, pushupBosuBallLow],
@@ -84,13 +89,16 @@ export const squat = {
 };
 export const splitSquat = {
   duration: 3,
+  animation: [splitSquatHigh, splitSquatLow, splitSquatHigh],
+};
+export const bulgarianSplitSquat = {
+  duration: 3,
   animation: [
-    standing,
-    splitSquatHigh,
-    splitSquatLow,
-    splitSquatHigh,
-    standing,
+    bulgarianSplitSquatHigh,
+    bulgarianSplitSquatLow,
+    bulgarianSplitSquatHigh,
   ],
+  prop: "sideways-bench",
 };
 export const lunge = {
   duration: 5,
@@ -213,12 +221,14 @@ export const burpee = {
 
 export const animateBodyWeight = {
   pushup,
+  diamondPushup,
   bosuBallPushup,
   trxSuspendedPushup,
   barbellAbRollout,
   situp,
   squat,
   splitSquat,
+  bulgarianSplitSquat,
   plank,
   gluteBridge,
   calfRaise,

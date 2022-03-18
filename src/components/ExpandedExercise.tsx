@@ -131,7 +131,7 @@ const Input = styled.input`
   border: none;
   border-bottom: 1px solid white;
   padding: 3px;
-  font-size: 14px;
+  font-size: 16px;
 `;
 const FakeInput = styled.span`
   display: inline-block;

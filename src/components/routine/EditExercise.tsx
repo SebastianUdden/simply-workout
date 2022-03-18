@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getPercentageChange, searchFor } from "../../utils";
 import { Link } from "../Common";
+import { getAnimation } from "../stickman/animations";
+import { getDirection } from "../stickman/direction";
+import StickmanWithProps from "../stickman/StickmanWithProps";
 
 export interface ExerciseValue {
   date: string;
@@ -62,6 +65,10 @@ const EditExercise = ({
       setShowInput(false);
     }, 3000);
   };
+
+  const animation = getAnimation(name);
+  const direction = getDirection(name);
+
   return (
     <Wrapper key={`${id}${Math.random()}`} bgColor={bgColor}>
       <Flex>
@@ -97,46 +104,59 @@ const EditExercise = ({
           </Link>
         </Box>
       </Flex>
-      <Flex>
+      <FlexAlignTop>
         <Box>
-          <Box>
-            <Arrow onClick={() => changeByPercentage(format.percentage)}>
-              +
-            </Arrow>
-            <Arrow onClick={() => changeByPercentage(-format.percentage)}>
-              -
-            </Arrow>
-            <div>
-              {showInput ? (
-                <Input
-                  id={`${name}-input`}
-                  onBlur={() => setShowInput(false)}
-                  value={e.value}
-                  onChange={(e: any) =>
-                    onChangeValue &&
-                    onChangeValue(i, checkValue(e.target.value))
-                  }
-                />
-              ) : (
-                <FakeInput onClick={() => setShowInput(true)}>
-                  {Math.round(e.value)}
-                </FakeInput>
-              )}
-              <Span>{unit}</Span>
-            </div>
-          </Box>
+          <Arrow onClick={() => changeByPercentage(format.percentage)}>+</Arrow>
+          <Arrow onClick={() => changeByPercentage(-format.percentage)}>
+            -
+          </Arrow>
+          <div>
+            {showInput ? (
+              <Input
+                id={`${name}-input`}
+                onBlur={() => setShowInput(false)}
+                value={e.value}
+                onChange={(e: any) =>
+                  onChangeValue && onChangeValue(i, checkValue(e.target.value))
+                }
+              />
+            ) : (
+              <FakeInput onClick={() => setShowInput(true)}>
+                {Math.round(e.value)}
+              </FakeInput>
+            )}
+            <Span>{unit}</Span>
+          </div>
         </Box>
-      </Flex>
+        <Column width="20vw">
+          <StickmanWithProps
+            direction={direction}
+            animationProps={animation}
+            category={category}
+          />
+        </Column>
+      </FlexAlignTop>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.li<{ bgColor?: string }>`
   ${(p) => p.bgColor && `background-color: ${p.bgColor};`}
-  border: 1px solid white;
   padding: 10px;
   margin: 10px 0;
   border-radius: 6px;
+`;
+const Column = styled.div<{ width?: string }>`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 200px;
+  ${(p) =>
+    p.width &&
+    `
+    justify-content: center;
+    width: ${p.width};
+  `}
 `;
 const Input = styled.input`
   text-align: right;
@@ -147,7 +167,7 @@ const Input = styled.input`
   border: none;
   border-bottom: 1px solid white;
   padding: 3px;
-  font-size: 14px;
+  font-size: 16px;
 `;
 const FakeInput = styled.span`
   display: inline-block;
@@ -173,6 +193,9 @@ const Flex = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 5px;
+`;
+const FlexAlignTop = styled(Flex)`
+  align-items: flex-start;
 `;
 const Box = styled.div`
   display: flex;

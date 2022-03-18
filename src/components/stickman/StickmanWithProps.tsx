@@ -5,6 +5,7 @@ import CurlBench from "./props/CurlBench";
 import DipsBar from "./props/DipsBar";
 import Pulldown from "./props/Pulldown";
 import PullupsBar from "./props/PullupBar";
+import SidewaysBench from "./props/SidewaysBench";
 import TrxSuspension from "./props/TrxSuspension";
 import Stickman, { Positions } from "./Stickman";
 import StickmanHolding from "./StickmanHolding";
@@ -27,6 +28,7 @@ interface Props {
 
 const getProp = (prop: string | undefined) => {
   if (prop === "bench") return <Bench angle={0} />;
+  if (prop === "sideways-bench") return <SidewaysBench />;
   if (prop === "curl-bench") return <CurlBench angle={0} />;
   if (prop === "pulldown") return <Pulldown />;
   if (prop === "dips-bar") return <DipsBar />;
