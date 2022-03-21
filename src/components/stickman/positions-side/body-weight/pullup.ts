@@ -1,10 +1,10 @@
 export const pullupMiddle = {
   head: {
-    x: [43],
+    x: [47],
     y: [21],
   },
   shoulder: {
-    x: [45],
+    x: [49],
     y: [30],
   },
   rightElbow: {
@@ -24,7 +24,7 @@ export const pullupMiddle = {
     y: [8],
   },
   hip: {
-    x: [49],
+    x: [51],
     y: [58],
   },
   rightKnee: {
@@ -47,11 +47,11 @@ export const pullupMiddle = {
 
 export const pullupHigh = {
   head: {
-    x: [43],
+    x: [42],
     y: [7],
   },
   shoulder: {
-    x: [43],
+    x: [45],
     y: [16],
   },
   rightElbow: {
@@ -71,23 +71,23 @@ export const pullupHigh = {
     y: [8],
   },
   hip: {
-    x: [44],
-    y: [44],
+    x: [53],
+    y: [42],
   },
   rightKnee: {
-    x: [56],
+    x: [58],
     y: [54],
   },
   leftKnee: {
-    x: [56],
+    x: [59],
     y: [54],
   },
   rightFoot: {
-    x: [53],
+    x: [55],
     y: [71],
   },
   leftFoot: {
-    x: [54],
+    x: [56],
     y: [72],
   },
 };
