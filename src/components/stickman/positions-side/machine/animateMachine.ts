@@ -1,4 +1,4 @@
-import { latPulldownHigh, latPulldownLow } from "./latPulldown";
+import { latPulldownHigh, latPulldownLow } from "./latPulldowns";
 import {
   latPulldown30DegreeHigh,
   latPulldown30DegreeLow,
