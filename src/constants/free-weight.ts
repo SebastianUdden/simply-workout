@@ -60,13 +60,6 @@ export const freeWeight = [
     areas: [DELTS, UPPER_PECS, TRICEPS, UPPER_TRAPS, LOWER_TRAPS],
   },
   {
-    id: "106",
-    category: FREE_WEIGHT,
-    name: "dumbbell row",
-    unit: "kg",
-    areas: [LATS, DELTS, TRICEPS, LOWER_TRAPS],
-  },
-  {
     id: "107",
     category: FREE_WEIGHT,
     name: "single leg deadlift",
@@ -118,7 +111,7 @@ export const freeWeight = [
   {
     id: "115",
     category: FREE_WEIGHT,
-    name: "farmers walk",
+    name: "dumbbell farmers walk",
     unit: "kg",
     areas: [
       QUADS,
@@ -132,13 +125,6 @@ export const freeWeight = [
       ABS,
       BICEPS,
     ],
-  },
-  {
-    id: "116",
-    category: FREE_WEIGHT,
-    name: "standing barbell bicep curl",
-    unit: "kg",
-    areas: [BICEPS, FOREARMS],
   },
   {
     id: "117",
@@ -157,7 +143,7 @@ export const freeWeight = [
   {
     id: "120",
     category: FREE_WEIGHT,
-    name: "overhead barbell press",
+    name: "barbell overhead press",
     unit: "kg",
     areas: [PECS, DELTS, TRICEPS, UPPER_TRAPS, LOWER_TRAPS],
   },
@@ -204,13 +190,6 @@ export const freeWeight = [
     areas: [LOWER_PECS, DELTS, TRICEPS],
   },
   {
-    id: "127",
-    category: FREE_WEIGHT,
-    name: "incline flye",
-    unit: "kg",
-    areas: [UPPER_PECS, DELTS],
-  },
-  {
     id: "128",
     category: FREE_WEIGHT,
     name: "calf raise",
@@ -229,7 +208,7 @@ export const freeWeight = [
     category: FREE_WEIGHT,
     name: "dumbbell incline flye",
     unit: "kg",
-    areas: [UPPER_PECS],
+    areas: [UPPER_PECS, DELTS],
   },
   {
     id: "131",
@@ -255,7 +234,7 @@ export const freeWeight = [
   {
     id: "134",
     category: FREE_WEIGHT,
-    name: "good morning",
+    name: "barbell good morning",
     unit: "kg",
     areas: [HAMSTRINGS, GLUTES, SPINAL_ERECTOR, LOWER_TRAPS],
   },

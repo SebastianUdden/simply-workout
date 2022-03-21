@@ -66,6 +66,7 @@ interface Props {
 }
 
 const Calendar = ({ dates }: Props) => {
+  console.log({ dates });
   const [selectedDate, setSelectedDate] = useState(getNewDate());
   const [datetime, setDatetime] = useState<any>();
 
@@ -123,7 +124,6 @@ const Calendar = ({ dates }: Props) => {
     const m = month + d.month;
     return (
       <Day
-        key={d.date}
         isToday={i === date + firstIndex - 1 && m === new Date().getMonth()}
         thisMonth={d.month === 0}
       >

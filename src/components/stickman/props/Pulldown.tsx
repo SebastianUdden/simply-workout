@@ -2,12 +2,12 @@ import styled from "styled-components";
 import { propColor } from "./propColor";
 
 const floor = 90;
-const seat = { y: 74, x: 45 };
+const seat = { y: 74, x: 50 };
 const rightFoot = { y: floor, x: 70 };
-const leftFoot = { y: floor, x: 50 };
+const leftFoot = { y: floor, x: 53 };
 const hip = { x: 60, y: 74 };
 const weights = { y: 20, x: rightFoot.x + 10 };
-export const overhang = { y: weights.y - 15, x: weights.x - 18 };
+export const overhang = { y: [weights.y - 15], x: [weights.x - 18] };
 
 const Pulldown = () => {
   return (
@@ -22,9 +22,9 @@ const Pulldown = () => {
       <Line
         id="overhang"
         x1={weights.x}
-        x2={overhang.x}
+        x2={overhang.x[0]}
         y1={weights.y}
-        y2={overhang.y}
+        y2={overhang.y[0]}
       />
       <Line
         id="leg-support"
@@ -34,7 +34,7 @@ const Pulldown = () => {
         y2={hip.y - 10}
       />
       <Line id="seat" x1={hip.x + 10} x2={seat.x} y1={hip.y} y2={seat.y} />
-      <Circle id="leg-support-pads" cy={hip.y - 12} cx={hip.x + 2} r={3} />
+      <Circle id="leg-support-pads" y={hip.y - 14} x={hip.x} rx="1" />
       <Line
         id="left-leg"
         x1={hip.x}
@@ -70,9 +70,12 @@ const Pulldown = () => {
 const Line = styled.line`
   stroke: ${propColor};
 `;
-const Circle = styled.circle`
+const Circle = styled.rect`
   fill: ${propColor};
   stroke: ${propColor};
+  width: 5px;
+  height: 5px;
+  border-radius: 8px;
 `;
 
 export default Pulldown;

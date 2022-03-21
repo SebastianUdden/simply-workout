@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Calendar, { WorkoutDot } from "./Calendar";
+import { Button, Column } from "./Common";
 
 const getUnique = (arr: any) =>
   Array.from(
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const WorkoutHistory = ({ routines }: Props) => {
+  const [expandYearSum, setExpandYearSum] = useState(false);
   const workoutDates = routines
     .map((r: any) =>
       getUnique(r.exercises).map((d) => ({
@@ -46,18 +48,21 @@ const WorkoutHistory = ({ routines }: Props) => {
       );
       if (filteredDots.length === 0) return null;
       return (
-        <Dots>
-          {filteredDots.map((w) => (
-            <WorkoutDot bgColor={r.color} />
-          ))}
-        </Dots>
+        <Column>
+          {expandYearSum && <Title>{r.name}</Title>}
+          <Dots>
+            {filteredDots.map((w) => (
+              <WorkoutDot bgColor={r.color} />
+            ))}
+          </Dots>
+        </Column>
       );
     })
     .filter(Boolean);
   return yearsum.length === 0 ? null : (
     <Wrapper>
       <Calendar dates={workoutDates} />
-      <YearSum>
+      <YearSum onClick={() => setExpandYearSum(!expandYearSum)}>
         <Label>Workouts this year</Label>
         {yearsum}
       </YearSum>
@@ -66,18 +71,27 @@ const WorkoutHistory = ({ routines }: Props) => {
 };
 
 const Wrapper = styled.div``;
-const YearSum = styled.div`
+const YearSum = styled(Button)`
   background-color: #000;
   border-radius: 6px;
-  padding: 0 10px 10px;
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 const Label = styled.label`
   color: #666;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
+`;
+const Title = styled.strong`
+  font-size: 14px;
+  margin-top: 10px;
+  margin-right: 10px;
 `;
 const Dots = styled.div`
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   margin-left: 4px;
   margin-top: 4px;

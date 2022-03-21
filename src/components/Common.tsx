@@ -58,7 +58,7 @@ export const List = styled.ul<{ capitalize?: boolean; noMaxHeight?: boolean }>`
   `}
   li {
     :hover {
-      background-color: #333;
+      background-color: #000;
     }
   }
 `;
@@ -69,7 +69,7 @@ export const Item = styled.li<{ bgColor?: string }>`
   list-style-type: none;
   font-size: 14px;
   border: none;
-  padding: 5px 10px 8px;
+  padding: 10px 15px 8px;
   border-radius: 6px;
   margin-bottom: 10px;
   cursor: pointer;

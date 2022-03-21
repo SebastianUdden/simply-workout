@@ -1,1 +1,1 @@
-export const propColor = "#000";
+export const propColor = "#bbb";

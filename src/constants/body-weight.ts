@@ -83,7 +83,7 @@ export const bodyWeight = [
   {
     id: "8",
     category: BODY_WEIGHT,
-    name: "side situp",
+    name: "side crunch",
     unit: "reps",
     areas: [ABS, OBLIQUES, LATS, LOWER_PECS, UPPER_TRAPS],
   },
@@ -249,5 +249,12 @@ export const bodyWeight = [
     name: "split squat",
     unit: "reps",
     areas: [QUADS, GLUTES],
+  },
+  {
+    id: "29",
+    category: BODY_WEIGHT,
+    name: "crunch",
+    unit: "reps",
+    areas: [ABS, OBLIQUES, LOWER_PECS],
   },
 ];

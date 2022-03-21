@@ -1,8 +1,17 @@
 import styled from "styled-components";
 import Ani from "./Animation";
-import { LeftDisc, RightDisc } from "./Dumbbell";
+import Dumbbell, {
+  HorizontalDumbbellBar,
+  HorizontalDumbbellL,
+  HorizontalDumbbellR,
+  VerticalDumbbellBar,
+  VerticalDumbbellL,
+  VerticalDumbbellR,
+} from "./Dumbbell";
+import { MachineBar, MachineLine } from "./MachinePull";
 import { overhang } from "./props/Pulldown";
-import { suspension } from "./props/TrxSuspension";
+import { suspensionL, suspensionR } from "./props/TrxSuspension";
+
 import { Positions } from "./Stickman";
 
 interface Props {
@@ -54,7 +63,6 @@ const StickmanHolding = ({
     leftKnee,
     leftFoot,
   } = positions;
-  const discSize = hands === "barbell" ? 6 : 5;
   const leftUpperArm = (
     <LeftUpperArm
       x1={shoulder.x[0]}
@@ -182,269 +190,107 @@ const StickmanHolding = ({
     </Head>
   );
 
-  const leftDumbbellL = (
-    <LeftDisc
-      id="left-discL"
-      cx={leftHand.x[0] - 1}
-      cy={leftHand.y[0]}
-      r={discSize}
-    >
-      <Ani arr={leftHand.x} attr="cx" dur={d} />
-      <Ani arr={leftHand.y} attr="cy" dur={d} />
-    </LeftDisc>
+  const leftDumbbell = <Dumbbell hands={hands} hand={leftHand} d={d} />;
+  const rightDumbbell = <Dumbbell hands={hands} hand={rightHand} d={d} right />;
+
+  const horizontalLeftDumbbellBar = (
+    <HorizontalDumbbellBar hand={leftHand} d={d} />
   );
-  const leftDumbbellR = (
-    <RightDisc
-      id="left-discR"
-      cx={leftHand.x[0] + 1}
-      cy={leftHand.y[0]}
-      r={discSize}
-    >
-      <Ani arr={leftHand.x} attr="cx" dur={d} />
-      <Ani arr={leftHand.y} attr="cy" dur={d} />
-    </RightDisc>
+  const horizontalLeftDumbbellR = <HorizontalDumbbellR hand={leftHand} d={d} />;
+  const horizontalLeftDumbbellL = <HorizontalDumbbellL hand={leftHand} d={d} />;
+  const horizontalRightDumbbellBar = (
+    <HorizontalDumbbellBar hand={rightHand} d={d} right />
   );
-  const rightDumbbellL = (
-    <LeftDisc
-      id="right-discL"
-      cx={rightHand.x[0] - 1}
-      cy={rightHand.y[0]}
-      r={discSize}
-    >
-      <Ani arr={rightHand.x} attr="cx" dur={d} />
-      <Ani arr={rightHand.y} attr="cy" dur={d} />
-    </LeftDisc>
+  const horizontalRightDumbbellR = (
+    <HorizontalDumbbellR hand={rightHand} d={d} right />
   );
-  const rightDumbbellR = (
-    <RightDisc
-      id="right-discR"
-      cx={rightHand.x[0] + 1}
-      cy={rightHand.y[0]}
-      r={discSize}
-    >
-      <Ani arr={rightHand.x} attr="cx" dur={d} />
-      <Ani arr={rightHand.y} attr="cy" dur={d} />
-    </RightDisc>
+  const horizontalRightDumbbellL = (
+    <HorizontalDumbbellL hand={rightHand} d={d} right />
   );
+
+  const verticalLeftDumbbellBar = <VerticalDumbbellBar hand={leftHand} d={d} />;
+  const verticalLeftDumbbellL = <VerticalDumbbellL hand={leftHand} d={d} />;
+  const verticalLeftDumbbellR = <VerticalDumbbellR hand={leftHand} d={d} />;
+
+  const verticalRightDumbbellBar = (
+    <VerticalDumbbellBar hand={rightHand} d={d} />
+  );
+  const verticalRightDumbbellL = <VerticalDumbbellL hand={rightHand} d={d} />;
+  const verticalRightDumbbellR = <VerticalDumbbellR hand={rightHand} d={d} />;
+
+  const swissBall = (
+    <SwissBall id="swiss-ball" cx={rightHand.x[0]} cy={rightHand.y[0]} r="10">
+      <Ani arr={rightHand.x.map((x) => x - 8)} attr="cx" dur={d} />
+      <Ani arr={rightHand.y.map((y) => y + 10)} attr="cy" dur={d} />
+    </SwissBall>
+  );
+
   const machineBar = (
-    <MachineBar
-      x1={rightHand.x[0]}
-      y1={rightHand.y[0]}
-      x2={leftHand.x[0]}
-      y2={leftHand.y[0]}
-    >
-      <Ani arr={rightHand.x} attr="x1" dur={d} />
-      <Ani arr={rightHand.y} attr="y1" dur={d} />
-      <Ani arr={leftHand.x} attr="x2" dur={d} />
-      <Ani arr={leftHand.y} attr="y2" dur={d} />
-    </MachineBar>
+    <MachineBar leftHand={leftHand} rightHand={rightHand} d={d} />
   );
-  const machineLine = (
-    <MachineLine
-      x1={leftHand.x[0]}
-      y1={leftHand.y[0]}
-      x2={overhang.x}
-      y2={overhang.y}
-    >
-      <Ani arr={leftHand.x} attr="x1" dur={d} />
-      <Ani arr={leftHand.y} attr="y1" dur={d} />
-    </MachineLine>
-  );
+  const machineLine = <MachineLine hand={leftHand} anchor={overhang} d={d} />;
   const suspensionGrip = (
-    <MachineBar
-      x1={rightHand.x[0]}
-      y1={rightHand.y[0]}
-      x2={leftHand.x[0]}
-      y2={leftHand.y[0]}
-    >
-      <Ani arr={rightHand.x} attr="x1" dur={d} />
-      <Ani arr={rightHand.y} attr="y1" dur={d} />
-      <Ani arr={leftHand.x} attr="x2" dur={d} />
-      <Ani arr={leftHand.y} attr="y2" dur={d} />
-    </MachineBar>
+    <MachineBar leftHand={leftHand} rightHand={rightHand} d={d} />
   );
   const suspensionLineL = (
-    <MachineLine
-      x1={leftHand.x[0]}
-      y1={leftHand.y[0]}
-      x2={suspension.x1}
-      y2={suspension.y}
-    >
-      <Ani arr={leftHand.x} attr="x1" dur={d} />
-      <Ani arr={leftHand.y} attr="y1" dur={d} />
-    </MachineLine>
+    <MachineLine hand={leftHand} anchor={suspensionL} d={d} />
   );
   const suspensionLineR = (
-    <MachineLine
-      x1={rightHand.x[0]}
-      y1={rightHand.y[0]}
-      x2={suspension.x2}
-      y2={suspension.y}
-    >
-      <Ani arr={rightHand.x} attr="x1" dur={d} />
-      <Ani arr={rightHand.y} attr="y1" dur={d} />
-    </MachineLine>
+    <MachineLine hand={rightHand} anchor={suspensionR} d={d} />
   );
 
-  if (hands === "machine-bar") {
-    return (
-      <StickBox viewBox="0 0 100 100" size={size}>
-        {direction === "Forward" && (
-          <>
-            {background}
-            {leftUpperArm}
-            {rightUpperArm}
-            {neck}
-            {torso}
-            {leftLowerArm}
-            {rightLowerArm}
-            {leftUpperLeg}
-            {leftLowerLeg}
-            {rightUpperLeg}
-            {rightLowerLeg}
-            {theHead}
-          </>
-        )}
-        {direction === "Side" && (
-          <>
-            {leftLowerArm}
-            {leftUpperArm}
-            {machineBar}
-            {machineLine}
-            {neck}
-            {theHead}
-            {leftLowerLeg}
-            {leftUpperLeg}
-            {background}
-            {torso}
-            {rightUpperLeg}
-            {rightLowerLeg}
-            {rightUpperArm}
-            {rightLowerArm}
-          </>
-        )}
-      </StickBox>
-    );
-  }
-  if (hands === "trx-suspension") {
-    return (
-      <StickBox viewBox="0 0 100 100" size={size}>
-        {direction === "Forward" && (
-          <>
-            {background}
-            {leftUpperArm}
-            {rightUpperArm}
-            {neck}
-            {torso}
-            {leftLowerArm}
-            {rightLowerArm}
-            {leftUpperLeg}
-            {leftLowerLeg}
-            {rightUpperLeg}
-            {rightLowerLeg}
-            {theHead}
-          </>
-        )}
-        {direction === "Side" && (
-          <>
-            {leftLowerArm}
-            {leftUpperArm}
-            {suspensionGrip}
-            {suspensionLineL}
-            {neck}
-            {theHead}
-            {leftLowerLeg}
-            {leftUpperLeg}
-            {background}
-            {torso}
-            {suspensionLineR}
-            {rightUpperLeg}
-            {rightLowerLeg}
-            {rightUpperArm}
-            {rightLowerArm}
-          </>
-        )}
-      </StickBox>
-    );
-  }
-
-  if (hands === "barbell") {
-    return (
-      <StickBox viewBox="0 0 100 100" size={size}>
-        {direction === "Forward" && (
-          <>
-            {background}
-            {leftUpperArm}
-            {rightUpperArm}
-            {neck}
-            {torso}
-            {leftLowerArm}
-            {rightLowerArm}
-            {leftUpperLeg}
-            {leftLowerLeg}
-            {rightUpperLeg}
-            {rightLowerLeg}
-            {theHead}
-          </>
-        )}
-        {direction === "Side" && (
-          <>
-            {left ? leftDumbbellL : null}
-            {leftLowerArm}
-            {leftUpperArm}
-            {neck}
-            {theHead}
-            {leftLowerLeg}
-            {leftUpperLeg}
-            {background}
-            {torso}
-            {rightUpperLeg}
-            {rightLowerLeg}
-            {rightUpperArm}
-            {rightLowerArm}
-            {right ? rightDumbbellR : null}
-          </>
-        )}
-      </StickBox>
-    );
-  }
+  const MACHINE_BAR = "machine-bar";
+  const DUMBBELL = "dumbbell";
+  const HORIZONTAL_DUMBBELL = "horizontal-dumbbell";
+  const VERTICAL_DUMBBELL = "vertical-dumbbell";
+  const BARBELL = "barbell";
+  const TRX_SUSPENSION = "trx-suspension";
+  const SWISS_BALL = "swiss-ball";
 
   return (
     <StickBox viewBox="0 0 100 100" size={size}>
-      {direction === "Forward" && (
-        <>
-          {background}
-          {leftUpperArm}
-          {rightUpperArm}
-          {neck}
-          {torso}
-          {leftLowerArm}
-          {rightLowerArm}
-          {leftUpperLeg}
-          {leftLowerLeg}
-          {rightUpperLeg}
-          {rightLowerLeg}
-          {theHead}
-        </>
-      )}
       {direction === "Side" && (
         <>
-          {left ? leftDumbbellL : null}
+          {hands === HORIZONTAL_DUMBBELL && left && horizontalLeftDumbbellBar}
+          {hands === VERTICAL_DUMBBELL && left && verticalLeftDumbbellBar}
           {leftLowerArm}
           {leftUpperArm}
-          {left ? leftDumbbellR : null}
+          {(hands === DUMBBELL || hands === BARBELL) && left && leftDumbbell}
+          {hands === HORIZONTAL_DUMBBELL && left && horizontalLeftDumbbellL}
+          {hands === HORIZONTAL_DUMBBELL && left && horizontalLeftDumbbellR}
+          {hands === VERTICAL_DUMBBELL && left && verticalLeftDumbbellL}
+          {hands === VERTICAL_DUMBBELL && left && verticalLeftDumbbellR}
+          {hands === MACHINE_BAR && (
+            <>
+              {machineBar}
+              {machineLine}
+            </>
+          )}
+          {hands === TRX_SUSPENSION && (
+            <>
+              {suspensionGrip}
+              {suspensionLineL}
+            </>
+          )}
           {neck}
           {theHead}
           {leftLowerLeg}
           {leftUpperLeg}
           {background}
           {torso}
+          {hands === TRX_SUSPENSION && suspensionLineR}
+          {hands === SWISS_BALL && swissBall}
           {rightUpperLeg}
           {rightLowerLeg}
           {rightUpperArm}
-          {right ? rightDumbbellL : null}
+          {hands === HORIZONTAL_DUMBBELL && right && horizontalRightDumbbellBar}
+          {hands === VERTICAL_DUMBBELL && right && verticalRightDumbbellBar}
           {rightLowerArm}
-          {right ? rightDumbbellR : null}
+          {hands === HORIZONTAL_DUMBBELL && right && horizontalRightDumbbellL}
+          {hands === HORIZONTAL_DUMBBELL && right && horizontalRightDumbbellR}
+          {hands === VERTICAL_DUMBBELL && right && verticalRightDumbbellL}
+          {hands === VERTICAL_DUMBBELL && right && verticalRightDumbbellR}
+          {(hands === DUMBBELL || hands === BARBELL) && right && rightDumbbell}
         </>
       )}
     </StickBox>
@@ -484,7 +330,7 @@ const RightUpperArm = styled(Arm)`
   stroke: #777;
 `;
 const RightLowerArm = styled(Arm)`
-  stroke: #888;
+  stroke: #999;
 `;
 const Leg = styled.line`
   stroke: #666;
@@ -499,13 +345,10 @@ const RightUpperLeg = styled(Leg)`
 const RightLowerLeg = styled(Leg)`
   stroke: #888;
 `;
-const MachineBar = styled.line`
-  stroke: #000;
-  stroke-width: 4;
-`;
-const MachineLine = styled.line`
-  stroke: #777;
-  stroke-width: 1;
+
+const SwissBall = styled.circle`
+  stroke: #aaa;
+  fill: #aaa;
 `;
 
 export default StickmanHolding;

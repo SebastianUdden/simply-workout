@@ -20,6 +20,10 @@ const Bench = ({ angle }: Props) => {
     topY = 52;
     diffX = -13;
   }
+  if (angle === 0.3) {
+    topY = 60;
+    diffX = -10;
+  }
   if (angle === -0.25) {
     topY = 82;
     diffX = +8;

@@ -23,8 +23,46 @@ import {
   dumbbellOneArmRowLow,
 } from "./dumbbellOneArmRow";
 import { barbellBackSquatHigh, barbellBackSquatLow } from "./barbellBackSquat";
+import {
+  barbellBentOverRowHigh,
+  barbellBentOverRowLow,
+} from "./barbellBentOverRow";
+import {
+  barbellBicepCurlHigh,
+  barbellBicepCurlLow,
+  barbellBicepCurlMiddle,
+} from "./barbellBicepCurl";
+import { barbellDeadliftHigh, barbellDeadliftLow } from "./barbellDeadlift";
+import {
+  barbellDeclineBenchPressHigh,
+  barbellDeclineBenchPressLow,
+} from "./barbellDeclineBenchPress";
+import {
+  barbellInclineBenchPressHigh,
+  barbellInclineBenchPressLow,
+} from "./barbellInclineBenchPress";
+import {
+  dumbbellInclineBiecpCurlHigh,
+  dumbbellInclineBiecpCurlLow,
+} from "./dumbbellInclineBicepCurl";
+import {
+  dumbbellInclineFlyeHigh,
+  dumbbellInclineFlyeLow,
+} from "./dumbbellInclineFlye";
+import {
+  dumbbellRomanianDeadliftHigh,
+  dumbbellRomanianDeadliftLow,
+} from "./dumbbellRomanianDeadlift";
+import {
+  dumbbellFarmersWalkPart1,
+  dumbbellFarmersWalkPart2,
+} from "./dumbbellFarmersWalk";
+import {
+  barbellGoodMorningHigh,
+  barbellGoodMorningLow,
+} from "./barbellGoodMorning";
 
-export const dumbbellBenchPress = {
+const dumbbellBenchPress = {
   duration: 2,
   animation: [
     dumbbellBenchPressLow,
@@ -34,7 +72,7 @@ export const dumbbellBenchPress = {
   prop: "bench",
   hands: "dumbbell",
 };
-export const dumbbellTricepExtension = {
+const dumbbellTricepExtension = {
   duration: 3,
   animation: [
     dumbbellTricepExtensionLow,
@@ -42,9 +80,9 @@ export const dumbbellTricepExtension = {
     dumbbellTricepExtensionLow,
   ],
   prop: "bench",
-  hands: "dumbbell",
+  hands: "vertical-dumbbell",
 };
-export const dumbbellStandingOverheadPress = {
+const dumbbellStandingOverheadPress = {
   duration: 3,
   animation: [
     dumbbellStandingOverheadPressLow,
@@ -53,7 +91,7 @@ export const dumbbellStandingOverheadPress = {
   ],
   hands: "dumbbell",
 };
-export const dumbbellLateralRaise = {
+const dumbbellLateralRaise = {
   duration: 3,
   animation: [
     dumbbellLateralRaiseLow,
@@ -62,7 +100,7 @@ export const dumbbellLateralRaise = {
   ],
   hands: "dumbbell",
 };
-export const dumbbellOneArmRow = {
+const dumbbellOneArmRow = {
   duration: 3,
   animation: [
     dumbbellOneArmRowLow,
@@ -70,7 +108,7 @@ export const dumbbellOneArmRow = {
     dumbbellOneArmRowLow,
   ],
   prop: "bench",
-  hands: "dumbbell",
+  hands: "horizontal-dumbbell",
   right: false,
 };
 export const barbellBenchPress = {
@@ -83,7 +121,77 @@ export const barbellBenchPress = {
   prop: "bench",
   hands: "barbell",
 };
-const overheadBarbellPress = {
+const barbellDeclineBenchPress = {
+  duration: 3,
+  animation: [
+    barbellDeclineBenchPressLow,
+    barbellDeclineBenchPressHigh,
+    barbellDeclineBenchPressLow,
+  ],
+  prop: "bench",
+  angle: -0.25,
+  hands: "barbell",
+};
+const dumbbellDeclineBenchPress = {
+  ...barbellDeclineBenchPress,
+  hands: "dumbbell",
+};
+const dumbbellInclineBicepCurl = {
+  duration: 3,
+  animation: [
+    dumbbellInclineBiecpCurlLow,
+    dumbbellInclineBiecpCurlHigh,
+    dumbbellInclineBiecpCurlLow,
+  ],
+  hands: "dumbbell",
+  prop: "bench",
+  angle: 0.5,
+};
+const dumbbellInclineFlye = {
+  duration: 3,
+  animation: [
+    dumbbellInclineFlyeLow,
+    dumbbellInclineFlyeHigh,
+    dumbbellInclineFlyeLow,
+  ],
+  hands: "horizontal-dumbbell",
+  prop: "bench",
+  angle: 0.3,
+};
+const dumbbellRomanianDeadlift = {
+  duration: 4,
+  animation: [
+    dumbbellRomanianDeadliftHigh,
+    dumbbellRomanianDeadliftLow,
+    dumbbellRomanianDeadliftHigh,
+  ],
+  hands: "dumbbell",
+};
+const dumbbellFarmersWalk = {
+  duration: 1.5,
+  animation: [
+    dumbbellFarmersWalkPart1,
+    dumbbellFarmersWalkPart2,
+    dumbbellFarmersWalkPart1,
+  ],
+  hands: "horizontal-dumbbell",
+};
+const barbellInclineBenchPress = {
+  duration: 3,
+  animation: [
+    barbellInclineBenchPressLow,
+    barbellInclineBenchPressHigh,
+    barbellInclineBenchPressLow,
+  ],
+  prop: "bench",
+  angle: 0.3,
+  hands: "barbell",
+};
+const dumbbellInclineBenchPress = {
+  ...barbellInclineBenchPress,
+  hands: "dumbbell",
+};
+const barbellOverheadPress = {
   duration: 3,
   animation: [
     dumbbellStandingOverheadPressLow,
@@ -92,6 +200,31 @@ const overheadBarbellPress = {
   ],
   hands: "barbell",
 };
+const barbellBentOverRow = {
+  duration: 3,
+  animation: [
+    barbellBentOverRowLow,
+    barbellBentOverRowHigh,
+    barbellBentOverRowLow,
+  ],
+  hands: "barbell",
+};
+const barbellBicepCurl = {
+  duration: 3,
+  animation: [
+    barbellBicepCurlLow,
+    barbellBicepCurlMiddle,
+    barbellBicepCurlHigh,
+    barbellBicepCurlMiddle,
+    barbellBicepCurlLow,
+  ],
+  hands: "barbell",
+};
+const dumbbellBicepCurl = {
+  ...barbellBicepCurl,
+  hands: "dumbbell",
+};
+
 const barbellBackSquat = {
   duration: 5,
   animation: [
@@ -103,6 +236,26 @@ const barbellBackSquat = {
   ],
   hands: "barbell",
 };
+const barbellDeadlift = {
+  duration: 5,
+  animation: [
+    barbellDeadliftHigh,
+    barbellDeadliftHigh,
+    barbellDeadliftLow,
+    barbellDeadliftLow,
+    barbellDeadliftHigh,
+  ],
+  hands: "barbell",
+};
+const barbellGoodMorning = {
+  duration: 4,
+  animation: [
+    barbellGoodMorningHigh,
+    barbellGoodMorningLow,
+    barbellGoodMorningHigh,
+  ],
+  hands: "barbell",
+};
 
 export const animateFreeWeight = {
   dumbbellBenchPress,
@@ -110,7 +263,20 @@ export const animateFreeWeight = {
   dumbbellStandingOverheadPress,
   dumbbellLateralRaise,
   dumbbellOneArmRow,
+  dumbbellBicepCurl,
+  dumbbellDeclineBenchPress,
+  dumbbellInclineBenchPress,
+  dumbbellInclineBicepCurl,
+  dumbbellInclineFlye,
+  dumbbellRomanianDeadlift,
+  dumbbellFarmersWalk,
   barbellBenchPress,
-  overheadBarbellPress,
+  barbellDeclineBenchPress,
+  barbellInclineBenchPress,
+  barbellBentOverRow,
+  barbellBicepCurl,
+  barbellDeadlift,
+  barbellOverheadPress,
   barbellBackSquat,
+  barbellGoodMorning,
 };

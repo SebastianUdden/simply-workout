@@ -4,7 +4,8 @@ import { propColor } from "./propColor";
 const barHeight = 82;
 const floor = 94;
 const grip = { x: 73, y: floor };
-export const suspension = { x1: grip.x, x2: grip.x + 3, y: 12 };
+export const suspensionL = { x: [grip.x], y: [12] };
+export const suspensionR = { x: [grip.x + 3], y: [12] };
 
 const TrxSuspension = () => {
   return (

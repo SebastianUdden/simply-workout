@@ -27,8 +27,9 @@ interface Props {
   animationProps?: AnimationProps | null;
 }
 
-const getProp = (prop: string | undefined) => {
-  if (prop === "bench") return <Bench angle={0} />;
+const getProp = (animationProp: any) => {
+  const { prop, angle } = animationProp;
+  if (prop === "bench") return <Bench angle={angle || 0} />;
   if (prop === "sideways-bench") return <SidewaysBench />;
   if (prop === "curl-bench") return <CurlBench angle={0} />;
   if (prop === "pulldown") return <Pulldown />;
@@ -43,7 +44,7 @@ const getProp = (prop: string | undefined) => {
 const StickmanWithProps = ({ direction, size, animationProps }: Props) => {
   if (!animationProps) return null;
   const { duration, positions, hands, left, right } = animationProps;
-  const background = getProp(animationProps.prop);
+  const background = getProp(animationProps);
   return (
     <Wrapper>
       {hands && (

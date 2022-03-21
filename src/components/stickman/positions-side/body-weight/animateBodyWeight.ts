@@ -46,6 +46,13 @@ import {
   jackknifeSitupMiddle,
 } from "./jackknifeSitup";
 import { walkingPart1, walkingPart2 } from "./walking";
+import {
+  crunchSideHighLeft,
+  crunchSideHighRight,
+  crunchSideLow,
+} from "./crunchSide";
+import { crunchHigh, crunchLow } from "./crunch";
+import { swissBallRolloutHigh, swissBallRolloutLow } from "./swissBallRollout";
 
 export const stand = {
   duration: 2,
@@ -106,6 +113,25 @@ export const barbellAbRollout = {
   duration: 4,
   animation: [barbellAbRolloutLow, barbellAbRolloutHigh, barbellAbRolloutLow],
   hands: "barbell",
+};
+export const swissBallRollout = {
+  duration: 4,
+  animation: [swissBallRolloutLow, swissBallRolloutHigh, swissBallRolloutLow],
+  hands: "swiss-ball",
+};
+export const crunch = {
+  duration: 2,
+  animation: [crunchLow, crunchHigh, crunchLow],
+};
+export const sideCrunch = {
+  duration: 4,
+  animation: [
+    crunchSideLow,
+    crunchSideHighLeft,
+    crunchSideLow,
+    crunchSideHighRight,
+    crunchSideLow,
+  ],
 };
 export const situp = {
   duration: 2,
@@ -268,6 +294,9 @@ export const animateBodyWeight = {
   bosuBallPushup,
   trxSuspendedPushup,
   barbellAbRollout,
+  swissBallRollout,
+  crunch,
+  sideCrunch,
   situp,
   jackknifeSitup,
   squat,
