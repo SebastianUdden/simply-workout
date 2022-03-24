@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Ani from "./Animation";
+import { BarbellAnchor } from "./BarbellAnchor";
 import Dumbbell, {
   HorizontalDumbbellBar,
   HorizontalDumbbellL,
@@ -9,6 +10,7 @@ import Dumbbell, {
   VerticalDumbbellR,
 } from "./Dumbbell";
 import { MachineBar, MachineLine } from "./MachinePull";
+import { barbellBase } from "./props/BarbellAnchorBase";
 import { overhang } from "./props/Pulldown";
 import { suspensionL, suspensionR } from "./props/TrxSuspension";
 
@@ -239,13 +241,52 @@ const StickmanHolding = ({
     <MachineLine hand={rightHand} anchor={suspensionR} d={d} />
   );
 
+  const leftBarbellAnchor = (
+    <BarbellAnchor hand={leftHand} anchor={barbellBase} d={d} />
+  );
+  const rightBarbellAnchor = (
+    <BarbellAnchor hand={rightHand} anchor={barbellBase} d={d} />
+  );
+
+  const kettlebell = (
+    <SwissBall id="swiss-ball" cx={rightHand.x[0]} cy={rightHand.y[0]} r="3">
+      <Ani
+        arr={rightHand.x.map((x, i) => x + 0.6 * (x - rightElbow.x[i]))}
+        attr="cx"
+        dur={d}
+      />
+      <Ani
+        arr={rightHand.y.map((y, i) => y + 0.7 * (y - rightElbow.y[i]))}
+        attr="cy"
+        dur={d}
+      />
+    </SwissBall>
+  );
+  const medicineBall = (
+    <SwissBall id="swiss-ball" cx={rightHand.x[0]} cy={rightHand.y[0]} r="4">
+      <Ani
+        arr={rightHand.x.map((x, i) => x + 0.3 * (x - rightElbow.x[i]))}
+        attr="cx"
+        dur={d}
+      />
+      <Ani
+        arr={rightHand.y.map((y, i) => y + 0.7 * (y - rightElbow.y[i]))}
+        attr="cy"
+        dur={d}
+      />
+    </SwissBall>
+  );
+
   const MACHINE_BAR = "machine-bar";
   const DUMBBELL = "dumbbell";
   const HORIZONTAL_DUMBBELL = "horizontal-dumbbell";
   const VERTICAL_DUMBBELL = "vertical-dumbbell";
   const BARBELL = "barbell";
+  const BARBELL_ANCHOR = "barbell-anchor";
   const TRX_SUSPENSION = "trx-suspension";
   const SWISS_BALL = "swiss-ball";
+  const MEDICINE_BALL = "medicine-ball";
+  const KETTLEBELL = "kettlebell";
 
   return (
     <StickBox viewBox="0 0 100 100" size={size}>
@@ -253,6 +294,7 @@ const StickmanHolding = ({
         <>
           {hands === HORIZONTAL_DUMBBELL && left && horizontalLeftDumbbellBar}
           {hands === VERTICAL_DUMBBELL && left && verticalLeftDumbbellBar}
+          {hands === BARBELL_ANCHOR && left && leftBarbellAnchor}
           {leftLowerArm}
           {leftUpperArm}
           {(hands === DUMBBELL || hands === BARBELL) && left && leftDumbbell}
@@ -280,12 +322,21 @@ const StickmanHolding = ({
           {torso}
           {hands === TRX_SUSPENSION && suspensionLineR}
           {hands === SWISS_BALL && swissBall}
+          {(hands === KETTLEBELL || hands === MEDICINE_BALL) && (
+            <>
+              {rightUpperArm}
+              {hands === KETTLEBELL && kettlebell}
+              {hands === MEDICINE_BALL && medicineBall}
+              {rightLowerArm}
+            </>
+          )}
           {rightUpperLeg}
           {rightLowerLeg}
-          {rightUpperArm}
+          {hands !== KETTLEBELL && hands !== KETTLEBELL && rightUpperArm}
           {hands === HORIZONTAL_DUMBBELL && right && horizontalRightDumbbellBar}
           {hands === VERTICAL_DUMBBELL && right && verticalRightDumbbellBar}
-          {rightLowerArm}
+          {hands === BARBELL_ANCHOR && right && rightBarbellAnchor}
+          {hands !== KETTLEBELL && hands !== KETTLEBELL && rightLowerArm}
           {hands === HORIZONTAL_DUMBBELL && right && horizontalRightDumbbellL}
           {hands === HORIZONTAL_DUMBBELL && right && horizontalRightDumbbellR}
           {hands === VERTICAL_DUMBBELL && right && verticalRightDumbbellL}

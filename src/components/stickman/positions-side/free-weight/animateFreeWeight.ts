@@ -61,6 +61,25 @@ import {
   barbellGoodMorningHigh,
   barbellGoodMorningLow,
 } from "./barbellGoodMorning";
+import {
+  barbellHalfKneelingLandminePressHigh,
+  barbellHalfKneelingLandminePressLow,
+} from "./barbellHalfKneelingLandminePress";
+import {
+  kettlebellSwingHigh,
+  kettlebellSwingHighStop,
+  kettlebellSwingLow,
+  kettlebellSwingLowHigh,
+  kettlebellSwingMiddleHigh,
+  kettlebellSwingMiddleLow,
+} from "./kettlebellSwing";
+import {
+  medicineBallSlamHigh,
+  medicineBallSlamHighStop,
+  medicineBallSlamLow,
+  medicineBallSlamMiddleHigh,
+  medicineBallSlamMiddleLow,
+} from "./medicineBallSlam";
 
 const dumbbellBenchPress = {
   duration: 2,
@@ -256,6 +275,50 @@ const barbellGoodMorning = {
   ],
   hands: "barbell",
 };
+const barbellHalfKneelingLandminePress = {
+  duration: 3,
+  animation: [
+    barbellHalfKneelingLandminePressLow,
+    barbellHalfKneelingLandminePressHigh,
+    barbellHalfKneelingLandminePressHigh,
+    barbellHalfKneelingLandminePressLow,
+    barbellHalfKneelingLandminePressLow,
+  ],
+  hands: "barbell-anchor",
+  right: false,
+};
+const kettlebellSwing = {
+  duration: 3,
+  animation: [
+    kettlebellSwingLow,
+    kettlebellSwingLowHigh,
+    kettlebellSwingMiddleLow,
+    kettlebellSwingMiddleHigh,
+    kettlebellSwingHigh,
+    kettlebellSwingHighStop,
+    kettlebellSwingHigh,
+    kettlebellSwingMiddleHigh,
+    kettlebellSwingMiddleLow,
+    kettlebellSwingLowHigh,
+    kettlebellSwingLow,
+  ],
+  hands: "kettlebell",
+};
+const medicineBallSlam = {
+  duration: 3,
+  animation: [
+    medicineBallSlamHighStop,
+    medicineBallSlamHigh,
+    medicineBallSlamMiddleHigh,
+    medicineBallSlamMiddleLow,
+    medicineBallSlamLow,
+    medicineBallSlamMiddleLow,
+    medicineBallSlamMiddleHigh,
+    medicineBallSlamHigh,
+    medicineBallSlamHighStop,
+  ],
+  hands: "medicine-ball",
+};
 
 export const animateFreeWeight = {
   dumbbellBenchPress,
@@ -279,4 +342,7 @@ export const animateFreeWeight = {
   barbellOverheadPress,
   barbellBackSquat,
   barbellGoodMorning,
+  barbellHalfKneelingLandminePress,
+  kettlebellSwing,
+  medicineBallSlam,
 };

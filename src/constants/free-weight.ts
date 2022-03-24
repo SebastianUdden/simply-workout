@@ -157,7 +157,7 @@ export const freeWeight = [
   {
     id: "122",
     category: FREE_WEIGHT,
-    name: "half kneeling landmine press",
+    name: "barbell half kneeling landmine press",
     unit: "kg",
     areas: [DELTS],
   },
