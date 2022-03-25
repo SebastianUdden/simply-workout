@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import BarbellRack from "./props/BarbellRack";
 import Bench from "./props/Bench";
 import BosuBall from "./props/BosuBall";
 import CurlBench from "./props/CurlBench";
@@ -38,6 +39,7 @@ const getProp = (animationProp: any) => {
   if (prop === "bosu-ball") return <BosuBall />;
   if (prop === "stability-ball") return <StabilityBall />;
   if (prop === "trx-suspension") return <TrxSuspension />;
+  if (prop === "barbell-rack") return <BarbellRack />;
   return null;
 };
 

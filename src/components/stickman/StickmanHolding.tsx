@@ -222,7 +222,11 @@ const StickmanHolding = ({
 
   const swissBall = (
     <SwissBall id="swiss-ball" cx={rightHand.x[0]} cy={rightHand.y[0]} r="10">
-      <Ani arr={rightHand.x.map((x) => x - 8)} attr="cx" dur={d} />
+      <Ani
+        arr={rightHand.x.map((x, i) => x + 22 - (x - shoulder.x[i]))}
+        attr="cx"
+        dur={d}
+      />
       <Ani arr={rightHand.y.map((y) => y + 10)} attr="cy" dur={d} />
     </SwissBall>
   );
@@ -263,14 +267,14 @@ const StickmanHolding = ({
     </SwissBall>
   );
   const medicineBall = (
-    <SwissBall id="swiss-ball" cx={rightHand.x[0]} cy={rightHand.y[0]} r="4">
+    <SwissBall id="swiss-ball" cx={rightHand.x[0]} cy={rightHand.y[0]} r="4.5">
       <Ani
         arr={rightHand.x.map((x, i) => x + 0.3 * (x - rightElbow.x[i]))}
         attr="cx"
         dur={d}
       />
       <Ani
-        arr={rightHand.y.map((y, i) => y + 0.7 * (y - rightElbow.y[i]))}
+        arr={rightHand.y.map((y, i) => y + 0.3 * (y - rightElbow.y[i]))}
         attr="cy"
         dur={d}
       />

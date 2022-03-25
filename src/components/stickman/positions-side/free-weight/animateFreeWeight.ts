@@ -80,6 +80,12 @@ import {
   medicineBallSlamMiddleHigh,
   medicineBallSlamMiddleLow,
 } from "./medicineBallSlam";
+import { barbellRackPullHigh, barbellRackPullLow } from "./barbellRackPull";
+import {
+  dumbbellRearDeltRaiseHigh,
+  dumbbellRearDeltRaiseLow,
+} from "./dumbbellRearDeltRaise";
+import { dumbbellShrugHigh, dumbbellShrugLow } from "./dumbbellShrug";
 
 const dumbbellBenchPress = {
   duration: 2,
@@ -195,6 +201,11 @@ const dumbbellFarmersWalk = {
   ],
   hands: "horizontal-dumbbell",
 };
+const dumbbellShrug = {
+  duration: 3,
+  animation: [dumbbellShrugLow, dumbbellShrugHigh, dumbbellShrugLow],
+  hands: "horizontal-dumbbell",
+};
 const barbellInclineBenchPress = {
   duration: 3,
   animation: [
@@ -243,6 +254,15 @@ const dumbbellBicepCurl = {
   ...barbellBicepCurl,
   hands: "dumbbell",
 };
+const dumbbellRearDeltRaise = {
+  duration: 3,
+  animation: [
+    dumbbellRearDeltRaiseLow,
+    dumbbellRearDeltRaiseHigh,
+    dumbbellRearDeltRaiseLow,
+  ],
+  hands: "horizontal-dumbbell",
+};
 
 const barbellBackSquat = {
   duration: 5,
@@ -264,6 +284,18 @@ const barbellDeadlift = {
     barbellDeadliftLow,
     barbellDeadliftHigh,
   ],
+  hands: "barbell",
+};
+const barbellRackPull = {
+  duration: 5,
+  animation: [
+    barbellRackPullHigh,
+    barbellRackPullHigh,
+    barbellRackPullLow,
+    barbellRackPullLow,
+    barbellRackPullHigh,
+  ],
+  prop: "barbell-rack",
   hands: "barbell",
 };
 const barbellGoodMorning = {
@@ -288,7 +320,7 @@ const barbellHalfKneelingLandminePress = {
   right: false,
 };
 const kettlebellSwing = {
-  duration: 3,
+  duration: 3.5,
   animation: [
     kettlebellSwingLow,
     kettlebellSwingLowHigh,
@@ -305,7 +337,7 @@ const kettlebellSwing = {
   hands: "kettlebell",
 };
 const medicineBallSlam = {
-  duration: 3,
+  duration: 4,
   animation: [
     medicineBallSlamHighStop,
     medicineBallSlamHigh,
@@ -332,13 +364,16 @@ export const animateFreeWeight = {
   dumbbellInclineBicepCurl,
   dumbbellInclineFlye,
   dumbbellRomanianDeadlift,
+  dumbbellRearDeltRaise,
   dumbbellFarmersWalk,
+  dumbbellShrug,
   barbellBenchPress,
   barbellDeclineBenchPress,
   barbellInclineBenchPress,
   barbellBentOverRow,
   barbellBicepCurl,
   barbellDeadlift,
+  barbellRackPull,
   barbellOverheadPress,
   barbellBackSquat,
   barbellGoodMorning,

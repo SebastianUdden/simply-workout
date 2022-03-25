@@ -129,7 +129,7 @@ export const freeWeight = [
   {
     id: "117",
     category: FREE_WEIGHT,
-    name: "shrug",
+    name: "dumbbell shrug",
     unit: "kg",
     areas: [UPPER_TRAPS],
   },
@@ -150,9 +150,9 @@ export const freeWeight = [
   {
     id: "121",
     category: FREE_WEIGHT,
-    name: "rear delt raises",
+    name: "dumbbell rear delt raise",
     unit: "kg",
-    areas: [DELTS, LOWER_TRAPS],
+    areas: [DELTS, RHOMBOIDS, LOWER_TRAPS],
   },
   {
     id: "122",
@@ -248,7 +248,7 @@ export const freeWeight = [
   {
     id: "136",
     category: FREE_WEIGHT,
-    name: "rack pull",
+    name: "barbell rack pull",
     unit: "kg",
     areas: [
       GLUTES,
@@ -260,13 +260,6 @@ export const freeWeight = [
       QUADS,
       FOREARMS,
     ],
-  },
-  {
-    id: "137",
-    category: FREE_WEIGHT,
-    name: "reverse flye",
-    unit: "kg",
-    areas: [RHOMBOIDS, UPPER_TRAPS, DELTS],
   },
   {
     id: "138",
