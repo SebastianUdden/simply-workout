@@ -257,4 +257,11 @@ export const bodyWeight = [
     unit: "reps",
     areas: [ABS, OBLIQUES, LOWER_PECS],
   },
+  {
+    id: "30",
+    category: BODY_WEIGHT,
+    name: "decline situp",
+    unit: "kg",
+    areas: [ABS, OBLIQUES, HIP, INNER_THIGH, LOWER_PECS],
+  },
 ];

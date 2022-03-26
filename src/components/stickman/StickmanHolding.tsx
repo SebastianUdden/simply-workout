@@ -10,13 +10,13 @@ import Dumbbell, {
   VerticalDumbbellR,
 } from "./Dumbbell";
 import { MachineBar, MachineLine } from "./MachinePull";
-import { barbellBase } from "./props/BarbellAnchorBase";
+import { barbellBase, invertedBarbellBase } from "./props/BarbellAnchorBase";
 import { overhang } from "./props/Pulldown";
 import { suspensionL, suspensionR } from "./props/TrxSuspension";
-
 import { Positions } from "./Stickman";
 
 interface Props {
+  id?: string;
   duration?: number;
   direction?: "Forward" | "Side";
   positions?: Positions;
@@ -24,6 +24,7 @@ interface Props {
   background?: any;
   left?: boolean;
   right?: boolean;
+  inverted?: boolean;
   hands: string;
 }
 
@@ -50,6 +51,7 @@ const StickmanHolding = ({
   left = true,
   right = true,
   hands,
+  inverted = false,
 }: Props) => {
   const d = duration;
   const {
@@ -251,6 +253,12 @@ const StickmanHolding = ({
   const rightBarbellAnchor = (
     <BarbellAnchor hand={rightHand} anchor={barbellBase} d={d} />
   );
+  const invertedLeftBarbellAnchor = (
+    <BarbellAnchor hand={leftHand} anchor={invertedBarbellBase} d={d} />
+  );
+  const invertedRightBarbellAnchor = (
+    <BarbellAnchor hand={rightHand} anchor={invertedBarbellBase} d={d} />
+  );
 
   const kettlebell = (
     <SwissBall id="swiss-ball" cx={rightHand.x[0]} cy={rightHand.y[0]} r="3">
@@ -298,7 +306,11 @@ const StickmanHolding = ({
         <>
           {hands === HORIZONTAL_DUMBBELL && left && horizontalLeftDumbbellBar}
           {hands === VERTICAL_DUMBBELL && left && verticalLeftDumbbellBar}
-          {hands === BARBELL_ANCHOR && left && leftBarbellAnchor}
+          {hands === BARBELL_ANCHOR && left && !inverted && leftBarbellAnchor}
+          {hands === BARBELL_ANCHOR &&
+            left &&
+            inverted &&
+            invertedLeftBarbellAnchor}
           {leftLowerArm}
           {leftUpperArm}
           {(hands === DUMBBELL || hands === BARBELL) && left && leftDumbbell}
@@ -339,7 +351,11 @@ const StickmanHolding = ({
           {hands !== KETTLEBELL && hands !== KETTLEBELL && rightUpperArm}
           {hands === HORIZONTAL_DUMBBELL && right && horizontalRightDumbbellBar}
           {hands === VERTICAL_DUMBBELL && right && verticalRightDumbbellBar}
-          {hands === BARBELL_ANCHOR && right && rightBarbellAnchor}
+          {hands === BARBELL_ANCHOR && right && !inverted && rightBarbellAnchor}
+          {hands === BARBELL_ANCHOR &&
+            right &&
+            inverted &&
+            invertedRightBarbellAnchor}
           {hands !== KETTLEBELL && hands !== KETTLEBELL && rightLowerArm}
           {hands === HORIZONTAL_DUMBBELL && right && horizontalRightDumbbellL}
           {hands === HORIZONTAL_DUMBBELL && right && horizontalRightDumbbellR}

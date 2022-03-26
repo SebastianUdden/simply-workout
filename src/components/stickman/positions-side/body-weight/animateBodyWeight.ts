@@ -53,6 +53,11 @@ import {
 } from "./crunchSide";
 import { crunchHigh, crunchLow } from "./crunch";
 import { swissBallRolloutHigh, swissBallRolloutLow } from "./swissBallRollout";
+import {
+  singleLegDeadliftHigh,
+  singleLegDeadliftLow,
+} from "./singleLegDeadLift";
+import { declineSitupHigh, declineSitupLow } from "./declineSitup";
 
 export const stand = {
   duration: 2,
@@ -137,6 +142,12 @@ export const situp = {
   duration: 2,
   animation: [situpLow, situpHigh, situpLow],
 };
+export const declineSitup = {
+  duration: 2,
+  animation: [declineSitupLow, declineSitupHigh, declineSitupLow],
+  prop: "bench",
+  angle: -0.25,
+};
 export const jackknifeSitup = {
   duration: 2,
   animation: [
@@ -150,6 +161,10 @@ export const jackknifeSitup = {
 export const squat = {
   duration: 3,
   animation: [standing, squatHigh, squatLow, squatHigh, standing],
+};
+export const singleLegDeadlift = {
+  duration: 3,
+  animation: [standing, singleLegDeadliftHigh, singleLegDeadliftLow, standing],
 };
 export const splitSquat = {
   duration: 3,
@@ -298,6 +313,7 @@ export const animateBodyWeight = {
   crunch,
   sideCrunch,
   situp,
+  declineSitup,
   jackknifeSitup,
   squat,
   splitSquat,
@@ -315,4 +331,5 @@ export const animateBodyWeight = {
   dip,
   lunge,
   burpee,
+  singleLegDeadlift,
 };

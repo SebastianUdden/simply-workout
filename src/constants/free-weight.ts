@@ -104,7 +104,7 @@ export const freeWeight = [
   {
     id: "113",
     category: FREE_WEIGHT,
-    name: "t-bar row",
+    name: "t bar row",
     unit: "kg",
     areas: [LATS, UPPER_TRAPS, LOWER_TRAPS, DELTS],
   },
@@ -195,13 +195,6 @@ export const freeWeight = [
     name: "calf raise",
     unit: "kg",
     areas: [CALVES],
-  },
-  {
-    id: "129",
-    category: FREE_WEIGHT,
-    name: "weighted decline situp",
-    unit: "kg",
-    areas: [ABS, OBLIQUES, HIP, INNER_THIGH, LOWER_PECS],
   },
   {
     id: "130",

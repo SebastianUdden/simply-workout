@@ -19,6 +19,7 @@ interface AnimationProps {
   hands?: string;
   left?: boolean;
   right?: boolean;
+  inverted?: boolean;
 }
 
 interface Props {
@@ -45,7 +46,7 @@ const getProp = (animationProp: any) => {
 
 const StickmanWithProps = ({ direction, size, animationProps }: Props) => {
   if (!animationProps) return null;
-  const { duration, positions, hands, left, right } = animationProps;
+  const { duration, positions, hands, left, right, inverted } = animationProps;
   const background = getProp(animationProps);
   return (
     <Wrapper>
@@ -59,6 +60,7 @@ const StickmanWithProps = ({ direction, size, animationProps }: Props) => {
           left={left}
           right={right}
           hands={hands}
+          inverted={inverted}
         />
       )}
       {!hands && (

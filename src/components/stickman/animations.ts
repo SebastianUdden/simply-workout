@@ -14,7 +14,6 @@ const formatName = (name: string) => {
         : word.toLowerCase()
     )
     .join("");
-  console.log({ newName });
   return newName;
 };
 

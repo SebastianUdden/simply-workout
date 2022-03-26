@@ -86,6 +86,11 @@ import {
   dumbbellRearDeltRaiseLow,
 } from "./dumbbellRearDeltRaise";
 import { dumbbellShrugHigh, dumbbellShrugLow } from "./dumbbellShrug";
+import { tBarRowHigh, tBarRowLow } from "./tBarRow";
+import {
+  weightedHipThrustHigh,
+  weightedHipThrustLow,
+} from "./weightedHipThrust";
 
 const dumbbellBenchPress = {
   duration: 2,
@@ -239,6 +244,13 @@ const barbellBentOverRow = {
   ],
   hands: "barbell",
 };
+const tBarRow = {
+  duration: 3,
+  animation: [tBarRowLow, tBarRowHigh, tBarRowLow],
+  hands: "barbell-anchor",
+  inverted: true,
+  right: false,
+};
 const barbellBicepCurl = {
   duration: 3,
   animation: [
@@ -351,6 +363,15 @@ const medicineBallSlam = {
   ],
   hands: "medicine-ball",
 };
+const weightedHipThrust = {
+  animation: [
+    weightedHipThrustLow,
+    weightedHipThrustHigh,
+    weightedHipThrustLow,
+  ],
+  prop: "sideways-bench",
+  hands: "barbell",
+};
 
 export const animateFreeWeight = {
   dumbbellBenchPress,
@@ -380,4 +401,6 @@ export const animateFreeWeight = {
   barbellHalfKneelingLandminePress,
   kettlebellSwing,
   medicineBallSlam,
+  tBarRow,
+  weightedHipThrust,
 };

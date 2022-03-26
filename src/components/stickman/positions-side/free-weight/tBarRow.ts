@@ -1,4 +1,4 @@
-export const barbellBentOverRowLow = {
+export const tBarRowLow = {
   head: {
     x: [70],
     y: [33],
@@ -45,7 +45,7 @@ export const barbellBentOverRowLow = {
   },
 };
 
-export const barbellBentOverRowHigh = {
+export const tBarRowHigh = {
   head: {
     x: [72],
     y: [40],
