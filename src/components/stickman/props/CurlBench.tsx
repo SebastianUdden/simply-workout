@@ -14,14 +14,14 @@ const CurlBench = ({ angle }: Props) => {
   const hip = { x: midX, y: 60 };
   return (
     <>
-      <Line
+      <ThinLine
         id="bottom"
         x1={leftFoot.x - 5}
         x2={rightFoot.x + 5}
         y1={floor}
         y2={floor}
       />
-      <Line
+      <ThinLine
         id="seat-stand"
         x1={leftFoot.x}
         x2={leftFoot.x}
@@ -35,8 +35,14 @@ const CurlBench = ({ angle }: Props) => {
         y1={seat.y}
         y2={seat.y}
       />
-      <Line id="mid-stand" x1={midX} x2={midX} y1={floor} y2={hip.y} />
-      <Line id="right-stand" x1={rightFoot.x} x2={midX} y1={floor} y2={hip.y} />
+      <ThinLine id="mid-stand" x1={midX} x2={midX} y1={floor} y2={hip.y} />
+      <ThinLine
+        id="right-stand"
+        x1={rightFoot.x}
+        x2={midX}
+        y1={floor}
+        y2={hip.y}
+      />
       <Line
         id="arm-cushion"
         x1={hip.x - 5}
@@ -51,5 +57,8 @@ const CurlBench = ({ angle }: Props) => {
 const Line = styled.line`
   stroke: ${propColor};
 `;
-
+const ThinLine = styled.line`
+  stroke: ${propColor};
+  stroke-width: 3;
+`;
 export default CurlBench;

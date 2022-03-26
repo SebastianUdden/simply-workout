@@ -15,14 +15,14 @@ const PullupsBar = () => {
         y1={barHeight}
         y2={barHeight}
       />
-      <Line
+      <ThinLine
         id="left-support"
         x1={leftFoot.x - 8}
         x2={leftFoot.x}
         y1={barHeight}
         y2={barHeight + 12}
       />
-      <Line
+      <ThinLine
         id="right-support"
         x1={rightFoot.x + 8}
         x2={rightFoot.x}
@@ -57,6 +57,10 @@ const PullupsBar = () => {
 const Line = styled.line`
   stroke: ${propColor};
   stroke-width: 4;
+`;
+const ThinLine = styled.line`
+  stroke: ${propColor};
+  stroke-width: 3;
 `;
 
 export default PullupsBar;

@@ -35,21 +35,21 @@ const Pulldown = () => {
       />
       <Line id="seat" x1={hip.x + 10} x2={seat.x} y1={hip.y} y2={seat.y} />
       <Circle id="leg-support-pads" y={hip.y - 14} x={hip.x} rx="1" />
-      <Line
+      <ThinLine
         id="left-leg"
         x1={hip.x}
         x2={leftFoot.x}
         y1={hip.y}
         y2={leftFoot.y}
       />
-      <Line
+      <ThinLine
         id="left-foot"
         x1={leftFoot.x - 2}
         x2={leftFoot.x + 2}
         y1={leftFoot.y}
         y2={leftFoot.y}
       />
-      <Line
+      <ThinLine
         id="right-leg"
         x1={hip.x}
         x2={rightFoot.x}
@@ -77,5 +77,8 @@ const Circle = styled.rect`
   height: 5px;
   border-radius: 8px;
 `;
-
+const ThinLine = styled.line`
+  stroke: ${propColor};
+  stroke-width: 3.5;
+`;
 export default Pulldown;

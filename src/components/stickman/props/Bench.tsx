@@ -52,35 +52,35 @@ const Bench = ({ angle }: Props) => {
     <>
       <Line id="back" x1={top.x} x2={hip.x} y1={top.y} y2={hip.y} />
       <Line id="seat" x1={hip.x} x2={bottom.x} y1={hip.y} y2={bottom.y} />
-      <Line
+      <ThinLine
         id="support"
         x1={supportLow.x}
         x2={supportHigh.x}
         y1={supportLow.y}
         y2={supportHigh.y}
       />
-      <Line
+      <ThinLine
         id="left-leg"
         x1={hip.x}
         x2={leftFoot.x}
         y1={hip.y}
         y2={leftFoot.y}
       />
-      <Line
+      <ThinLine
         id="left-foot"
         x1={leftFoot.x - 2}
         x2={leftFoot.x + 2}
         y1={leftFoot.y}
         y2={leftFoot.y}
       />
-      <Line
+      <ThinLine
         id="right-leg"
         x1={hip.x}
         x2={rightFoot.x}
         y1={hip.y}
         y2={rightFoot.y}
       />
-      <Line
+      <ThinLine
         id="right-foot"
         x1={rightFoot.x - 2}
         x2={rightFoot.x + 2}
@@ -93,6 +93,10 @@ const Bench = ({ angle }: Props) => {
 
 const Line = styled.line`
   stroke: ${propColor};
+`;
+const ThinLine = styled.line`
+  stroke: ${propColor};
+  stroke-width: 3.5;
 `;
 
 export default Bench;
