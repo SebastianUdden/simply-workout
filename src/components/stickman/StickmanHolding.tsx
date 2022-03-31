@@ -11,6 +11,7 @@ import Dumbbell, {
 } from "./Dumbbell";
 import { MachineBar, MachineLine } from "./MachinePull";
 import { barbellBase, invertedBarbellBase } from "./props/BarbellAnchorBase";
+import { crossL, crossR } from "./props/CrossLine";
 import { overhang } from "./props/Pulldown";
 import { suspensionL, suspensionR } from "./props/TrxSuspension";
 import { Positions } from "./Stickman";
@@ -246,6 +247,8 @@ const StickmanHolding = ({
   const suspensionLineR = (
     <MachineLine hand={rightHand} anchor={suspensionR} d={d} />
   );
+  const crossLineL = <MachineLine hand={leftHand} anchor={crossR} d={d} />;
+  const crossLineR = <MachineLine hand={rightHand} anchor={crossL} d={d} />;
 
   const leftBarbellAnchor = (
     <BarbellAnchor hand={leftHand} anchor={barbellBase} d={d} />
@@ -299,6 +302,58 @@ const StickmanHolding = ({
   const SWISS_BALL = "swiss-ball";
   const MEDICINE_BALL = "medicine-ball";
   const KETTLEBELL = "kettlebell";
+  const CABLE_PULL = "cable-pull";
+  const CABLE_CROSS_PULL = "cable-cross-pull";
+
+  if (hands === CABLE_CROSS_PULL) {
+    return (
+      <StickBox viewBox="0 0 100 100" size={size}>
+        {direction === "Side" && (
+          <>
+            {neck}
+            {theHead}
+            {leftLowerLeg}
+            {leftUpperLeg}
+            {background}
+            {torso}
+            {rightUpperLeg}
+            {rightLowerLeg}
+            {rightUpperArm}
+            {leftUpperArm}
+            {crossLineL}
+            {crossLineR}
+            {rightLowerArm}
+            {leftLowerArm}
+          </>
+        )}
+      </StickBox>
+    );
+  }
+
+  if (hands === CABLE_PULL) {
+    return (
+      <StickBox viewBox="0 0 100 100" size={size}>
+        {direction === "Side" && (
+          <>
+            {neck}
+            {theHead}
+            {leftLowerLeg}
+            {leftUpperLeg}
+            {background}
+            {torso}
+            {machineBar}
+            {machineLine}
+            {rightUpperLeg}
+            {rightLowerLeg}
+            {rightUpperArm}
+            {leftUpperArm}
+            {rightLowerArm}
+            {leftLowerArm}
+          </>
+        )}
+      </StickBox>
+    );
+  }
 
   return (
     <StickBox viewBox="0 0 100 100" size={size}>
@@ -348,7 +403,7 @@ const StickmanHolding = ({
           )}
           {rightUpperLeg}
           {rightLowerLeg}
-          {hands !== KETTLEBELL && hands !== KETTLEBELL && rightUpperArm}
+          {hands !== KETTLEBELL && rightUpperArm}
           {hands === HORIZONTAL_DUMBBELL && right && horizontalRightDumbbellBar}
           {hands === VERTICAL_DUMBBELL && right && verticalRightDumbbellBar}
           {hands === BARBELL_ANCHOR && right && !inverted && rightBarbellAnchor}
@@ -356,7 +411,7 @@ const StickmanHolding = ({
             right &&
             inverted &&
             invertedRightBarbellAnchor}
-          {hands !== KETTLEBELL && hands !== KETTLEBELL && rightLowerArm}
+          {hands !== KETTLEBELL && rightLowerArm}
           {hands === HORIZONTAL_DUMBBELL && right && horizontalRightDumbbellL}
           {hands === HORIZONTAL_DUMBBELL && right && horizontalRightDumbbellR}
           {hands === VERTICAL_DUMBBELL && right && verticalRightDumbbellL}

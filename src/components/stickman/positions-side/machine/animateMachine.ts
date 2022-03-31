@@ -5,6 +5,8 @@ import {
 } from "./latPulldown30Degree";
 import { bicepCurlHigh, bicepCurlLow, bicepCurlMiddle } from "./bicepCurl";
 import { barbellBenchPress } from "../free-weight/animateFreeWeight";
+import { cableWoodchopHigh, cableWoodchopLow } from "./cableWoodchop";
+import { cableCrossoverHigh, cableCrossoverLow } from "./cableCrossover";
 
 export const latPulldown = {
   duration: 3,
@@ -21,6 +23,27 @@ export const latPulldown30Degree = {
   ],
   prop: "pulldown",
   hands: "machine-bar",
+};
+export const cableWoodchop = {
+  duration: 3,
+  animation: [
+    cableWoodchopLow,
+    cableWoodchopHigh,
+    cableWoodchopLow,
+    cableWoodchopLow,
+  ],
+  prop: "pulldown",
+  hands: "cable-pull",
+};
+export const cableCrossover = {
+  duration: 3,
+  animation: [
+    cableCrossoverLow,
+    cableCrossoverHigh,
+    cableCrossoverLow,
+    cableCrossoverLow,
+  ],
+  hands: "cable-cross-pull",
 };
 export const bicepCurl = {
   duration: 3,
@@ -40,6 +63,8 @@ const benchPress = barbellBenchPress;
 export const animateMachine = {
   latPulldown,
   latPulldown30Degree,
+  cableWoodchop,
+  cableCrossover,
   bicepCurl,
   benchPress,
 };
