@@ -138,7 +138,7 @@ const Calendar = ({ dates, onShowSelectedDay }: Props) => {
     const isSelected = newDate === selectedDate && d.month === 0;
     return (
       <Day
-        onClick={() => handleSelectDay(newDate, d.month)}
+        onClick={() => d.month === 0 && handleSelectDay(newDate, d.month)}
         isToday={d.date === new Date().getDate() && m === new Date().getMonth()}
         thisMonth={d.month === 0}
         isSelected={isSelected}
@@ -207,13 +207,21 @@ const Day = styled.div<{
   min-height: 60px;
   font-weight: 800;
   padding: 5px;
-  cursor: pointer;
+  user-select: none;
   ${(p) =>
     p.thisMonth &&
     `
+        cursor: pointer;
         background-color: #333;
         color: #eee;
         border: 1px solid #222;
+        :hover {
+          background-color: #111;
+          color: #fff;
+        }
+        :active {
+          background-color: #000;
+        }
   `}
   ${(p) =>
     p.isSelected &&
@@ -226,13 +234,6 @@ const Day = styled.div<{
     `
     border: 1px solid magenta;
   `}
-  :hover {
-    background-color: #111;
-    color: #fff;
-  }
-  :active {
-    background-color: #000;
-  }
 `;
 const D = styled.div`
   height: 100%;
