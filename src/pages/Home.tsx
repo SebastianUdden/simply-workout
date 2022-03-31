@@ -73,7 +73,6 @@ const Home = () => {
                 setRoutines(routines.filter((r) => r.id !== id))
               }
               onUpdateRoutine={(routine: any) => {
-                console.log({ routine });
                 setRoutines(
                   routines.map((r) => (r.id === routine.id ? routine : r))
                 );

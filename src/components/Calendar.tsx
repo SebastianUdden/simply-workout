@@ -45,10 +45,15 @@ const getDate = (
   return { month: -1, date: daysInLastMonth - firstIndex + i + 1 };
 };
 
+const getSelectedWorkouts = (date: string, dates: any) => {
+  const selectedDate = dates.find((dt: any) => dt.date === date);
+  return selectedDate || null;
+};
+
 const getWorkoutsThisDay = (d: any, m: any, dates: any) => {
   return dates.map((dt: any) => {
     const newDate = new Date(dt.date);
-    return newDate.getDate() === d.date && m === newDate.getMonth()
+    return d.date === newDate.getDate() && m === newDate.getMonth()
       ? dt.activities.map((a: any) => (
           <WorkoutDot key={a.color} bgColor={a.color} />
         ))
@@ -63,16 +68,18 @@ interface DateActivity {
 
 interface Props {
   dates: DateActivity[];
+  onShowSelectedDay: Function;
 }
 
-const Calendar = ({ dates }: Props) => {
+const Calendar = ({ dates, onShowSelectedDay }: Props) => {
   const [selectedDate, setSelectedDate] = useState(getNewDate());
   const [datetime, setDatetime] = useState<any>();
 
-  const handleDateChange = (value: number) => {
-    const now = new Date(selectedDate);
+  const handleDateChange = (date: any, value: number) => {
+    const now = new Date(date);
+    now.setDate(1);
     now.setMonth(now.getMonth() + value);
-    setSelectedDate(getNewDate(now));
+    setSelectedDate(getNewDate(now.toDateString()));
   };
 
   useEffect(() => {
@@ -107,24 +114,34 @@ const Calendar = ({ dates }: Props) => {
     });
   }, [selectedDate]);
 
-  if (!datetime) return null;
-  const {
-    year,
-    month,
-    date,
-    formatedMonth,
-    firstIndex,
-    lastIndex,
-    daysInLastMonth,
-  } = datetime;
+  const handleSelectDay = (date: string, monthSelected: number) => {
+    // if (monthSelected === 0) {
+    const selectedDay = getSelectedWorkouts(date, dates);
+    setSelectedDate(date);
+    onShowSelectedDay(selectedDay);
+    // return;
+    // }
+    // handleDateChange(date, monthSelected);
+  };
 
-  const weekEl = weeks.map((day, i) => {
+  if (!datetime) return null;
+  const { year, month, formatedMonth, firstIndex, lastIndex, daysInLastMonth } =
+    datetime;
+
+  const weekEl = weeks.map((weekDay, i) => {
     const d = getDate(i, firstIndex, lastIndex, daysInLastMonth);
     const m = month + d.month;
+    const dt = new Date();
+    dt.setMonth(m);
+    dt.setDate(d.date);
+    const newDate = getNewDate(dt.toDateString());
+    const isSelected = newDate === selectedDate && d.month === 0;
     return (
       <Day
-        isToday={i === date + firstIndex - 1 && m === new Date().getMonth()}
+        onClick={() => handleSelectDay(newDate, d.month)}
+        isToday={d.date === new Date().getDate() && m === new Date().getMonth()}
         thisMonth={d.month === 0}
+        isSelected={isSelected}
       >
         <Number>{d.date}</Number>
         {getWorkoutsThisDay(d, m, dates)}
@@ -135,9 +152,9 @@ const Calendar = ({ dates }: Props) => {
   return (
     <Wrapper>
       <Title>
-        <Left onClick={() => handleDateChange(-1)}>&larr;</Left>
+        <Left onClick={() => handleDateChange(selectedDate, -1)}>&larr;</Left>
         {year} {formatedMonth}
-        <Right onClick={() => handleDateChange(1)}>&rarr;</Right>
+        <Right onClick={() => handleDateChange(selectedDate, 1)}>&rarr;</Right>
       </Title>
       <Week>
         {days.map((d) => (
@@ -173,7 +190,11 @@ const Week = styled.div`
   height: 16.7%;
   display: flex;
 `;
-const Day = styled.div<{ isToday: boolean; thisMonth: boolean }>`
+const Day = styled.div<{
+  isToday: boolean;
+  isSelected?: boolean;
+  thisMonth: boolean;
+}>`
   display: flex;
   align-items: flex-end;
   position: relative;
@@ -186,6 +207,7 @@ const Day = styled.div<{ isToday: boolean; thisMonth: boolean }>`
   min-height: 60px;
   font-weight: 800;
   padding: 5px;
+  cursor: pointer;
   ${(p) =>
     p.thisMonth &&
     `
@@ -194,10 +216,23 @@ const Day = styled.div<{ isToday: boolean; thisMonth: boolean }>`
         border: 1px solid #222;
   `}
   ${(p) =>
+    p.isSelected &&
+    `
+        background-color: #000;
+        color: #eee;
+  `}
+  ${(p) =>
     p.isToday &&
     `
     border: 1px solid magenta;
   `}
+  :hover {
+    background-color: #111;
+    color: #fff;
+  }
+  :active {
+    background-color: #000;
+  }
 `;
 const D = styled.div`
   height: 100%;

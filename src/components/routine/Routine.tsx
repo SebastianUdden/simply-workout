@@ -33,7 +33,6 @@ const Routine = ({ onUpdateRoutine, onUpdateExercises, ...props }: Props) => {
   const { exerciseIds } = r;
 
   useEffect(() => {
-    console.log({ exerciseIds });
     setRoutineExercises(
       exerciseIds.map((eid) => props.exercises.find(({ id }) => eid === id))
     );
@@ -86,7 +85,6 @@ const Routine = ({ onUpdateRoutine, onUpdateExercises, ...props }: Props) => {
   };
 
   const handleAddType = (id: string) => {
-    console.log(id);
     setR({
       ...r,
       exerciseIds: [...exerciseIds, id],

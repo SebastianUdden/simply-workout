@@ -8,6 +8,7 @@ interface Props {
 }
 
 const WorkoutHistory = ({ routines }: Props) => {
+  const [selectedDay, setSelectedDay] = useState<any>(null);
   const [expandYearSum, setExpandYearSum] = useState(false);
   const workoutDates = routines
     .map((r: any) =>
@@ -44,7 +45,11 @@ const WorkoutHistory = ({ routines }: Props) => {
       if (filteredDots.length === 0) return null;
       return (
         <Column>
-          {expandYearSum && <Title>{r.name}</Title>}
+          {expandYearSum && (
+            <Row>
+              <Title>{r.name}</Title>
+            </Row>
+          )}
           <Dots>
             {filteredDots.map(() => (
               <WorkoutDot bgColor={r.color} />
@@ -56,10 +61,38 @@ const WorkoutHistory = ({ routines }: Props) => {
     .filter(Boolean);
   return yearsum.length === 0 ? null : (
     <Wrapper>
-      <Calendar dates={workoutDates} />
-      <YearSum onClick={() => setExpandYearSum(!expandYearSum)}>
-        <Label>Workouts this year</Label>
-        {yearsum}
+      <Calendar
+        dates={workoutDates}
+        onShowSelectedDay={(day: any) => setSelectedDay(day)}
+      />
+      <YearSum
+        onClick={() => {
+          setExpandYearSum(!expandYearSum);
+          setSelectedDay(null);
+        }}
+      >
+        {selectedDay ? (
+          <>
+            <Label>Workouts {selectedDay?.date}</Label>
+            {selectedDay?.activities.map((a: any) => {
+              return (
+                <Column>
+                  <Row>
+                    <Title>{a.name}</Title>
+                  </Row>
+                  <Dots>
+                    <WorkoutDot bgColor={a.color} />
+                  </Dots>
+                </Column>
+              );
+            })}
+          </>
+        ) : (
+          <>
+            <Label>Workouts this year</Label>
+            {yearsum}
+          </>
+        )}
       </YearSum>
     </Wrapper>
   );
@@ -78,11 +111,10 @@ const Label = styled.label`
   color: #666;
   font-size: 16px;
   font-weight: 700;
+  cursor: pointer;
 `;
 const Title = styled.strong`
   font-size: 14px;
-  margin-top: 10px;
-  margin-right: 10px;
 `;
 const Dots = styled.div`
   display: flex;
@@ -90,5 +122,11 @@ const Dots = styled.div`
   flex-wrap: wrap;
   margin-left: 4px;
   margin-top: 4px;
+`;
+const Row = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-right: 10px;
 `;
 export default WorkoutHistory;
