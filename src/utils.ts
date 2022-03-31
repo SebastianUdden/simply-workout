@@ -67,3 +67,10 @@ export const getNewDate = (d?: Date) => {
 };
 
 export const getZero = (count: number) => (count < 10 ? `0${count}` : count);
+
+export const getUniqueValues = (arr: any) =>
+  Array.from(
+    new Set(arr.map((e: any) => e.values.map((d: any) => d.date)).flat())
+  ).filter(Boolean);
+
+export const getUnique = (arr: any) => Array.from(new Set(arr)).filter(Boolean);

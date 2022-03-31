@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import EditRoutine from "./EditRoutine";
 import ViewRoutine from "./ViewRoutine";
-import { exerciseTypes as defaultExerciseTypes } from "../../constants/exerciseTypes";
-import { estimateTime, getOldWorkout, uuidv4 } from "../../utils";
+import { estimateTime, getNewDate, getUnique } from "../../utils";
 import { ExerciseValue } from "./EditExercise";
 
 export interface RoutineProps {
@@ -10,8 +9,9 @@ export interface RoutineProps {
   name: string;
   color: string;
   format: any;
-  exercises: any[];
+  exerciseIds: any[];
   timeToComplete?: string;
+  workouts: string[];
 }
 
 interface Props {
@@ -21,45 +21,59 @@ interface Props {
   expandIndex: number;
   onExpandIndexChange: Function;
   onUpdateRoutine: Function;
-  allExercises: any[];
+  exercises: any[];
+  onUpdateExercises: Function;
   onDeleteRoutine: Function;
 }
 
-const Routine = ({ onUpdateRoutine, ...props }: Props) => {
+const Routine = ({ onUpdateRoutine, onUpdateExercises, ...props }: Props) => {
   const [viewRoutine, setViewRoutine] = useState(false);
-  const [exerciseTypes, setExerciseTypes] = useState<any[]>([]);
   const [r, setR] = useState(props.routine);
-  const { exercises } = r;
+  const [routineExercises, setRoutineExercises] = useState<any>([]);
+  const { exerciseIds } = r;
 
-  const handleChangeExerciseValue = (i: number, value: ExerciseValue) => {
-    const exercises = r.exercises.map((e, index) => {
-      let values = e.values.slice();
-      const latest = e.values[e.values.length - 1];
-      if (latest.date === value.date) {
-        values.pop();
+  useEffect(() => {
+    console.log({ exerciseIds });
+    setRoutineExercises(
+      exerciseIds.map((eid) => props.exercises.find(({ id }) => eid === id))
+    );
+  }, [exerciseIds, props.exercises]);
+
+  const handleChangeExerciseValue = (id: string, value: ExerciseValue) => {
+    const exercises = props.exercises.map((e: any) => {
+      if (e.id === id) {
+        let values = e.values.slice();
+        const latest = e.values[e.values.length - 1];
+        if (latest.date === value.date) {
+          values.pop();
+        }
+        values.push(value);
+        return { ...e, values };
       }
-      values.push(value);
-      return i !== index ? e : { ...e, values };
+      return e;
     });
+    onUpdateExercises(exercises);
     setR({
       ...r,
-      exercises,
+      workouts: getUnique([...r.workouts, getNewDate()])
+        .map((entry: any) => entry?.toString() || false)
+        .filter(Boolean),
     });
   };
 
   const handleChangeExercisePosition = (i: number, move: number) => {
-    const moveExercise = r.exercises[i];
-    const newExercises = r.exercises.slice();
-    newExercises.splice(i, 1);
-    newExercises.splice(i + move, 0, moveExercise);
+    const moveExercise = r.exerciseIds[i];
+    const newExerciseIds = r.exerciseIds.slice();
+    newExerciseIds.splice(i, 1);
+    newExerciseIds.splice(i + move, 0, moveExercise);
 
-    setR({ ...r, exercises: newExercises });
+    setR({ ...r, exerciseIds: newExerciseIds });
   };
 
   const handleDeleteExercise = (i: number) =>
     setR({
       ...r,
-      exercises: r.exercises.filter((e, index) => i !== index),
+      exerciseIds: exerciseIds.filter((e, index) => i !== index),
     });
 
   const handleChangeFormat = (e: any) => {
@@ -67,24 +81,15 @@ const Routine = ({ onUpdateRoutine, ...props }: Props) => {
     setR({
       ...r,
       format: newFormat,
-      timeToComplete: estimateTime(newFormat, exercises),
+      timeToComplete: estimateTime(newFormat, routineExercises),
     });
   };
 
-  const handleAddType = (e: any) => {
+  const handleAddType = (id: string) => {
+    console.log(id);
     setR({
       ...r,
-      exercises: [
-        ...exercises,
-        {
-          id: uuidv4(),
-          name: e.name,
-          category: e.category,
-          areas: e.areas,
-          unit: e.unit,
-          values: [{ date: undefined, value: 10 }],
-        },
-      ],
+      exerciseIds: [...exerciseIds, id],
     });
   };
 
@@ -95,8 +100,6 @@ const Routine = ({ onUpdateRoutine, ...props }: Props) => {
 
   useEffect(() => {
     document.getElementById("routine-name")?.focus();
-    const oldWorkout = getOldWorkout();
-    setExerciseTypes(oldWorkout.exercises || defaultExerciseTypes);
   }, []);
 
   return (
@@ -105,17 +108,17 @@ const Routine = ({ onUpdateRoutine, ...props }: Props) => {
         <ViewRoutine
           {...props}
           routine={r}
+          routineExercises={routineExercises}
           onHideRoutine={() => setViewRoutine(false)}
           onChangeValue={handleChangeExerciseValue}
-          allExercises={props.allExercises}
           onAdd={handleAddType}
         />
       )}
       <EditRoutine
         {...props}
         routine={r}
+        routineExercises={routineExercises}
         onViewRoutine={() => setViewRoutine(true)}
-        exerciseTypes={exerciseTypes}
         onChangeFormat={handleChangeFormat}
         onChangeValue={handleChangeExerciseValue}
         onChangePosition={handleChangeExercisePosition}

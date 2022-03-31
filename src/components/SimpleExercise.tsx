@@ -23,7 +23,7 @@ const SimpleExercise = ({ exercise, onSelect, bgColor }: Props) => {
   return (
     <Item
       key={exercise.id}
-      onClick={() => onSelect && onSelect(exercise)}
+      onClick={() => onSelect && onSelect(exercise.id)}
       bgColor={bgColor}
     >
       {showImage && <Image src={exercise.img} />}

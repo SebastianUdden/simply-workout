@@ -56,7 +56,7 @@ const EditExercise = ({
 
   const changeByPercentage = (percentage: number) => {
     onChangeValue &&
-      onChangeValue(i, {
+      onChangeValue(id, {
         ...e,
         value: getPercentageChange(e.value, percentage),
       });
@@ -117,7 +117,7 @@ const EditExercise = ({
                 onBlur={() => setShowInput(false)}
                 value={e.value}
                 onChange={(e: any) =>
-                  onChangeValue && onChangeValue(i, checkValue(e.target.value))
+                  onChangeValue && onChangeValue(id, checkValue(e.target.value))
                 }
               />
             ) : (

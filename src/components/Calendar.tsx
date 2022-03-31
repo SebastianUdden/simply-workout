@@ -66,7 +66,6 @@ interface Props {
 }
 
 const Calendar = ({ dates }: Props) => {
-  console.log({ dates });
   const [selectedDate, setSelectedDate] = useState(getNewDate());
   const [datetime, setDatetime] = useState<any>();
 

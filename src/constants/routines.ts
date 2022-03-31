@@ -16,6 +16,7 @@ const odenplanIds = [
   "9",
   "102",
 ];
+const pushupIds = ["3"];
 
 const homeExercises: any[] = homeIds.map((id) =>
   exerciseTypes.find((f) => id === f.id)
@@ -26,13 +27,7 @@ const odenplanExercises: any[] = odenplanIds.map((id) =>
 const outsideExercises: any[] = outsideIds.map((id) =>
   exerciseTypes.find((f) => id === f.id)
 );
-const pushups = [exerciseTypes.find((f) => "3" === f.id)];
-
-const initialize = (e: any) => ({
-  ...e,
-  unit: e.unit,
-  values: [{ date: undefined, value: 10 }],
-});
+const pushups = pushupIds.map((id) => exerciseTypes.find((f) => id === f.id));
 
 export const defaultRoutines = [
   {
@@ -40,31 +35,35 @@ export const defaultRoutines = [
     name: "Morning pushups",
     color: "gold",
     format: workoutFormats[0],
-    exercises: pushups.map(initialize),
+    exerciseIds: pushupIds,
     timeToComplete: estimateTime(workoutFormats[0], pushups),
+    workouts: [],
   },
   {
     id: "1",
     name: "Gym routine",
     color: "magenta",
     format: workoutFormats[0],
-    exercises: odenplanExercises.map(initialize),
+    exerciseIds: odenplanIds,
     timeToComplete: estimateTime(workoutFormats[0], odenplanExercises),
+    workouts: [],
   },
   {
     id: "2",
     name: "Home routine",
     color: "orange",
     format: workoutFormats[0],
-    exercises: homeExercises.map(initialize),
+    exerciseIds: homeIds,
     timeToComplete: estimateTime(workoutFormats[0], homeExercises),
+    workouts: [],
   },
   {
     id: "3",
     name: "Outside routine",
     color: "green",
     format: workoutFormats[0],
-    exercises: outsideExercises.map(initialize),
+    exerciseIds: outsideIds,
     timeToComplete: estimateTime(workoutFormats[0], outsideExercises),
+    workouts: [],
   },
 ];

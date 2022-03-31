@@ -1,12 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import Calendar, { WorkoutDot } from "./Calendar";
 import { Button, Column } from "./Common";
-
-const getUnique = (arr: any) =>
-  Array.from(
-    new Set(arr.map((e: any) => e.values.map((d: any) => d.date)).flat())
-  ).filter(Boolean);
 
 interface Props {
   routines: any;
@@ -16,7 +11,7 @@ const WorkoutHistory = ({ routines }: Props) => {
   const [expandYearSum, setExpandYearSum] = useState(false);
   const workoutDates = routines
     .map((r: any) =>
-      getUnique(r.exercises).map((d) => ({
+      r.workouts.map((d: string) => ({
         date: d,
         name: r.name,
         color: r.color,
@@ -42,7 +37,7 @@ const WorkoutHistory = ({ routines }: Props) => {
   const yearsum = routines
     .map((r: any) => {
       const now = new Date();
-      const workoutDots = getUnique(r.exercises);
+      const workoutDots = r.workouts;
       const filteredDots = workoutDots.filter(
         (w: any) => new Date(w) > new Date(now.getFullYear(), 0, 0)
       );
@@ -51,7 +46,7 @@ const WorkoutHistory = ({ routines }: Props) => {
         <Column>
           {expandYearSum && <Title>{r.name}</Title>}
           <Dots>
-            {filteredDots.map((w) => (
+            {filteredDots.map(() => (
               <WorkoutDot bgColor={r.color} />
             ))}
           </Dots>

@@ -1,21 +1,23 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Modal from "../Modal";
-import { ExerciseValue } from "./EditExercise";
+import { ExerciseProps, ExerciseValue } from "./EditExercise";
 import NewExercise from "./NewExercise";
 import { RoutineProps } from "./Routine";
 import ViewExercise from "./ViewExercise";
 
 interface Props {
   routine: RoutineProps;
+  routineExercises: ExerciseProps[];
   onHideRoutine: Function;
   onChangeValue: Function;
-  allExercises: any[];
+  exercises: any[];
   onAdd: Function;
 }
 
 const ViewRoutine = ({
-  allExercises,
+  exercises,
+  routineExercises,
   routine,
   onHideRoutine,
   onChangeValue,
@@ -24,7 +26,7 @@ const ViewRoutine = ({
   const [showNewExercise, setShowNewExercise] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const isLeft = selectedIndex === 0;
-  const isRight = selectedIndex === routine.exercises.length - 1;
+  const isRight = selectedIndex === routine.exerciseIds.length - 1;
 
   const onGoForward = () => {
     if (isRight) return;
@@ -44,10 +46,10 @@ const ViewRoutine = ({
       <Content>
         <Title>{routine.name}</Title>
         <ViewExercise
-          {...routine.exercises[selectedIndex]}
+          {...routineExercises[selectedIndex]}
           format={routine.format}
           onChangeValue={(value: ExerciseValue) =>
-            onChangeValue(selectedIndex, value)
+            onChangeValue(routineExercises[selectedIndex].id, value)
           }
         />
         <Arrows>
@@ -67,7 +69,7 @@ const ViewRoutine = ({
       {showNewExercise && (
         <NewExercise
           onAdd={handleAdd}
-          allExercises={allExercises}
+          exercises={exercises}
           onHideNewExercise={() => setShowNewExercise(false)}
         />
       )}

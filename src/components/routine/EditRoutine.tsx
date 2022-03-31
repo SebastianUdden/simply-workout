@@ -9,12 +9,13 @@ import NewExercise from "./NewExercise";
 
 interface Props {
   routine: RoutineProps;
+  routineExercises: ExerciseProps[];
   i: number;
   formats: any[];
   expandIndex: number;
   onExpandIndexChange: Function;
   onViewRoutine: Function;
-  exerciseTypes: any[];
+  exercises: ExerciseProps[];
   onChangeFormat: any;
   onChangeValue: Function;
   onChangePosition: Function;
@@ -25,12 +26,13 @@ interface Props {
 
 const EditRoutine = ({
   routine,
+  routineExercises,
   i,
   formats,
   expandIndex,
   onExpandIndexChange,
   onViewRoutine,
-  exerciseTypes,
+  exercises,
   onChangeFormat,
   onChangeValue,
   onChangePosition,
@@ -42,7 +44,7 @@ const EditRoutine = ({
   const [maxHeight, setMaxHeight] = useState(105);
   const [showDelete, setShowDelete] = useState(false);
   const [showNewExercise, setShowNewExercise] = useState(false);
-  const { name, format, exercises, timeToComplete } = routine;
+  const { name, format, exerciseIds, timeToComplete } = routine;
 
   const handleAdd = (e: any) => {
     setTimeout(() => {
@@ -65,7 +67,7 @@ const EditRoutine = ({
 
   useEffect(() => {
     setShowFullView(expandIndex === i);
-    setMaxHeight(routine.exercises.length * 300 + 300);
+    setMaxHeight(routine.exerciseIds.length * 300 + 300);
   }, [routine, expandIndex, i]);
 
   return (
@@ -106,7 +108,7 @@ const EditRoutine = ({
             {format.sets * format.reps} reps
           </Item>
           <Item>Rest between sets: {format.rest} sec</Item>
-          <Item>Exercises: {exercises.length}</Item>
+          <Item>Exercises: {exerciseIds.length}</Item>
           <Item>Percentage (+ / -): {format.percentage}%</Item>
         </>
       )}
@@ -126,14 +128,14 @@ const EditRoutine = ({
           </Select>
 
           <Exercises>
-            {exercises.map((e: ExerciseProps, i: number) => (
+            {routineExercises.map((e: ExerciseProps, i: number) => (
               <EditExercise
                 {...e}
                 format={routine.format}
                 onChangeValue={onChangeValue}
                 onChangePosition={onChangePosition}
                 onDelete={onDelete}
-                exerciseCount={exercises.length - 1}
+                exerciseCount={exerciseIds.length - 1}
                 i={i}
                 bgColor="#111"
               />
@@ -145,7 +147,7 @@ const EditRoutine = ({
           {showNewExercise && (
             <NewExercise
               onAdd={handleAdd}
-              allExercises={exerciseTypes}
+              exercises={exercises}
               onHideNewExercise={() => setShowNewExercise(false)}
             />
           )}

@@ -5,11 +5,11 @@ import SearchExercises from "../SearchExercises";
 
 interface Props {
   onHideNewExercise: Function;
-  allExercises: any[];
+  exercises: any[];
   onAdd: Function;
 }
 
-const NewExercise = ({ onHideNewExercise, allExercises, onAdd }: Props) => {
+const NewExercise = ({ onHideNewExercise, exercises, onAdd }: Props) => {
   const handleAdd = (e: any) => {
     onHideNewExercise();
     onAdd(e);
@@ -20,7 +20,7 @@ const NewExercise = ({ onHideNewExercise, allExercises, onAdd }: Props) => {
       <Content>
         <Label>Add exercise</Label>
         <SearchExercises
-          exercises={allExercises}
+          exercises={exercises}
           onSelect={handleAdd}
           maxHeight={true}
         />

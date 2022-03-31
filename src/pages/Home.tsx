@@ -26,7 +26,7 @@ const Home = () => {
   const [expandIndex, setExpandIndex] = useState(-1);
   const [formats, setFormats] = useState([]);
   const [routines, setRoutines] = useState<RoutineProps[]>([]);
-  const [allExercises, setAllExercies] = useState([]);
+  const [exercises, setExercises] = useState([]);
 
   useEffect(() => {
     const oldWorkout = getOldWorkout();
@@ -37,15 +37,15 @@ const Home = () => {
 
     setRoutines(workouts);
     setFormats(oldWorkout?.formats || workoutFormats);
-    setAllExercies(
+    setExercises(
       oldWorkout.exercises?.length ? oldWorkout.exercises : exerciseTypes
     );
   }, []);
 
   useEffect(() => {
     const oldWorkout = getOldWorkout();
-    saveWorkout({ ...oldWorkout, routines });
-  }, [routines]);
+    saveWorkout({ ...oldWorkout, routines, exercises });
+  }, [routines, exercises]);
 
   const filteredRoutines = routines.filter((r) =>
     r.name.toLowerCase().includes(search)
@@ -68,15 +68,19 @@ const Home = () => {
               formats={formats}
               expandIndex={expandIndex}
               onExpandIndexChange={(i: number) => setExpandIndex(i)}
-              allExercises={allExercises}
+              exercises={exercises}
               onDeleteRoutine={(id: string) =>
                 setRoutines(routines.filter((r) => r.id !== id))
               }
               onUpdateRoutine={(routine: any) => {
+                console.log({ routine });
                 setRoutines(
                   routines.map((r) => (r.id === routine.id ? routine : r))
                 );
               }}
+              onUpdateExercises={(updatedExercises: any) =>
+                setExercises(updatedExercises)
+              }
             />
           ))}
         </Routines>

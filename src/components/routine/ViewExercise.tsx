@@ -25,12 +25,6 @@ const ViewExercise = ({
   const [showTimer, setShowTimer] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
   const [showRepChallenge, setShowRepChallenge] = useState(false);
-  const value = values[values.length - 1]?.value;
-  const challenge = getChallenge(value, format.percentage);
-  const repString =
-    unit === "kg" ? `${format.reps} reps` : `${challenge} ${unit}`;
-  const animation = getAnimation(name);
-  const direction = getDirection(name);
 
   useEffect(() => {
     const body = document.getElementsByTagName("body")[0];
@@ -47,6 +41,14 @@ const ViewExercise = ({
       body.style.right = "default";
     };
   }, []);
+
+  if (!values) return null;
+  const value = values[values.length - 1]?.value;
+  const challenge = getChallenge(value, format.percentage);
+  const repString =
+    unit === "kg" ? `${format.reps} reps` : `${challenge} ${unit}`;
+  const animation = getAnimation(name);
+  const direction = getDirection(name);
 
   return (
     <Wrapper>
