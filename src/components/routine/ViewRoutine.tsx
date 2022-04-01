@@ -86,6 +86,7 @@ const Content = styled.div`
   height: 100%;
   max-height: 98vh;
   position: relative;
+  overflow-y: scroll;
 `;
 const Title = styled.h1`
   margin: 5px 40px 0 0;
@@ -98,14 +99,11 @@ const Row = styled.div`
   display: flex;
 `;
 const Arrows = styled.div`
+  margin-top: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: absolute;
   background-color: inherit;
-  bottom: 5px;
-  left: 0;
-  right: 0;
 `;
 const Plus = styled.button<{ disabled?: boolean }>`
   user-select: none;
