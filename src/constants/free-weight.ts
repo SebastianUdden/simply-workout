@@ -17,7 +17,6 @@ import {
   HIP,
   CALVES,
   FOREARMS,
-  INNER_THIGH,
   RHOMBOIDS,
 } from "./areas";
 
