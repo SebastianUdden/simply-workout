@@ -98,7 +98,8 @@ const Calendar = ({ dates, onShowSelectedDay }: Props) => {
       0
     ).getDate();
     const { firstDate } = getFirstAndLastDate(selectedDate);
-    const firstDay = days[firstDate.getDay() - 1];
+    const nr = firstDate.getDay();
+    const firstDay = days[nr === 0 ? 6 : nr - 1];
     const firstIndex = weeks.findIndex((f, i) => f === firstDay && i !== 0);
     const lastIndex = firstIndex + daysInMonth - 1;
 
@@ -114,14 +115,10 @@ const Calendar = ({ dates, onShowSelectedDay }: Props) => {
     });
   }, [selectedDate]);
 
-  const handleSelectDay = (date: string, monthSelected: number) => {
-    // if (monthSelected === 0) {
+  const handleSelectDay = (date: string) => {
     const selectedDay = getSelectedWorkouts(date, dates);
     setSelectedDate(date);
     onShowSelectedDay(selectedDay);
-    // return;
-    // }
-    // handleDateChange(date, monthSelected);
   };
 
   if (!datetime) return null;
@@ -138,7 +135,7 @@ const Calendar = ({ dates, onShowSelectedDay }: Props) => {
     const isSelected = newDate === selectedDate && d.month === 0;
     return (
       <Day
-        onClick={() => d.month === 0 && handleSelectDay(newDate, d.month)}
+        onClick={() => handleSelectDay(newDate)}
         isToday={d.date === new Date().getDate() && m === new Date().getMonth()}
         thisMonth={d.month === 0}
         isSelected={isSelected}
@@ -208,21 +205,21 @@ const Day = styled.div<{
   font-weight: 800;
   padding: 5px;
   user-select: none;
+  cursor: pointer;
+  :hover {
+    background-color: #111;
+    color: #fff;
+  }
+  :active {
+    background-color: #000;
+  }
   ${(p) =>
     p.thisMonth &&
     `
-        cursor: pointer;
         background-color: #333;
         color: #eee;
         border: 1px solid #222;
-        :hover {
-          background-color: #111;
-          color: #fff;
-        }
-        :active {
-          background-color: #000;
-        }
-  `}
+        `}
   ${(p) =>
     p.isSelected &&
     `
