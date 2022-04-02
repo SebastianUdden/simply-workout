@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FORMAT, HOME, ROUTINE, EXERCISE, TIPS } from "../App";
+import { FORMAT, HOME, ROUTINE, EXERCISE } from "../App";
 import workoutLogo from "../images/workout-logo.png";
 
 interface Props {
