@@ -6,8 +6,6 @@ import Header from "./components/Header";
 import AddFormat from "./pages/AddFormat";
 import styled from "styled-components";
 import Home from "./pages/Home";
-// import StickmanWithProps from "./components/stickman/StickmanWithProps";
-// import { getAnimation } from "./components/stickman/animations";
 
 export const HOME = "home";
 export const EXERCISE = "exercise";
@@ -20,12 +18,6 @@ const App = () => {
   return (
     <div>
       <Header onTabChange={(value: string) => setTab(value)} />
-      {/* <StickmanWithProps
-        size="58%"
-        direction="Side"
-        category="machine"
-        animationProps={getAnimation("burpee")}
-      /> */}
       <Content>
         {tab === HOME && <Home />}
         {tab === EXERCISE && <AddExercise />}
@@ -42,7 +34,7 @@ const Content = styled.div`
   box-sizing: border-box;
   width: 100%;
   max-width: 800px;
-  padding: 0 30px;
+  padding: 0 10px;
   margin: 0 auto;
   min-height: calc(100vh - 100px);
   font-size: calc(10px + 2vmin);
