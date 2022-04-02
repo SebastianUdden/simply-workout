@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FORMAT, HOME, ROUTINE, EXERCISE } from "../App";
+import { FORMAT, HOME, ROUTINE, EXERCISE, TIPS } from "../App";
 import workoutLogo from "../images/workout-logo.png";
 
 interface Props {
@@ -17,6 +17,7 @@ const Header = ({ onTabChange }: Props) => {
         <Button onClick={() => onTabChange(EXERCISE)}>+ Exercise</Button>
         <Button onClick={() => onTabChange(FORMAT)}>+ Format</Button>
         <Button onClick={() => onTabChange(ROUTINE)}>+ Routine</Button>
+        {/* <Button onClick={() => onTabChange(TIPS)}>Tips</Button> */}
       </Right>
     </Wrapper>
   );

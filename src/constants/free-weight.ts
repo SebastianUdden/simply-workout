@@ -18,6 +18,7 @@ import {
   CALVES,
   FOREARMS,
   RHOMBOIDS,
+  INNER_THIGH,
 } from "./areas";
 
 export const FREE_WEIGHT = "free weight";
@@ -259,5 +260,12 @@ export const freeWeight = [
     name: "dumbbell one arm row",
     unit: "kg",
     areas: [UPPER_TRAPS, LOWER_TRAPS, DELTS, BICEPS, HIP],
+  },
+  {
+    id: "139",
+    category: FREE_WEIGHT,
+    name: "barbell front squat",
+    unit: "kg",
+    areas: [QUADS, GLUTES, INNER_THIGH, SPINAL_ERECTOR],
   },
 ];

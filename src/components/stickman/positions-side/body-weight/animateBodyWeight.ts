@@ -58,6 +58,7 @@ import {
   singleLegDeadliftLow,
 } from "./singleLegDeadLift";
 import { declineSitupHigh, declineSitupLow } from "./declineSitup";
+import { invertedRowHigh, invertedRowLow } from "./invertedRow";
 
 export const stand = {
   duration: 2,
@@ -112,6 +113,11 @@ export const bosuBallPushup = {
 export const trxSuspendedPushup = {
   duration: 2,
   animation: [pushupTrxLow, pushupTrxHigh, pushupTrxLow],
+  hands: "trx-suspension",
+};
+export const invertedRow = {
+  duration: 2,
+  animation: [invertedRowLow, invertedRowHigh, invertedRowLow],
   hands: "trx-suspension",
 };
 export const barbellAbRollout = {
@@ -308,6 +314,7 @@ export const animateBodyWeight = {
   punchersPushup,
   bosuBallPushup,
   trxSuspendedPushup,
+  invertedRow,
   barbellAbRollout,
   swissBallRollout,
   crunch,

@@ -4,6 +4,8 @@ import { exerciseTypes } from "../constants/exerciseTypes";
 
 // BODYWEIGHT
 const PULLUP = "4";
+const INVERTED_ROW = "31";
+// const RUNNING = "26";
 // BARBELL
 const SQUAT = "109";
 const BENCH = "102";
@@ -21,7 +23,7 @@ const match = (exerciseIds: string[]) =>
   exerciseIds.map((id) => exerciseTypes.find((f) => id === f.id));
 
 const home = ["3", "6", "5", "9", "13", "21", "10", "15"];
-const outside = ["26", PULLUP, "24", "7", "11", "5", "21", "26"];
+const outside = [PULLUP, "24", "7", INVERTED_ROW, "11", "5", "21"];
 const odenplan = [
   "124",
   "105",

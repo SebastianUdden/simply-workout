@@ -91,6 +91,10 @@ import {
   weightedHipThrustHigh,
   weightedHipThrustLow,
 } from "./weightedHipThrust";
+import {
+  barbellFrontSquatHigh,
+  barbellFrontSquatLow,
+} from "./barbellFrontSquat";
 
 const dumbbellBenchPress = {
   duration: 2,
@@ -287,6 +291,17 @@ const barbellBackSquat = {
   ],
   hands: "barbell",
 };
+const barbellFrontSquat = {
+  duration: 5,
+  animation: [
+    barbellFrontSquatHigh,
+    barbellFrontSquatHigh,
+    barbellFrontSquatLow,
+    barbellFrontSquatLow,
+    barbellFrontSquatHigh,
+  ],
+  hands: "barbell",
+};
 const barbellDeadlift = {
   duration: 5,
   animation: [
@@ -397,6 +412,7 @@ export const animateFreeWeight = {
   barbellRackPull,
   barbellOverheadPress,
   barbellBackSquat,
+  barbellFrontSquat,
   barbellGoodMorning,
   barbellHalfKneelingLandminePress,
   kettlebellSwing,
