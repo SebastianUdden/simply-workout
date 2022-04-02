@@ -106,6 +106,13 @@ const YearSum = styled(Button)`
   width: 100%;
   display: flex;
   flex-direction: column;
+  :hover {
+    opacity: 1;
+    background-color: #0b0b0b;
+  }
+  :active {
+    background-color: #000;
+  }
 `;
 const Label = styled.label`
   color: #666;

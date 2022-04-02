@@ -24,6 +24,7 @@ interface Props {
   exercises: any[];
   onUpdateExercises: Function;
   onDeleteRoutine: Function;
+  showExercises: boolean;
 }
 
 const Routine = ({ onUpdateRoutine, onUpdateExercises, ...props }: Props) => {

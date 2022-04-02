@@ -23,6 +23,7 @@ const Home = () => {
   const [search, setSearch] = useState("");
   const [hide, setHide] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
+  const [showExercises, setShowExercises] = useState(true);
   const [expandIndex, setExpandIndex] = useState(-1);
   const [formats, setFormats] = useState([]);
   const [routines, setRoutines] = useState<RoutineProps[]>([]);
@@ -47,17 +48,27 @@ const Home = () => {
     saveWorkout({ ...oldWorkout, routines, exercises });
   }, [routines, exercises]);
 
-  const filteredRoutines = routines.filter((r) =>
-    r.name.toLowerCase().includes(search)
+  const filteredRoutines = routines.filter(
+    (r) =>
+      r.name.toLowerCase().includes(search) ||
+      r.exerciseIds
+        .map((id) => exercises.find((e: any) => e.id === id))
+        .some((e: any) => e.name.includes(search))
   );
 
   return (
     <Wrapper hide={hide}>
       <WorkoutHistory routines={routines} />
-      <SearchInput
-        placeholder="Search routines"
-        onChange={(e) => setSearch(e.target.value.toLowerCase())}
-      />
+
+      <Row>
+        <SearchInput
+          placeholder="Search routines"
+          onChange={(e) => setSearch(e.target.value.toLowerCase())}
+        />
+        <Toggle onClick={() => setShowExercises(!showExercises)}>
+          {showExercises ? "Hide exercises" : "Show exercises"}
+        </Toggle>
+      </Row>
       {filteredRoutines?.length !== 0 && (
         <Routines>
           {filteredRoutines.sort(sortByName).map((r: any, i: number) => (
@@ -80,6 +91,7 @@ const Home = () => {
               onUpdateExercises={(updatedExercises: any) =>
                 setExercises(updatedExercises)
               }
+              showExercises={showExercises}
             />
           ))}
         </Routines>
@@ -128,7 +140,7 @@ const Routines = styled.ul`
   list-style-type: none;
   padding: 0;
 `;
-const Button = styled.button<{ danger: boolean }>`
+const Button = styled.button<{ danger?: boolean }>`
   background-color: #333;
   margin-bottom: 10px;
   color: white;
@@ -151,14 +163,23 @@ const Button = styled.button<{ danger: boolean }>`
   }
 `;
 const SearchInput = styled(Input)`
-  margin-top: 30px;
-  margin-bottom: -10px;
-  border-radius: 10px;
+  border-radius: 6px;
   border: 1px solid #777;
+  width: 60%;
+  margin: 0;
 `;
 const NoMatch = styled.p`
   font-size: 16px;
   opacity: 0.5;
+`;
+const Row = styled.div`
+  display: flex;
+`;
+const Toggle = styled(Button)`
+  width: 40%;
+  margin: 0 0 0 10px;
+  font-size: 16px;
+  padding: 10px;
 `;
 
 export default Home;

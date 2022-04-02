@@ -7,6 +7,9 @@ import { getFormatString } from "../../utils";
 import { RoutineProps } from "./Routine";
 import NewExercise from "./NewExercise";
 
+const capitalize = (string: string) =>
+  string.charAt(0).toUpperCase() + string.slice(1);
+
 interface Props {
   routine: RoutineProps;
   routineExercises: ExerciseProps[];
@@ -22,6 +25,7 @@ interface Props {
   onDelete: Function;
   onAdd: any;
   onDeleteRoutine: Function;
+  showExercises: boolean;
 }
 
 const EditRoutine = ({
@@ -39,6 +43,7 @@ const EditRoutine = ({
   onDelete,
   onDeleteRoutine,
   onAdd,
+  showExercises,
 }: Props) => {
   const [showFullView, setShowFullView] = useState(false);
   const [maxHeight, setMaxHeight] = useState(105);
@@ -115,6 +120,13 @@ const EditRoutine = ({
       <Item>
         <Strong>Time to complete: {timeToComplete}</Strong>
       </Item>
+      {expandIndex !== i && showExercises && (
+        <UL>
+          {routineExercises.map((e) => (
+            <LI>{capitalize(e.name)}</LI>
+          ))}
+        </UL>
+      )}
       <BigButton onClick={() => onViewRoutine()}>Start</BigButton>
       {expandIndex === i && (
         <>
@@ -162,7 +174,7 @@ const Wrapper = styled.div<{ showFullView: boolean; maxHeight: number }>`
   border-radius: 12px;
   padding: 10px;
   margin-bottom: 10px;
-  max-height: 105px;
+  /* max-height: 105px; */
   transition: max-height 500ms ease;
   overflow: hidden;
   ${(p) =>
@@ -206,7 +218,7 @@ const Item = styled.li`
 const Strong = styled.strong`
   color: #666;
 `;
-const BigButton = styled(Button)`
+export const BigButton = styled(Button)`
   margin: 5px 0;
   padding: 12px;
   font-size: 16px;
@@ -245,6 +257,15 @@ const Circle = styled.div<{ color?: string }>`
   width: 15px;
   height: 15px;
   background-color: ${(p) => p.color || "#666"};
+`;
+
+const UL = styled.ul`
+  font-size: 12px;
+  padding: 0 0 0 15px;
+  opacity: 0.8;
+`;
+const LI = styled.li`
+  list-style-type: disc;
 `;
 
 export default EditRoutine;

@@ -18,13 +18,19 @@ const bySortString = (a: any, b: any) => {
   return 0;
 };
 
+const byMuscle = (a: any, b: any) => {
+  if (a[0] > b[0]) return 1;
+  if (a[0] < b[0]) return -1;
+  return 0;
+};
+
 const SearchExercises = ({
   exercises,
   onSelect,
   onDelete,
   maxHeight = true,
 }: Props) => {
-  const [simpleView, setSimpleView] = useState(false);
+  const [simpleView, setSimpleView] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState<any[]>([]);
   const q = searchQuery.toLowerCase();
@@ -72,7 +78,7 @@ const SearchExercises = ({
         onChange={(e: any) => setSearchQuery(e.target.value)}
       />
       {exerciseNames && (
-        <Tags>
+        <Toggles>
           {exerciseNames.map((en) => (
             <Area
               selected={filters.some((f) => f === en)}
@@ -81,14 +87,14 @@ const SearchExercises = ({
               {en}
             </Area>
           ))}
-        </Tags>
+        </Toggles>
       )}
       {tags?.length > 0 && (
         <Tags>
           <SimpleView onClick={() => setSimpleView(!simpleView)}>
             {simpleView ? "Show muscle areas" : "Show muscle names"}
           </SimpleView>
-          {tags.map((t: any) => (
+          {tags.sort(byMuscle).map((t: any) => (
             <Area
               selected={filters.some((f) => f === t[0])}
               onClick={() => handleAreaClick(t[0])}
@@ -98,6 +104,7 @@ const SearchExercises = ({
           ))}
         </Tags>
       )}
+      <br />
       <List capitalize={true} noMaxHeight={!maxHeight}>
         {filteredExercises
           .map((e) => ({
@@ -120,7 +127,13 @@ const SearchExercises = ({
 const Tags = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 15px;
+  overflow-y: scroll;
+  min-height: 60px;
+`;
+const Toggles = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 5px;
 `;
 
 const SimpleView = styled(Area)`
