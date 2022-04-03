@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { exerciseNames, exerciseTypes } from "../constants/exerciseTypes";
 import { getOldWorkout, saveWorkout, uuidv4 } from "../utils";
