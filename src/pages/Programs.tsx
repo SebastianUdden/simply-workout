@@ -6,12 +6,20 @@ import { ExerciseValue } from "../components/routine/EditExercise";
 import ViewRoutine from "../components/routine/ViewRoutine";
 import { exerciseTypes } from "../constants/exerciseTypes";
 import { defaultPrograms } from "../constants/programs";
-import { getOldWorkout, saveWorkout, updateExerciseValues } from "../utils";
+import { defaultRoutines } from "../constants/routines";
+import {
+  getNewDate,
+  getOldWorkout,
+  getUnique,
+  saveWorkout,
+  updateExerciseValues,
+} from "../utils";
 
 const Programs = () => {
   const [viewRoutine, setViewRoutine] = useState<any>(false);
   const [programs, setPrograms] = useState([]);
   const [exercises, setExercises] = useState<any>([]);
+  const [routines, setRoutines] = useState<any>([]);
   const [selectedRoutine, setSelectedRoutine] = useState<any>();
 
   const handleRoutineClick = (r: any) => {
@@ -20,18 +28,31 @@ const Programs = () => {
   };
 
   const handleChangeExerciseValue = (id: string, value: ExerciseValue) => {
-    // setSelectedExercise(updateExerciseValues(selectedExercise, id, value));
     setExercises(exercises.map((e: any) => updateExerciseValues(e, id, value)));
+    setRoutines(
+      routines.map((r: any) =>
+        r.id === selectedRoutine.id
+          ? {
+              ...selectedRoutine,
+              workouts: getUnique([...selectedRoutine.workouts, getNewDate()])
+                .map((entry: any) => entry?.toString() || false)
+                .filter(Boolean),
+            }
+          : r
+      )
+    );
   };
 
   useEffect(() => {
     const oldWorkout = getOldWorkout();
+    console.log({ routines });
     saveWorkout({
       ...oldWorkout,
       programs: programs?.length ? programs : oldWorkout.programs,
+      routines: routines?.length ? routines : oldWorkout.routines,
       exercises: exercises?.length ? exercises : oldWorkout.exercises,
     });
-  }, [programs, exercises]);
+  }, [programs, routines, exercises]);
 
   useEffect(() => {
     const oldWorkout = getOldWorkout();
@@ -40,6 +61,9 @@ const Programs = () => {
     );
     setExercises(
       oldWorkout.exercises?.length ? oldWorkout.exercises : exerciseTypes
+    );
+    setRoutines(
+      oldWorkout.routines?.length ? oldWorkout.routines : defaultRoutines
     );
   }, []);
 
