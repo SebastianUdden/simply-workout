@@ -98,7 +98,9 @@ const WorkoutHistory = ({ routines }: Props) => {
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  margin-bottom: 30px;
+`;
 const YearSum = styled(Button)`
   background-color: #000;
   border-radius: 6px;

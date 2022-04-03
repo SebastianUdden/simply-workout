@@ -117,15 +117,17 @@ const EditRoutine = ({
           <Item>Percentage (+ / -): {format.percentage}%</Item>
         </>
       )}
-      <Item>
-        <Strong>Time to complete: {timeToComplete}</Strong>
-      </Item>
       {expandIndex !== i && showExercises && (
-        <UL>
-          {routineExercises.map((e) => (
-            <LI>{capitalize(e.name)}</LI>
-          ))}
-        </UL>
+        <>
+          <Item>
+            <Strong>Time to complete: {timeToComplete}</Strong>
+          </Item>
+          <UL>
+            {routineExercises.map((e) => (
+              <LI>{capitalize(e.name)}</LI>
+            ))}
+          </UL>
+        </>
       )}
       <BigButton onClick={() => onViewRoutine()}>Start</BigButton>
       {expandIndex === i && (

@@ -139,6 +139,7 @@ const Wrapper = styled.div<{ hide: boolean }>`
 const Routines = styled.ul`
   list-style-type: none;
   padding: 0;
+  margin: 0;
 `;
 const Button = styled.button<{ danger?: boolean }>`
   background-color: #333;
@@ -174,6 +175,7 @@ const NoMatch = styled.p`
 `;
 const Row = styled.div`
   display: flex;
+  margin-bottom: 15px;
 `;
 const Toggle = styled(Button)`
   width: 40%;
