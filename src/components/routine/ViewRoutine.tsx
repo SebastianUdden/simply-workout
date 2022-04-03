@@ -12,7 +12,7 @@ interface Props {
   onHideRoutine: Function;
   onChangeValue: Function;
   exercises: any[];
-  onAdd: Function;
+  onAdd?: Function;
 }
 
 const ViewRoutine = ({
@@ -26,7 +26,9 @@ const ViewRoutine = ({
   const [showNewExercise, setShowNewExercise] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const isLeft = selectedIndex === 0;
-  const isRight = selectedIndex === routine.exerciseIds.length - 1;
+  const isRight =
+    selectedIndex === routine.exerciseIds.length - 1 ||
+    selectedIndex === routine.exerciseIds.length;
 
   const onGoForward = () => {
     if (isRight) return;
@@ -37,7 +39,7 @@ const ViewRoutine = ({
     setSelectedIndex(selectedIndex - 1);
   };
   const handleAdd = (e: any) => {
-    onAdd(e);
+    onAdd && onAdd(e);
     setSelectedIndex(selectedIndex + 1);
   };
 
@@ -57,7 +59,7 @@ const ViewRoutine = ({
             <Arrow onClick={onGoBack} disabled={isLeft}>
               &larr;
             </Arrow>
-            {isRight && (
+            {onAdd && isRight && (
               <Plus onClick={() => setShowNewExercise(true)}>+ Add</Plus>
             )}
             <Arrow onClick={onGoForward} disabled={isRight}>

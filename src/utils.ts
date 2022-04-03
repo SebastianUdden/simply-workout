@@ -1,3 +1,4 @@
+import { ExerciseValue } from "./components/routine/EditExercise";
 import { Format } from "./pages/AddFormat";
 
 export const uuidv4 = () => {
@@ -74,3 +75,20 @@ export const getUniqueValues = (arr: any) =>
   ).filter(Boolean);
 
 export const getUnique = (arr: any) => Array.from(new Set(arr)).filter(Boolean);
+
+export const updateExerciseValues = (
+  e: any,
+  id: string,
+  value: ExerciseValue
+) => {
+  if (e.id === id) {
+    let values = e.values.slice();
+    const latest = e.values[e.values.length - 1];
+    if (latest.date === value.date) {
+      values.pop();
+    }
+    values.push(value);
+    return { ...e, values };
+  }
+  return e;
+};

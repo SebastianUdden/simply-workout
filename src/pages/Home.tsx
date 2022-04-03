@@ -47,7 +47,6 @@ const Home = () => {
     const oldWorkout = getOldWorkout();
     saveWorkout({ ...oldWorkout, routines, exercises });
   }, [routines, exercises]);
-
   const filteredRoutines = routines.filter(
     (r) =>
       r.name.toLowerCase().includes(search) ||

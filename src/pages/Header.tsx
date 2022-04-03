@@ -1,5 +1,12 @@
 import styled from "styled-components";
-import { FORMAT, HOME, ROUTINE, EXERCISE } from "../App";
+import {
+  FORMAT,
+  PROGRAMS,
+  ROUTINE,
+  ROUTINES,
+  EXERCISE,
+  EXERCISES,
+} from "../App";
 import workoutLogo from "../images/workout-logo.png";
 
 interface Props {
@@ -9,11 +16,14 @@ interface Props {
 const Header = ({ onTabChange }: Props) => {
   return (
     <Wrapper>
-      <TitleButton onClick={() => onTabChange(HOME)}>
+      <TitleButton onClick={() => onTabChange(ROUTINES)}>
         <Logo src={workoutLogo} />
         Workout
       </TitleButton>
       <Right>
+        <Button onClick={() => onTabChange(PROGRAMS)}>Programs</Button>
+        <Button onClick={() => onTabChange(ROUTINES)}>Routines</Button>
+        <Button onClick={() => onTabChange(EXERCISES)}>Exercises</Button>
         <Button onClick={() => onTabChange(EXERCISE)}>+ Exercise</Button>
         <Button onClick={() => onTabChange(FORMAT)}>+ Format</Button>
         <Button onClick={() => onTabChange(ROUTINE)}>+ Routine</Button>

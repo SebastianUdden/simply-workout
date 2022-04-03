@@ -243,6 +243,7 @@ const D = styled.div`
   background-color: inherit;
   color: #666;
   border: none;
+  font-size: 16px;
   padding: 5px 0;
 `;
 const Number = styled.span`

@@ -26,7 +26,7 @@ const defaultExercise = {
 };
 
 const AddExercise = () => {
-  const firstTime = useRef<boolean>(false);
+  // const firstTime = useRef<boolean>(false);
   const [exercises, setExercises] = useState<any[]>([]);
   const [newExercise, setNewExercise] = useState(defaultExercise);
 
@@ -63,19 +63,19 @@ const AddExercise = () => {
     saveWorkout(newWorkout);
   }, [exercises]);
 
-  useEffect(() => {
-    if (!firstTime.current) {
-      firstTime.current = true;
-      return;
-    }
-    setTimeout(() => {
-      window.scrollTo({
-        left: 0,
-        top: document.body.scrollHeight,
-        behavior: "smooth",
-      });
-    }, 100);
-  }, [newExercise]);
+  // useEffect(() => {
+  //   if (!firstTime.current) {
+  //     firstTime.current = true;
+  //     return;
+  //   }
+  //   setTimeout(() => {
+  //     window.scrollTo({
+  //       left: 0,
+  //       top: document.body.scrollHeight,
+  //       behavior: "smooth",
+  //     });
+  //   }, 100);
+  // }, [newExercise]);
 
   const alreadyExists = exercises.find(
     (w) => w.name === newExercise.name && w.category === newExercise.category
@@ -86,15 +86,8 @@ const AddExercise = () => {
   return (
     <Wrapper>
       <TopRow>
-        <Label>Current exercises available</Label>
-        <Reset onClick={handleReset}>Reset</Reset>
+        <Label>Select category</Label>
       </TopRow>
-      <SearchExercises
-        exercises={exercises}
-        onSelect={(e: any) => setNewExercise(e)}
-        onDelete={(id: string) => handleDelete(id)}
-      />
-      <Label>Select category</Label>
       {exerciseNames.map((name) => (
         <Radio
           key={name}
@@ -123,6 +116,15 @@ const AddExercise = () => {
           {alreadyExists ? "Exercise already exists!" : "Add exercise"}
         </AddButton>
       )}
+      <TopRow>
+        <Label>Current exercises available</Label>
+        <Reset onClick={handleReset}>Reset</Reset>
+      </TopRow>
+      <SearchExercises
+        exercises={exercises}
+        onSelect={(e: any) => setNewExercise(e)}
+        onDelete={(id: string) => handleDelete(id)}
+      />
     </Wrapper>
   );
 };

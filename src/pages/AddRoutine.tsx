@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { HOME } from "../App";
+import { ROUTINES } from "../App";
 import { workoutFormats } from "../constants/formats";
 import { exerciseTypes as defaultExerciseTypes } from "../constants/exerciseTypes";
 import {
@@ -68,7 +68,7 @@ const AddRoutine = ({ onTabChange }: Props) => {
       routines: [...(oldWorkout.routines || []), routine],
     };
     saveWorkout(newWorkout);
-    onTabChange(HOME);
+    onTabChange(ROUTINES);
   };
 
   useEffect(() => {
