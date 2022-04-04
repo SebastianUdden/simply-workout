@@ -27,7 +27,7 @@ const App = () => {
 
   return (
     <div>
-      <Header onTabChange={(value: string) => setTab(value)} />
+      <Header tab={tab} onTabChange={(value: string) => setTab(value)} />
       <Content>
         {tab === PROGRAMS && <Progams />}
         {tab === ROUTINES && <Home />}

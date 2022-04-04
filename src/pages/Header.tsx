@@ -10,10 +10,11 @@ import {
 import workoutLogo from "../images/workout-logo.png";
 
 interface Props {
+  tab: string;
   onTabChange: Function;
 }
 
-const Header = ({ onTabChange }: Props) => {
+const Header = ({ tab, onTabChange }: Props) => {
   return (
     <Wrapper>
       <TitleButton onClick={() => onTabChange(ROUTINES)}>
@@ -21,12 +22,39 @@ const Header = ({ onTabChange }: Props) => {
         Workout
       </TitleButton>
       <Right>
-        <Button onClick={() => onTabChange(PROGRAMS)}>Programs</Button>
-        <Button onClick={() => onTabChange(ROUTINES)}>Routines</Button>
-        <Button onClick={() => onTabChange(EXERCISES)}>Exercises</Button>
-        <Button onClick={() => onTabChange(EXERCISE)}>+ Exercise</Button>
-        <Button onClick={() => onTabChange(FORMAT)}>+ Format</Button>
-        <Button onClick={() => onTabChange(ROUTINE)}>+ Routine</Button>
+        <Button
+          isSelected={tab === PROGRAMS}
+          onClick={() => onTabChange(PROGRAMS)}
+        >
+          Programs
+        </Button>
+        <Button
+          isSelected={tab === ROUTINES}
+          onClick={() => onTabChange(ROUTINES)}
+        >
+          Routines
+        </Button>
+        <Button
+          isSelected={tab === EXERCISES}
+          onClick={() => onTabChange(EXERCISES)}
+        >
+          Exercises
+        </Button>
+        <Button
+          isSelected={tab === EXERCISE}
+          onClick={() => onTabChange(EXERCISE)}
+        >
+          + Exercise
+        </Button>
+        <Button isSelected={tab === FORMAT} onClick={() => onTabChange(FORMAT)}>
+          + Format
+        </Button>
+        <Button
+          isSelected={tab === ROUTINE}
+          onClick={() => onTabChange(ROUTINE)}
+        >
+          + Routine
+        </Button>
         {/* <Button onClick={() => onTabChange(TIPS)}>Tips</Button> */}
       </Right>
     </Wrapper>
@@ -51,13 +79,13 @@ const TitleButton = styled.button`
   cursor: pointer;
   padding: 5px;
   :hover {
-    border: 1px solid white;
+    opacity: 0.8;
   }
   :active {
-    border: 1px solid #888;
+    opacity: 0.5;
   }
 `;
-const Button = styled.button`
+const Button = styled.button<{ isSelected: boolean }>`
   font-size: 20px;
   background-color: inherit;
   color: inherit;
@@ -65,11 +93,16 @@ const Button = styled.button`
   border: 1px solid black;
   margin-left: 10px;
   cursor: pointer;
+  ${(p) =>
+    p.isSelected &&
+    `
+    border-bottom: 1px solid white;
+  `}
   :hover {
-    border: 1px solid white;
+    opacity: 0.8;
   }
   :active {
-    border: 1px solid #888;
+    opacity: 0.5;
   }
 `;
 const Right = styled.div`
