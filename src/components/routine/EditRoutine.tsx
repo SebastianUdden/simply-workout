@@ -3,12 +3,9 @@ import EditExercise, { ExerciseProps } from "./EditExercise";
 import { Button, Column, Row, Select } from "../Common";
 import { Format } from "../../pages/AddFormat";
 import { useEffect, useState } from "react";
-import { getFormatString } from "../../utils";
+import { capitalize, getFormatString } from "../../utils";
 import { RoutineProps } from "./Routine";
 import NewExercise from "./NewExercise";
-
-const capitalize = (string: string) =>
-  string.charAt(0).toUpperCase() + string.slice(1);
 
 interface Props {
   routine: RoutineProps;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Row } from "../components/Common";
+import { Button, Input, Row } from "../components/Common";
 import Program from "../components/Program";
 import { ExerciseValue } from "../components/routine/EditExercise";
 import ViewRoutine from "../components/routine/ViewRoutine";
@@ -16,6 +16,8 @@ import {
 } from "../utils";
 
 const Programs = () => {
+  const [search, setSearch] = useState("");
+  const [showExercises, setShowExercises] = useState(true);
   const [viewRoutine, setViewRoutine] = useState<any>(false);
   const [programs, setPrograms] = useState([]);
   const [exercises, setExercises] = useState<any>([]);
@@ -45,7 +47,6 @@ const Programs = () => {
 
   useEffect(() => {
     const oldWorkout = getOldWorkout();
-    console.log({ routines });
     saveWorkout({
       ...oldWorkout,
       programs: programs?.length ? programs : oldWorkout.programs,
@@ -67,13 +68,37 @@ const Programs = () => {
     );
   }, []);
 
+  const filteredPrograms = programs.filter((p: any) =>
+    p.routines.some(
+      ({ routine }: any) =>
+        routine.name.toLowerCase().includes(search) ||
+        routine.exerciseIds
+          .map((id: string) => exercises.find((e: any) => e.id === id))
+          .some((e: any) => e.name.includes(search))
+    )
+  );
+
   return (
     <Wrapper>
       <TopRow>
         <Label>Programs</Label>
       </TopRow>
-      {programs.map((p) => (
-        <Program {...p} onRoutineClick={handleRoutineClick} />
+      <Search>
+        <SearchInput
+          placeholder="Search routines"
+          onChange={(e) => setSearch(e.target.value.toLowerCase())}
+        />
+        <Toggle onClick={() => setShowExercises(!showExercises)}>
+          {showExercises ? "Hide exercises" : "Show exercises"}
+        </Toggle>
+      </Search>
+      {filteredPrograms.map((p) => (
+        <Program
+          {...p}
+          exercises={exercises}
+          showExercises={showExercises}
+          onRoutineClick={handleRoutineClick}
+        />
       ))}
       {viewRoutine && selectedRoutine && (
         <ViewRoutine
@@ -104,6 +129,21 @@ const Label = styled.label`
 `;
 const TopRow = styled(Row)`
   margin: 20px 0 10px;
+`;
+const Search = styled(Row)`
+  margin: 0 0 10px;
+`;
+const Toggle = styled(Button)`
+  width: 40%;
+  margin: 0 0 0 10px;
+  font-size: 16px;
+  padding: 10px;
+`;
+const SearchInput = styled(Input)`
+  border-radius: 6px;
+  border: 1px solid #777;
+  width: 60%;
+  margin: 0;
 `;
 
 export default Programs;
