@@ -12,6 +12,12 @@ import { ExerciseProps } from "./EditExercise";
 const getChallenge = (value: number, percentage: number) =>
   Math.round(value * (1 + percentage / 100));
 
+const sortByZero = (a: any, b: any) => {
+  if (a[0] > b[0]) return 1;
+  if (a[0] < b[0]) return -1;
+  return 0;
+};
+
 const ViewExercise = ({
   category,
   name,
@@ -74,7 +80,7 @@ const ViewExercise = ({
           <Title>{name} </Title>
           {areas?.length ? (
             <Areas>
-              {areas.map((a: string, i: number) => (
+              {areas.sort(sortByZero).map((a: string, i: number) => (
                 <Area
                   key={a[0]}
                   onClick={() => setSimpleIndex(i === simpleIndex ? -1 : i)}

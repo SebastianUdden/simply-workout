@@ -120,8 +120,8 @@ const EditRoutine = ({
             <Strong>Time to complete: {timeToComplete}</Strong>
           </Item>
           <UL>
-            {routineExercises.map((e) => (
-              <LI>{capitalize(e.name)}</LI>
+            {routineExercises.map((e: any) => (
+              <LI>{capitalize(e[0].name)}</LI>
             ))}
           </UL>
         </>
@@ -139,9 +139,9 @@ const EditRoutine = ({
           </Select>
 
           <Exercises>
-            {routineExercises.map((e: ExerciseProps, i: number) => (
+            {routineExercises.map((e: any, i: number) => (
               <EditExercise
-                {...e}
+                {...e[0]}
                 format={routine.format}
                 onChangeValue={onChangeValue}
                 onChangePosition={onChangePosition}

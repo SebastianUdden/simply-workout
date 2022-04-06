@@ -8,7 +8,7 @@ import ViewExercise from "./ViewExercise";
 
 interface Props {
   routine: RoutineProps;
-  routineExercises: ExerciseProps[];
+  routineExercises: ExerciseProps[][];
   onHideRoutine: Function;
   onChangeValue: Function;
   exercises: any[];
@@ -25,18 +25,34 @@ const ViewRoutine = ({
 }: Props) => {
   const [showNewExercise, setShowNewExercise] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedAlt, setSelectedAlt] = useState(0);
+  const selectedExercise = routineExercises[selectedIndex];
   const isLeft = selectedIndex === 0;
   const isRight =
     selectedIndex === routine.exerciseIds.length - 1 ||
     selectedIndex === routine.exerciseIds.length;
+  const isBottom = selectedAlt === 0;
+  const isTop =
+    selectedAlt === selectedExercise.length - 1 ||
+    selectedAlt === selectedExercise.length;
 
   const onGoForward = () => {
     if (isRight) return;
+    setSelectedAlt(0);
     setSelectedIndex(selectedIndex + 1);
   };
   const onGoBack = () => {
     if (isLeft) return;
+    setSelectedAlt(0);
     setSelectedIndex(selectedIndex - 1);
+  };
+  const onGoUp = () => {
+    if (isTop) return;
+    setSelectedAlt(selectedAlt + 1);
+  };
+  const onGoDown = () => {
+    if (isBottom) return;
+    setSelectedAlt(selectedAlt - 1);
   };
   const handleAdd = (e: any) => {
     onAdd && onAdd(e);
@@ -48,10 +64,13 @@ const ViewRoutine = ({
       <Content>
         <Title>{routine.name}</Title>
         <ViewExercise
-          {...routineExercises[selectedIndex]}
+          {...selectedExercise[selectedAlt]}
           format={routine.format}
           onChangeValue={(value: ExerciseValue) =>
-            onChangeValue(routineExercises[selectedIndex].id, value)
+            onChangeValue(
+              routineExercises[selectedIndex][selectedAlt].id,
+              value
+            )
           }
         />
         <Arrows>
@@ -59,8 +78,21 @@ const ViewRoutine = ({
             <Arrow onClick={onGoBack} disabled={isLeft}>
               &larr;
             </Arrow>
-            {onAdd && isRight && (
+            {onAdd && selectedExercise.length === 0 && isRight && (
               <Plus onClick={() => setShowNewExercise(true)}>+ Add</Plus>
+            )}
+            {selectedExercise.length !== 0 && (
+              <>
+                <Arrow onClick={onGoUp} disabled={isTop}>
+                  &uarr;
+                </Arrow>
+                {onAdd && isRight && (
+                  <Plus onClick={() => setShowNewExercise(true)}>+ Add</Plus>
+                )}
+                <Arrow onClick={onGoDown} disabled={isBottom}>
+                  &darr;
+                </Arrow>
+              </>
             )}
             <Arrow onClick={onGoForward} disabled={isRight}>
               &rarr;

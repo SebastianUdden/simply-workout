@@ -8,6 +8,7 @@ import { exerciseTypes } from "../constants/exerciseTypes";
 import { defaultPrograms } from "../constants/programs";
 import { defaultRoutines } from "../constants/routines";
 import {
+  getExercisesFromIds,
   getNewDate,
   getOldWorkout,
   getUnique,
@@ -103,8 +104,9 @@ const Programs = () => {
       {viewRoutine && selectedRoutine && (
         <ViewRoutine
           routine={selectedRoutine}
-          routineExercises={selectedRoutine.exerciseIds.map((eid: any) =>
-            exercises.find(({ id }: any) => eid === id)
+          routineExercises={getExercisesFromIds(
+            exercises,
+            selectedRoutine.exerciseIds
           )}
           exercises={exercises}
           onHideRoutine={() => setViewRoutine(false)}

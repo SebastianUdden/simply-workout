@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { capitalize } from "../utils";
+import { capitalize, getExercisesFromIds } from "../utils";
 
 const Program = ({
   onRoutineClick,
@@ -13,8 +13,9 @@ const Program = ({
       <Title>{name}</Title>
       <List>
         {routines.map((r: any) => {
-          const routineExercises = r.routine.exerciseIds.map((eid: string) =>
-            exercises.find((e: any) => e.id === eid)
+          const routineExercises = getExercisesFromIds(
+            exercises,
+            r.routine.exerciseIds
           );
           return (
             <li>
@@ -25,7 +26,7 @@ const Program = ({
               {showExercises && (
                 <Exercises>
                   {routineExercises.map((re: any) => (
-                    <li>{capitalize(re.name)}</li>
+                    <li>{capitalize(re[0].name)}</li>
                   ))}
                 </Exercises>
               )}

@@ -125,6 +125,7 @@ const dumbbellStandingOverheadPress = {
   ],
   hands: "dumbbell",
 };
+const dumbbellArnoldShoulderPress = dumbbellStandingOverheadPress;
 const dumbbellLateralRaise = {
   duration: 3,
   animation: [
@@ -155,6 +156,7 @@ export const barbellBenchPress = {
   prop: "bench",
   hands: "barbell",
 };
+const barbellNarrowBenchPress = barbellBenchPress;
 const barbellDeclineBenchPress = {
   duration: 3,
   animation: [
@@ -392,6 +394,7 @@ export const animateFreeWeight = {
   dumbbellBenchPress,
   dumbbellTricepExtension,
   dumbbellStandingOverheadPress,
+  dumbbellArnoldShoulderPress,
   dumbbellLateralRaise,
   dumbbellOneArmRow,
   dumbbellBicepCurl,
@@ -404,6 +407,7 @@ export const animateFreeWeight = {
   dumbbellFarmersWalk,
   dumbbellShrug,
   barbellBenchPress,
+  barbellNarrowBenchPress,
   barbellDeclineBenchPress,
   barbellInclineBenchPress,
   barbellBentOverRow,

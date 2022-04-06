@@ -1,55 +1,25 @@
 import { estimateTime } from "../utils";
 import { MADCOW_A, MADCOW_B, workoutFormats } from "./formats";
 import { exerciseTypes } from "../constants/exerciseTypes";
+import {
+  arnold,
+  home,
+  madcowFriday,
+  madcowMonday,
+  madcowWednesday,
+  newbieA,
+  newbieB,
+  odenplan,
+  outside,
+  pushup,
+  startingStrengthA,
+  startingStrengthB,
+  wholebodyA,
+  wholebodyB,
+} from "./ids";
 
-// BODYWEIGHT
-const PULLUP = "4";
-const INVERTED_ROW = "31";
-// const RUNNING = "26";
-// BARBELL
-const SQUAT = "109";
-const BENCH = "102";
-const DEADLIFT = "108";
-const PRESS = "120";
-const ROW = "132";
-const INCLINE_BENCH = "103";
-const BICEP_CURLS = "101";
-// DUMBBELL
-const ROMANIAN_DEADLIFT = "110";
-// MACHINE
-const LAT_PULLDOWN = "210";
-
-const match = (exerciseIds: string[]) =>
+const match = (exerciseIds: (string | string[])[]) =>
   exerciseIds.map((id) => exerciseTypes.find((f) => id === f.id));
-
-const home = ["3", "6", "5", "9", "13", "21", "10", "15"];
-const outside = [PULLUP, "24", "7", INVERTED_ROW, "11", "5", "21"];
-const odenplan = [
-  "124",
-  "105",
-  "119",
-  "131",
-  "138",
-  LAT_PULLDOWN,
-  "201",
-  "202",
-  "9",
-  BENCH,
-];
-const pushup = ["3"];
-
-const newbieA = [SQUAT, BENCH, ROW];
-const newbieB = [DEADLIFT, PULLUP, PRESS];
-
-const startingStrengthA = [SQUAT, BENCH, DEADLIFT];
-const startingStrengthB = [SQUAT, PRESS, PULLUP];
-
-const madcowMonday = [SQUAT, BENCH, ROW, BICEP_CURLS];
-const madcowWednesday = [SQUAT, PRESS, DEADLIFT, PULLUP];
-const madcowFriday = [SQUAT, BENCH, ROW, INCLINE_BENCH];
-
-const wholebodyA = [SQUAT, BENCH, ROMANIAN_DEADLIFT, ROW];
-const wholebodyB = [DEADLIFT, PRESS, SQUAT, PULLUP];
 
 export const MORNING_PUSHUPS = {
   id: "0",
@@ -168,8 +138,18 @@ export const FULLBODY_B = {
   timeToComplete: estimateTime(workoutFormats[0], match(wholebodyB)),
   workouts: [],
 };
+export const THE_ARNOLD = {
+  id: "13",
+  name: "Arnold",
+  color: "silver",
+  format: workoutFormats[0],
+  exerciseIds: arnold,
+  timeToComplete: estimateTime(workoutFormats[0], match(arnold)),
+  workouts: [],
+};
 
 export const defaultRoutines = [
+  THE_ARNOLD,
   MORNING_PUSHUPS,
   GYM_ROUTINE,
   HOME_ROUTINE,

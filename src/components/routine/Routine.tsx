@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import EditRoutine from "./EditRoutine";
 import ViewRoutine from "./ViewRoutine";
-import { estimateTime, getNewDate, getUnique } from "../../utils";
+import {
+  estimateTime,
+  getExercisesFromIds,
+  getNewDate,
+  getUnique,
+} from "../../utils";
 import { ExerciseValue } from "./EditExercise";
 
 export interface RoutineProps {
@@ -34,9 +39,7 @@ const Routine = ({ onUpdateRoutine, onUpdateExercises, ...props }: Props) => {
   const { exerciseIds } = r;
 
   useEffect(() => {
-    setRoutineExercises(
-      exerciseIds.map((eid) => props.exercises.find(({ id }) => eid === id))
-    );
+    setRoutineExercises(getExercisesFromIds(props.exercises, exerciseIds));
   }, [exerciseIds, props.exercises]);
 
   const handleChangeExerciseValue = (id: string, value: ExerciseValue) => {

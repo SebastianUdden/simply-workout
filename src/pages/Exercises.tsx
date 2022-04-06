@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { exerciseTypes } from "../constants/exerciseTypes";
 import {
+  getExercisesFromIds,
   getNewDate,
   getOldWorkout,
   saveWorkout,
@@ -31,12 +32,13 @@ const Exercises = () => {
 
   const handleSelectExercise = (id: string) => {
     setViewExercise(true);
-    const exercise = exercises.find((e) => e.id === id);
+    const exercisesWithAlts = getExercisesFromIds(exercises, [id]);
+    const exercise = exercisesWithAlts[0];
     setSelectedExercise(exercise);
     setNewRoutine({
       ...def,
-      id: `${def.id}-${exercise.id}`,
-      name: `${def.name} - ${exercise.name}`,
+      id: `${def.id}-${exercise[0].id}`,
+      name: `${def.name} - ${exercise[0].name}`,
       exerciseIds: [id],
       timeToComplete: estimateTime(def.format, [selectedExercise]),
       workouts: [getNewDate()],

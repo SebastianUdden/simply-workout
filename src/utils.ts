@@ -1,4 +1,7 @@
-import { ExerciseValue } from "./components/routine/EditExercise";
+import {
+  ExerciseProps,
+  ExerciseValue,
+} from "./components/routine/EditExercise";
 import { Format } from "./pages/AddFormat";
 
 export const uuidv4 = () => {
@@ -95,3 +98,23 @@ export const updateExerciseValues = (
 
 export const capitalize = (string: string) =>
   string.charAt(0).toUpperCase() + string.slice(1);
+
+const noExerciseFound = {
+  name: "N/A",
+  unit: "kg",
+  values: [],
+};
+
+export const getExercisesFromIds = (
+  exercises: ExerciseProps[],
+  exerciseIds: (string | string[])[]
+): ExerciseProps[][] =>
+  exerciseIds.map((eid: string | string[]) => {
+    if (typeof eid === "string") {
+      return [exercises.find(({ id }) => eid === id) || noExerciseFound];
+    }
+    return eid.map(
+      (altId: string) =>
+        exercises.find(({ id }) => altId === id) || noExerciseFound
+    );
+  });

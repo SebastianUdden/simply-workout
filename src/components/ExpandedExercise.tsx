@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { searchFor } from "../utils";
-import { Link } from "./Common";
 
-export interface ExerciseProps {
+export interface ExpandedExerciseProps {
   id?: string;
   category?: string;
   name: string;
@@ -30,7 +28,7 @@ const ExpandedExercise = ({
   onDelete,
   i,
   exerciseCount,
-}: ExerciseProps) => {
+}: ExpandedExerciseProps) => {
   const [showInput, setShowInput] = useState(false);
 
   const changeByPercentage = (percentage: number) => {

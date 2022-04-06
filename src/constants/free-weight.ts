@@ -268,4 +268,18 @@ export const freeWeight = [
     unit: "kg",
     areas: [QUADS, GLUTES, INNER_THIGH, SPINAL_ERECTOR],
   },
+  {
+    id: "140",
+    category: FREE_WEIGHT,
+    name: "barbell narrow bench press",
+    unit: "kg",
+    areas: [TRICEPS, PECS],
+  },
+  {
+    id: "141",
+    category: FREE_WEIGHT,
+    name: "dumbbell arnold shoulder press",
+    unit: "kg",
+    areas: [DELTS, UPPER_PECS, TRICEPS, UPPER_TRAPS, LOWER_TRAPS],
+  },
 ];
