@@ -1,12 +1,5 @@
 import styled from "styled-components";
-import {
-  FORMAT,
-  PROGRAMS,
-  ROUTINE,
-  ROUTINES,
-  EXERCISE,
-  EXERCISES,
-} from "../App";
+import { HOME } from "../App";
 import workoutLogo from "../images/workout-logo.png";
 
 interface Props {
@@ -14,15 +7,15 @@ interface Props {
   onTabChange: Function;
 }
 
-const Header = ({ tab, onTabChange }: Props) => {
+const Header = ({ onTabChange }: Props) => {
   return (
     <Wrapper>
-      <TitleButton onClick={() => onTabChange(ROUTINES)}>
+      <TitleButton onClick={() => onTabChange(HOME)}>
         <Logo src={workoutLogo} />
         Workout
       </TitleButton>
       <Right>
-        <Button
+        {/* <Button
           isSelected={tab === PROGRAMS}
           onClick={() => onTabChange(PROGRAMS)}
         >
@@ -54,7 +47,7 @@ const Header = ({ tab, onTabChange }: Props) => {
           onClick={() => onTabChange(ROUTINE)}
         >
           + Routine
-        </Button>
+        </Button> */}
         {/* <Button onClick={() => onTabChange(TIPS)}>Tips</Button> */}
       </Right>
     </Wrapper>
@@ -63,7 +56,7 @@ const Header = ({ tab, onTabChange }: Props) => {
 
 const Wrapper = styled.div`
   background-color: #050505;
-  padding: 30px 20px;
+  padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -78,33 +71,33 @@ const TitleButton = styled.button`
   border: 1px solid black;
   cursor: pointer;
   padding: 5px;
-  :hover {
+  /* :hover {
     opacity: 0.8;
   }
   :active {
     opacity: 0.5;
-  }
+  } */
 `;
-const Button = styled.button<{ isSelected: boolean }>`
-  font-size: 20px;
-  background-color: inherit;
-  color: inherit;
-  border: none;
-  border: 1px solid black;
-  margin-left: 10px;
-  cursor: pointer;
-  ${(p) =>
-    p.isSelected &&
-    `
-    border-bottom: 1px solid white;
-  `}
-  :hover {
-    opacity: 0.8;
-  }
-  :active {
-    opacity: 0.5;
-  }
-`;
+// const Button = styled.button<{ isSelected: boolean }>`
+//   font-size: 20px;
+//   background-color: inherit;
+//   color: inherit;
+//   border: none;
+//   border: 1px solid black;
+//   margin-left: 10px;
+//   cursor: pointer;
+//   ${(p) =>
+//     p.isSelected &&
+//     `
+//     border-bottom: 1px solid white;
+//   `}
+//   :hover {
+//     opacity: 0.8;
+//   }
+//   :active {
+//     opacity: 0.5;
+//   }
+// `;
 const Right = styled.div`
   margin-top: 15px;
 `;

@@ -81,9 +81,7 @@ const Programs = () => {
 
   return (
     <Wrapper>
-      <TopRow>
-        <Label>Programs</Label>
-      </TopRow>
+      <br />
       <Search>
         <SearchInput
           placeholder="Search routines"
@@ -125,12 +123,6 @@ const Wrapper = styled.div`
   #exercise-name {
     margin-bottom: 20px;
   }
-`;
-const Label = styled.label`
-  font-weight: 800;
-`;
-const TopRow = styled(Row)`
-  margin: 20px 0 10px;
 `;
 const Search = styled(Row)`
   margin: 0 0 10px;

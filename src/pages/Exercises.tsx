@@ -8,7 +8,6 @@ import {
   saveWorkout,
   updateExerciseValues,
 } from "../utils";
-import { Row } from "../components/Common";
 import ViewRoutine from "../components/routine/ViewRoutine";
 import SearchExercises from "../components/SearchExercises";
 import { workoutFormats } from "../constants/formats";
@@ -81,9 +80,7 @@ const Exercises = () => {
 
   return (
     <Wrapper>
-      <TopRow>
-        <Label>Exercises</Label>
-      </TopRow>
+      <br />
       {viewExercise && (
         <ViewRoutine
           routine={newRoutine}
@@ -106,12 +103,6 @@ const Wrapper = styled.div`
   #exercise-name {
     margin-bottom: 20px;
   }
-`;
-const Label = styled.label`
-  font-weight: 800;
-`;
-const TopRow = styled(Row)`
-  margin: 20px 0 10px;
 `;
 
 export default Exercises;
