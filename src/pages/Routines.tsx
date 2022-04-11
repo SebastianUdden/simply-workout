@@ -6,7 +6,6 @@ import { defaultRoutines } from "../constants/routines";
 import { getOldWorkout, saveWorkout } from "../utils";
 import { exerciseTypes } from "../constants/exerciseTypes";
 import Routine, { RoutineProps } from "../components/routine/Routine";
-import WorkoutHistory from "../components/WorkoutHistory";
 import { Input } from "../components/Common";
 
 const sortByName = (a: any, b: any) => {
